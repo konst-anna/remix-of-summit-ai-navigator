@@ -1,0 +1,118 @@
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Bot, X, Sparkles, ArrowRight, ExternalLink } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
+export default function AICopilotButton() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      {/* Floating Button */}
+      <motion.button
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 1, type: 'spring', stiffness: 200 }}
+        onClick={() => setIsOpen(!isOpen)}
+        className="ai-copilot-button group"
+        aria-label="Open AI Copilot"
+      >
+        <motion.div
+          animate={isOpen ? { rotate: 180 } : { rotate: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          {isOpen ? (
+            <X className="w-7 h-7 text-primary-foreground" />
+          ) : (
+            <Bot className="w-7 h-7 text-primary-foreground" />
+          )}
+        </motion.div>
+        
+        {/* Pulse Ring */}
+        <motion.div
+          animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+          className="absolute inset-0 rounded-full gradient-hero"
+        />
+      </motion.button>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 flex items-end sm:items-center justify-center sm:justify-end p-4 sm:p-6"
+            onClick={() => setIsOpen(false)}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 50, scale: 0.9 }}
+              transition={{ type: 'spring', duration: 0.5 }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-sm bg-card rounded-2xl shadow-2xl overflow-hidden border border-border"
+            >
+              {/* Header */}
+              <div className="gradient-hero p-6 text-primary-foreground">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-xl bg-primary-foreground/20 flex items-center justify-center">
+                    <Bot className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">Summit AI Agent</h3>
+                    <p className="text-sm opacity-80">2026 Vaccines Summit Copilot</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-sm opacity-90">
+                  <Sparkles className="w-4 h-4" />
+                  <span>Powered by AI</span>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-6">
+                <p className="text-muted-foreground mb-6">
+                  Get instant help navigating the summit! Our AI-powered Copilot can help you:
+                </p>
+
+                <ul className="space-y-3 mb-6">
+                  {[
+                    'Find sessions based on your interests',
+                    'Get speaker information',
+                    'Navigate the venue',
+                    'Connect with other attendees',
+                    'Track your AI Passport progress',
+                  ].map((item, index) => (
+                    <motion.li
+                      key={index}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-center gap-3 text-sm text-foreground"
+                    >
+                      <ArrowRight className="w-4 h-4 text-primary flex-shrink-0" />
+                      <span>{item}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+
+                <div className="space-y-3">
+                  <Button className="w-full gradient-hero text-primary-foreground" size="lg">
+                    <Bot className="w-5 h-5 mr-2" />
+                    Launch Copilot
+                  </Button>
+                  <Button variant="outline" className="w-full" size="lg">
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Add to Your Corporate Environment
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
