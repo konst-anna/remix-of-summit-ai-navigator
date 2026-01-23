@@ -69,7 +69,7 @@ export default function HeroSection() {
               className="flex items-center gap-3 px-5 py-3 bg-primary-foreground/10 backdrop-blur-sm rounded-xl border border-primary-foreground/20"
             >
               <Users className="w-5 h-5 text-accent" />
-              <span className="text-primary-foreground font-medium">500+ Attendees</span>
+              <span className="text-primary-foreground font-medium">200 Attendees</span>
             </motion.div>
           </div>
 
