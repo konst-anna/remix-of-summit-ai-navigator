@@ -87,13 +87,6 @@ export default function HeroSection() {
             >
               View Full Schedule
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
-            >
-              Download Agenda
-            </Button>
           </motion.div>
         </motion.div>
 
