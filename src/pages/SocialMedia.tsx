@@ -16,44 +16,36 @@ const quotes = [
   "Protecting one person through vaccination helps protect entire communities.",
 ];
 
-const socialImages = [
-  {
-    id: 1,
-    gradient: "from-primary to-primary-light",
-    icon: "🔬",
-    caption: "Science in action"
-  },
-  {
-    id: 2,
-    gradient: "from-track-pcv to-primary",
-    icon: "🌍",
-    caption: "Global health"
-  },
-  {
-    id: 3,
-    gradient: "from-primary-light to-accent",
-    icon: "💉",
-    caption: "Innovation"
-  },
-  {
-    id: 4,
-    gradient: "from-track-comirnaty to-primary",
-    icon: "🤝",
-    caption: "Collaboration"
-  },
-  {
-    id: 5,
-    gradient: "from-primary to-track-break",
-    icon: "🏆",
-    caption: "Achievement"
-  },
-  {
-    id: 6,
-    gradient: "from-accent to-primary-light",
-    icon: "💡",
-    caption: "Discovery"
-  },
+const instagramPosts = [
+  { id: 1, gradient: "from-primary to-primary-light", image: "🔬", likes: 342, caption: "Science in action #VaccinesSummit2026" },
+  { id: 2, gradient: "from-pink-500 to-purple-600", image: "🌍", likes: 521, caption: "Global health matters" },
+  { id: 3, gradient: "from-primary-light to-accent", image: "💉", likes: 189, caption: "Innovation at its finest" },
+  { id: 4, gradient: "from-track-comirnaty to-primary", image: "🤝", likes: 456, caption: "Collaboration is key" },
+  { id: 5, gradient: "from-primary to-track-break", image: "🏆", likes: 278, caption: "Celebrating achievements" },
+  { id: 6, gradient: "from-accent to-primary-light", image: "💡", likes: 634, caption: "Discovery never stops" },
+  { id: 7, gradient: "from-track-pcv to-primary", image: "🧬", likes: 412, caption: "The future of health" },
+  { id: 8, gradient: "from-pink-400 to-pink-600", image: "❤️", likes: 893, caption: "Protecting communities" },
 ];
+
+// Create mixed feed items
+type FeedItem = { type: 'quote'; content: string; index: number } | { type: 'instagram'; post: typeof instagramPosts[0]; index: number };
+
+const createMixedFeed = (): FeedItem[] => {
+  const feed: FeedItem[] = [];
+  const maxLength = Math.max(quotes.length, instagramPosts.length);
+  
+  for (let i = 0; i < maxLength; i++) {
+    if (i < instagramPosts.length) {
+      feed.push({ type: 'instagram', post: instagramPosts[i], index: i });
+    }
+    if (i < quotes.length) {
+      feed.push({ type: 'quote', content: quotes[i], index: i });
+    }
+  }
+  return feed;
+};
+
+const mixedFeed = createMixedFeed();
 
 export default function SocialMedia() {
   return (
@@ -109,60 +101,38 @@ export default function SocialMedia() {
           </div>
         </section>
 
-        {/* Image Grid */}
+        {/* Mixed Feed Wall */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <motion.h2
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-2xl md:text-3xl font-bold text-foreground text-center mb-12"
-            >
-              Moments from the Summit
-            </motion.h2>
-            
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
-              {socialImages.map((image, index) => (
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 max-w-6xl mx-auto">
+              {mixedFeed.map((item, index) => (
                 <motion.div
-                  key={image.id}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className={`aspect-square rounded-xl bg-gradient-to-br ${image.gradient} flex flex-col items-center justify-center p-4 shadow-lg hover:scale-105 transition-transform cursor-pointer`}
-                >
-                  <span className="text-4xl md:text-6xl mb-2">{image.icon}</span>
-                  <span className="text-white font-medium text-sm md:text-base">{image.caption}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Quotes Section */}
-        <section className="py-16 bg-secondary/30">
-          <div className="container mx-auto px-4">
-            <motion.h2
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-2xl md:text-3xl font-bold text-foreground text-center mb-12"
-            >
-              Inspiring Words
-            </motion.h2>
-            
-            <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-              {quotes.map((quote, index) => (
-                <motion.div
-                  key={index}
+                  key={`${item.type}-${item.index}`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  transition={{ duration: 0.4, delay: index * 0.03 }}
                   viewport={{ once: true }}
-                  className="bg-card rounded-xl p-6 shadow-sm border border-border"
+                  className="break-inside-avoid mb-4"
                 >
-                  <Quote className="w-8 h-8 text-primary/30 mb-3" />
-                  <p className="text-foreground italic">"{quote}"</p>
+                  {item.type === 'instagram' ? (
+                    <div className="bg-card rounded-xl overflow-hidden shadow-sm border border-border hover:shadow-md transition-shadow">
+                      <div className={`aspect-square bg-gradient-to-br ${item.post.gradient} flex items-center justify-center`}>
+                        <span className="text-6xl md:text-7xl">{item.post.image}</span>
+                      </div>
+                      <div className="p-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Instagram className="w-4 h-4 text-pink-500" />
+                          <span className="text-sm text-muted-foreground">{item.post.likes} likes</span>
+                        </div>
+                        <p className="text-sm text-foreground">{item.post.caption}</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="bg-card rounded-xl p-6 shadow-sm border border-border hover:shadow-md transition-shadow">
+                      <Quote className="w-8 h-8 text-primary/30 mb-3" />
+                      <p className="text-foreground italic leading-relaxed">"{item.content}"</p>
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </div>
