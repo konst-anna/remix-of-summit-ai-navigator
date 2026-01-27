@@ -3,7 +3,7 @@ import HeroSection from '@/components/HeroSection';
 import ScheduleSection from '@/components/ScheduleSection';
 import ActivitiesSection from '@/components/ActivitiesSection';
 import AIPassportSection from '@/components/AIPassportSection';
-import VRExperienceSection from '@/components/VRExperienceSection';
+import SocialMediaSection from '@/components/SocialMediaSection';
 import AICopilotButton from '@/components/AICopilotButton';
 import Footer from '@/components/Footer';
 
@@ -16,7 +16,7 @@ const Index = () => {
         <ScheduleSection />
         <ActivitiesSection />
         <AIPassportSection />
-        <VRExperienceSection />
+        <SocialMediaSection />
       </main>
       <Footer />
       <AICopilotButton />
