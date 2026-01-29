@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Hash, ArrowLeft, Quote, Send, User } from 'lucide-react';
+import { Hash, ArrowLeft, Quote, Send, User, Camera, X, Image as ImageIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -9,12 +9,19 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+
+// Import example photos
+import coffeeBreakPhoto from '@/assets/summit-coffee-break.jpg';
+import panelDiscussionPhoto from '@/assets/summit-panel-discussion.jpg';
+import posterSessionPhoto from '@/assets/summit-poster-session.jpg';
 
 interface Thought {
   id: string;
   content: string;
   author_name: string | null;
   created_at: string;
+  image_url: string | null;
 }
 
 // Static inspiring quotes to mix with user thoughts
@@ -29,12 +36,93 @@ const staticQuotes = [
   "Protecting one person through vaccination helps protect entire communities.",
 ];
 
+// Example photo posts from the summit
+const examplePhotoPosts = [
+  {
+    id: 'example-photo-1',
+    type: 'photo' as const,
+    image_url: coffeeBreakPhoto,
+    content: 'Great conversations during the coffee break! Discussing vaccine equity with colleagues from around the world.',
+    author: 'Dr. Maria Santos',
+  },
+  {
+    id: 'example-photo-2',
+    type: 'photo' as const,
+    image_url: panelDiscussionPhoto,
+    content: 'Incredible panel on global vaccine distribution. So many innovative ideas shared today!',
+    author: 'James Chen',
+  },
+  {
+    id: 'example-photo-3',
+    type: 'photo' as const,
+    image_url: posterSessionPhoto,
+    content: 'Fascinating research on mRNA technology at the poster session. The future of immunization looks bright!',
+    author: 'Prof. Sarah Williams',
+  },
+];
+
+// Max file size: 5MB
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+// Max image dimension after resize
+const MAX_IMAGE_DIMENSION = 1200;
+
+async function resizeImage(file: File): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+    const img = document.createElement('img');
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    img.onload = () => {
+      let { width, height } = img;
+
+      // Calculate new dimensions while maintaining aspect ratio
+      if (width > MAX_IMAGE_DIMENSION || height > MAX_IMAGE_DIMENSION) {
+        if (width > height) {
+          height = (height / width) * MAX_IMAGE_DIMENSION;
+          width = MAX_IMAGE_DIMENSION;
+        } else {
+          width = (width / height) * MAX_IMAGE_DIMENSION;
+          height = MAX_IMAGE_DIMENSION;
+        }
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+
+      if (!ctx) {
+        reject(new Error('Could not get canvas context'));
+        return;
+      }
+
+      ctx.drawImage(img, 0, 0, width, height);
+
+      canvas.toBlob(
+        (blob) => {
+          if (blob) {
+            resolve(blob);
+          } else {
+            reject(new Error('Could not create blob'));
+          }
+        },
+        'image/jpeg',
+        0.85
+      );
+    };
+
+    img.onerror = () => reject(new Error('Could not load image'));
+    img.src = URL.createObjectURL(file);
+  });
+}
+
 export default function SocialMedia() {
   const [thoughts, setThoughts] = useState<Thought[]>([]);
   const [newThought, setNewThought] = useState('');
   const [authorName, setAuthorName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
   // Fetch initial thoughts
@@ -79,16 +167,54 @@ export default function SocialMedia() {
     };
   }, []);
 
+  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      toast({
+        title: "Invalid file type",
+        description: "Please select an image file.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      toast({
+        title: "File too large",
+        description: "Please select an image under 5MB.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setSelectedImage(file);
+    setImagePreview(URL.createObjectURL(file));
+  };
+
+  const clearImage = () => {
+    setSelectedImage(null);
+    if (imagePreview) {
+      URL.revokeObjectURL(imagePreview);
+      setImagePreview(null);
+    }
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     const trimmedContent = newThought.trim();
     const trimmedAuthor = authorName.trim();
 
-    if (!trimmedContent) {
+    // At least content or image is required
+    if (!trimmedContent && !selectedImage) {
       toast({
-        title: "Empty thought",
-        description: "Please write something to share.",
+        title: "Nothing to share",
+        description: "Please write something or add a photo.",
         variant: "destructive",
       });
       return;
@@ -105,47 +231,97 @@ export default function SocialMedia() {
 
     setIsSubmitting(true);
 
-    const { error } = await supabase.from('summit_thoughts').insert({
-      content: trimmedContent,
-      author_name: trimmedAuthor || null,
-    });
+    try {
+      let imageUrl: string | null = null;
 
-    if (error) {
-      console.error('Error submitting thought:', error);
-      toast({
-        title: "Error",
-        description: "Failed to submit your thought. Please try again.",
-        variant: "destructive",
+      // Upload image if selected
+      if (selectedImage) {
+        const resizedBlob = await resizeImage(selectedImage);
+        const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.jpg`;
+        
+        const { error: uploadError } = await supabase.storage
+          .from('summit-photos')
+          .upload(fileName, resizedBlob, {
+            contentType: 'image/jpeg',
+          });
+
+        if (uploadError) {
+          console.error('Upload error:', uploadError);
+          throw new Error('Failed to upload image');
+        }
+
+        const { data: publicUrlData } = supabase.storage
+          .from('summit-photos')
+          .getPublicUrl(fileName);
+
+        imageUrl = publicUrlData.publicUrl;
+      }
+
+      const { error } = await supabase.from('summit_thoughts').insert({
+        content: trimmedContent || null,
+        author_name: trimmedAuthor || null,
+        image_url: imageUrl,
       });
-    } else {
+
+      if (error) {
+        console.error('Error submitting thought:', error);
+        throw new Error('Failed to submit');
+      }
+
       toast({
         title: "Shared!",
-        description: "Your thought has been added to the wall.",
+        description: "Your post has been added to the wall.",
       });
       setNewThought('');
       setAuthorName('');
+      clearImage();
       setShowForm(false);
+    } catch (error) {
+      console.error('Submission error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to submit your post. Please try again.",
+        variant: "destructive",
+      });
     }
 
     setIsSubmitting(false);
   };
 
-  // Create mixed feed of static quotes and user thoughts
+  // Create mixed feed of static quotes, user thoughts, and example photos
   const createMixedFeed = () => {
-    const feed: { type: 'static' | 'user'; content: string; author?: string | null; id: string }[] = [];
+    const feed: {
+      type: 'static' | 'user' | 'photo';
+      content: string | null;
+      author?: string | null;
+      id: string;
+      image_url?: string | null;
+    }[] = [];
     
     // Add static quotes
     staticQuotes.forEach((quote, index) => {
       feed.push({ type: 'static', content: quote, id: `static-${index}` });
     });
 
+    // Add example photo posts
+    examplePhotoPosts.forEach((post) => {
+      feed.push({
+        type: 'photo',
+        content: post.content,
+        author: post.author,
+        id: post.id,
+        image_url: post.image_url,
+      });
+    });
+
     // Add user thoughts
     thoughts.forEach((thought) => {
       feed.push({
-        type: 'user',
+        type: thought.image_url ? 'photo' : 'user',
         content: thought.content,
         author: thought.author_name,
         id: thought.id,
+        image_url: thought.image_url,
       });
     });
 
@@ -185,7 +361,7 @@ export default function SocialMedia() {
               </h1>
               
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-                Share your thoughts and join the conversation about global immunization
+                Share your thoughts and photos from the summit
               </p>
 
               <Button 
@@ -193,8 +369,8 @@ export default function SocialMedia() {
                 className="bg-primary hover:bg-primary/90"
                 size="lg"
               >
-                <Send className="w-5 h-5 mr-2" />
-                Share Your Thoughts
+                <Camera className="w-5 h-5 mr-2" />
+                Share a Moment
               </Button>
             </motion.div>
 
@@ -210,13 +386,57 @@ export default function SocialMedia() {
                 >
                   <form onSubmit={handleSubmit} className="bg-card rounded-xl p-6 shadow-lg border border-border">
                     <div className="space-y-4">
+                      {/* Image Upload */}
+                      <div>
+                        <label className="block text-sm font-medium text-foreground mb-2">
+                          Add a Photo (optional)
+                        </label>
+                        <input
+                          ref={fileInputRef}
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageSelect}
+                          className="hidden"
+                        />
+                        
+                        {imagePreview ? (
+                          <div className="relative rounded-lg overflow-hidden border border-border">
+                            <AspectRatio ratio={4/3}>
+                              <img
+                                src={imagePreview}
+                                alt="Preview"
+                                className="w-full h-full object-cover"
+                              />
+                            </AspectRatio>
+                            <button
+                              type="button"
+                              onClick={clearImage}
+                              className="absolute top-2 right-2 bg-background/80 hover:bg-background rounded-full p-1.5 transition-colors"
+                            >
+                              <X className="w-4 h-4 text-foreground" />
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => fileInputRef.current?.click()}
+                            className="w-full border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 hover:bg-primary/5 transition-colors"
+                          >
+                            <ImageIcon className="w-10 h-10 mx-auto text-muted-foreground mb-2" />
+                            <span className="text-sm text-muted-foreground">
+                              Click to upload a photo
+                            </span>
+                          </button>
+                        )}
+                      </div>
+
                       <div>
                         <label htmlFor="thought" className="block text-sm font-medium text-foreground mb-2">
-                          Your Thought
+                          Your Thought {!selectedImage && <span className="text-muted-foreground">(required)</span>}
                         </label>
                         <Textarea
                           id="thought"
-                          placeholder="Share your thoughts about vaccines, global health, or the summit..."
+                          placeholder="Share your thoughts about the summit..."
                           value={newThought}
                           onChange={(e) => setNewThought(e.target.value)}
                           className="min-h-[100px]"
@@ -241,7 +461,7 @@ export default function SocialMedia() {
                       <Button 
                         type="submit" 
                         className="w-full"
-                        disabled={isSubmitting || !newThought.trim()}
+                        disabled={isSubmitting || (!newThought.trim() && !selectedImage)}
                       >
                         {isSubmitting ? 'Sharing...' : 'Share'}
                       </Button>
@@ -257,15 +477,45 @@ export default function SocialMedia() {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 max-w-6xl mx-auto">
-              <AnimatePresence>
-                {mixedFeed.map((item, index) => (
-                  <motion.div
-                    key={item.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.03 }}
-                    className="break-inside-avoid mb-4"
-                  >
+              {mixedFeed.map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.03 }}
+                  className="break-inside-avoid mb-4"
+                >
+                  {item.type === 'photo' || item.image_url ? (
+                    // Photo post card
+                    <div className="rounded-xl overflow-hidden shadow-sm border border-border hover:shadow-md transition-shadow bg-card">
+                      <div className="relative">
+                        <img
+                          src={item.image_url || ''}
+                          alt="Summit moment"
+                          className="w-full h-auto object-cover"
+                          loading="lazy"
+                        />
+                      </div>
+                      {item.content && (
+                        <div className="p-4">
+                          <p className="text-foreground leading-relaxed">{item.content}</p>
+                          {item.author && (
+                            <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+                              <User className="w-4 h-4" />
+                              <span>{item.author}</span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      {!item.content && item.author && (
+                        <div className="p-4 flex items-center gap-2 text-sm text-muted-foreground">
+                          <User className="w-4 h-4" />
+                          <span>{item.author}</span>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    // Text-only card (quote or user thought)
                     <div className={`rounded-xl p-6 shadow-sm border border-border hover:shadow-md transition-shadow ${
                       item.type === 'user' 
                         ? 'bg-primary/5 border-primary/20' 
@@ -282,9 +532,9 @@ export default function SocialMedia() {
                         </div>
                       )}
                     </div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
+                  )}
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
@@ -302,7 +552,7 @@ export default function SocialMedia() {
                 Join the Conversation
               </h2>
               <p className="text-muted-foreground mb-8">
-                Your voice matters! Share your thoughts and be part of the global conversation on vaccines.
+                Your voice matters! Share your thoughts and photos from the summit.
               </p>
               <div className="inline-block bg-primary/10 rounded-full px-8 py-4">
                 <span className="text-2xl md:text-3xl font-bold text-primary">
