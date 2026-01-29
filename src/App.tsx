@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import SocialMedia from "./pages/SocialMedia";
 import Schedule from "./pages/Schedule";
+import PromptsWall from "./pages/PromptsWall";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/social" element={<SocialMedia />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="/prompts" element={<PromptsWall />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
