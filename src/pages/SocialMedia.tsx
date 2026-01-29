@@ -1,11 +1,24 @@
-import { motion } from 'framer-motion';
-import { Hash, Instagram, MessageCircle, ArrowLeft, Quote } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Hash, ArrowLeft, Quote, Send, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
-const quotes = [
+interface Thought {
+  id: string;
+  content: string;
+  author_name: string | null;
+  created_at: string;
+}
+
+// Static inspiring quotes to mix with user thoughts
+const staticQuotes = [
   "Vaccines save millions of lives every year - they are one of humanity's greatest achievements.",
   "Innovation in immunization is the key to a healthier future for all.",
   "Together, we can protect communities and build a world free from preventable diseases.",
@@ -16,38 +29,132 @@ const quotes = [
   "Protecting one person through vaccination helps protect entire communities.",
 ];
 
-const instagramPosts = [
-  { id: 1, gradient: "from-primary to-primary-light", image: "🔬", likes: 342, caption: "Science in action #VaccinesSummit2026" },
-  { id: 2, gradient: "from-pink-500 to-purple-600", image: "🌍", likes: 521, caption: "Global health matters" },
-  { id: 3, gradient: "from-primary-light to-accent", image: "💉", likes: 189, caption: "Innovation at its finest" },
-  { id: 4, gradient: "from-track-comirnaty to-primary", image: "🤝", likes: 456, caption: "Collaboration is key" },
-  { id: 5, gradient: "from-primary to-track-break", image: "🏆", likes: 278, caption: "Celebrating achievements" },
-  { id: 6, gradient: "from-accent to-primary-light", image: "💡", likes: 634, caption: "Discovery never stops" },
-  { id: 7, gradient: "from-track-pcv to-primary", image: "🧬", likes: 412, caption: "The future of health" },
-  { id: 8, gradient: "from-pink-400 to-pink-600", image: "❤️", likes: 893, caption: "Protecting communities" },
-];
-
-// Create mixed feed items
-type FeedItem = { type: 'quote'; content: string; index: number } | { type: 'instagram'; post: typeof instagramPosts[0]; index: number };
-
-const createMixedFeed = (): FeedItem[] => {
-  const feed: FeedItem[] = [];
-  const maxLength = Math.max(quotes.length, instagramPosts.length);
-  
-  for (let i = 0; i < maxLength; i++) {
-    if (i < instagramPosts.length) {
-      feed.push({ type: 'instagram', post: instagramPosts[i], index: i });
-    }
-    if (i < quotes.length) {
-      feed.push({ type: 'quote', content: quotes[i], index: i });
-    }
-  }
-  return feed;
-};
-
-const mixedFeed = createMixedFeed();
-
 export default function SocialMedia() {
+  const [thoughts, setThoughts] = useState<Thought[]>([]);
+  const [newThought, setNewThought] = useState('');
+  const [authorName, setAuthorName] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const { toast } = useToast();
+
+  // Fetch initial thoughts
+  useEffect(() => {
+    const fetchThoughts = async () => {
+      const { data, error } = await supabase
+        .from('summit_thoughts')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Error fetching thoughts:', error);
+        return;
+      }
+
+      setThoughts(data || []);
+    };
+
+    fetchThoughts();
+  }, []);
+
+  // Subscribe to realtime updates
+  useEffect(() => {
+    const channel = supabase
+      .channel('summit_thoughts_realtime')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'summit_thoughts',
+        },
+        (payload) => {
+          const newThought = payload.new as Thought;
+          setThoughts((prev) => [newThought, ...prev]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const trimmedContent = newThought.trim();
+    const trimmedAuthor = authorName.trim();
+
+    if (!trimmedContent) {
+      toast({
+        title: "Empty thought",
+        description: "Please write something to share.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (trimmedContent.length > 500) {
+      toast({
+        title: "Too long",
+        description: "Please keep your thought under 500 characters.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const { error } = await supabase.from('summit_thoughts').insert({
+      content: trimmedContent,
+      author_name: trimmedAuthor || null,
+    });
+
+    if (error) {
+      console.error('Error submitting thought:', error);
+      toast({
+        title: "Error",
+        description: "Failed to submit your thought. Please try again.",
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Shared!",
+        description: "Your thought has been added to the wall.",
+      });
+      setNewThought('');
+      setAuthorName('');
+      setShowForm(false);
+    }
+
+    setIsSubmitting(false);
+  };
+
+  // Create mixed feed of static quotes and user thoughts
+  const createMixedFeed = () => {
+    const feed: { type: 'static' | 'user'; content: string; author?: string | null; id: string }[] = [];
+    
+    // Add static quotes
+    staticQuotes.forEach((quote, index) => {
+      feed.push({ type: 'static', content: quote, id: `static-${index}` });
+    });
+
+    // Add user thoughts
+    thoughts.forEach((thought) => {
+      feed.push({
+        type: 'user',
+        content: thought.content,
+        author: thought.author_name,
+        id: thought.id,
+      });
+    });
+
+    // Shuffle the feed for variety
+    return feed.sort(() => Math.random() - 0.5);
+  };
+
+  const mixedFeed = createMixedFeed();
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -70,7 +177,7 @@ export default function SocialMedia() {
               
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
                 <Hash className="w-4 h-4" />
-                Social Feed
+                Live Feed
               </div>
               
               <h1 className="text-4xl md:text-6xl font-bold text-primary mb-6">
@@ -78,26 +185,71 @@ export default function SocialMedia() {
               </h1>
               
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-                Follow the hashtag and share your pictures on Instagram, or send your photos and thoughts to our AI Concierge
+                Share your thoughts and join the conversation about global immunization
               </p>
 
-              <div className="flex flex-wrap justify-center gap-4">
-                <a 
-                  href="https://instagram.com/explore/tags/vaccinessummit2026" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  <Button className="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700">
-                    <Instagram className="w-5 h-5 mr-2" />
-                    Follow on Instagram
-                  </Button>
-                </a>
-                <Button variant="outline">
-                  <MessageCircle className="w-5 h-5 mr-2" />
-                  Message AI Concierge
-                </Button>
-              </div>
+              <Button 
+                onClick={() => setShowForm(!showForm)}
+                className="bg-primary hover:bg-primary/90"
+                size="lg"
+              >
+                <Send className="w-5 h-5 mr-2" />
+                Share Your Thoughts
+              </Button>
             </motion.div>
+
+            {/* Submission Form */}
+            <AnimatePresence>
+              {showForm && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="max-w-lg mx-auto mt-8"
+                >
+                  <form onSubmit={handleSubmit} className="bg-card rounded-xl p-6 shadow-lg border border-border">
+                    <div className="space-y-4">
+                      <div>
+                        <label htmlFor="thought" className="block text-sm font-medium text-foreground mb-2">
+                          Your Thought
+                        </label>
+                        <Textarea
+                          id="thought"
+                          placeholder="Share your thoughts about vaccines, global health, or the summit..."
+                          value={newThought}
+                          onChange={(e) => setNewThought(e.target.value)}
+                          className="min-h-[100px]"
+                          maxLength={500}
+                        />
+                        <p className="text-xs text-muted-foreground mt-1">
+                          {newThought.length}/500 characters
+                        </p>
+                      </div>
+                      <div>
+                        <label htmlFor="author" className="block text-sm font-medium text-foreground mb-2">
+                          Your Name (optional)
+                        </label>
+                        <Input
+                          id="author"
+                          placeholder="Anonymous"
+                          value={authorName}
+                          onChange={(e) => setAuthorName(e.target.value)}
+                          maxLength={100}
+                        />
+                      </div>
+                      <Button 
+                        type="submit" 
+                        className="w-full"
+                        disabled={isSubmitting || !newThought.trim()}
+                      >
+                        {isSubmitting ? 'Sharing...' : 'Share'}
+                      </Button>
+                    </div>
+                  </form>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </section>
 
@@ -105,36 +257,34 @@ export default function SocialMedia() {
         <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 max-w-6xl mx-auto">
-              {mixedFeed.map((item, index) => (
-                <motion.div
-                  key={`${item.type}-${item.index}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.03 }}
-                  viewport={{ once: true }}
-                  className="break-inside-avoid mb-4"
-                >
-                  {item.type === 'instagram' ? (
-                    <div className="bg-card rounded-xl overflow-hidden shadow-sm border border-border hover:shadow-md transition-shadow">
-                      <div className={`aspect-square bg-gradient-to-br ${item.post.gradient} flex items-center justify-center`}>
-                        <span className="text-6xl md:text-7xl">{item.post.image}</span>
-                      </div>
-                      <div className="p-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Instagram className="w-4 h-4 text-pink-500" />
-                          <span className="text-sm text-muted-foreground">{item.post.likes} likes</span>
-                        </div>
-                        <p className="text-sm text-foreground">{item.post.caption}</p>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="bg-card rounded-xl p-6 shadow-sm border border-border hover:shadow-md transition-shadow">
-                      <Quote className="w-8 h-8 text-primary/30 mb-3" />
+              <AnimatePresence>
+                {mixedFeed.map((item, index) => (
+                  <motion.div
+                    key={item.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.03 }}
+                    className="break-inside-avoid mb-4"
+                  >
+                    <div className={`rounded-xl p-6 shadow-sm border border-border hover:shadow-md transition-shadow ${
+                      item.type === 'user' 
+                        ? 'bg-primary/5 border-primary/20' 
+                        : 'bg-card'
+                    }`}>
+                      <Quote className={`w-8 h-8 mb-3 ${
+                        item.type === 'user' ? 'text-primary/50' : 'text-primary/30'
+                      }`} />
                       <p className="text-foreground italic leading-relaxed">"{item.content}"</p>
+                      {item.type === 'user' && (
+                        <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+                          <User className="w-4 h-4" />
+                          <span>{item.author || 'Anonymous'}</span>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
+              </AnimatePresence>
             </div>
           </div>
         </section>
@@ -149,10 +299,10 @@ export default function SocialMedia() {
               className="max-w-2xl mx-auto"
             >
               <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                Share Your Experience
+                Join the Conversation
               </h2>
               <p className="text-muted-foreground mb-8">
-                Don't forget to use #VaccinesSummit2026 when posting about the event!
+                Your voice matters! Share your thoughts and be part of the global conversation on vaccines.
               </p>
               <div className="inline-block bg-primary/10 rounded-full px-8 py-4">
                 <span className="text-2xl md:text-3xl font-bold text-primary">
