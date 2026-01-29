@@ -7,6 +7,7 @@ const navItems = [
   { label: 'Schedule', href: '/schedule', isRoute: true },
   { label: 'Activities', href: '#activities' },
   { label: 'AI Passport', href: '#passport' },
+  { label: 'Prompts Wall', href: '/prompts', isRoute: true },
   { label: 'Social', href: '/social', isRoute: true },
 ];
 
