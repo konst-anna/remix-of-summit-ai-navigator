@@ -26,14 +26,14 @@ interface Thought {
 
 // Static inspiring quotes to mix with user thoughts
 const staticQuotes = [
-  "Vaccines save millions of lives every year - they are one of humanity's greatest achievements.",
-  "Innovation in immunization is the key to a healthier future for all.",
-  "Together, we can protect communities and build a world free from preventable diseases.",
-  "The science of vaccines continues to evolve, bringing hope to millions worldwide.",
-  "Every vaccination is a step toward global health security.",
-  "Collaboration between scientists, healthcare workers, and communities makes immunization possible.",
-  "Vaccines are a testament to what we can achieve when science and compassion unite.",
-  "Protecting one person through vaccination helps protect entire communities.",
+  "Cookies bring joy to millions of people every year - they are one of humanity's greatest treats.",
+  "Innovation in baking is the key to a sweeter future for all.",
+  "Together, we can spread happiness and build a world filled with delicious creations.",
+  "The art of cookies continues to evolve, bringing delight to millions worldwide.",
+  "Every cookie baked is a step toward global culinary excellence.",
+  "Collaboration between bakers, pastry chefs, and communities makes cookie innovation possible.",
+  "Cookies are a testament to what we can achieve when creativity and passion unite.",
+  "Sharing one cookie helps bring joy to entire communities.",
 ];
 
 // Example photo posts from the summit
@@ -42,21 +42,21 @@ const examplePhotoPosts = [
     id: 'example-photo-1',
     type: 'photo' as const,
     image_url: coffeeBreakPhoto,
-    content: 'Great conversations during the coffee break! Discussing vaccine equity with colleagues from around the world.',
+    content: 'Great conversations during the coffee break! Discussing cookie recipes with colleagues from around the world.',
     author: 'Dr. Maria Santos',
   },
   {
     id: 'example-photo-2',
     type: 'photo' as const,
     image_url: panelDiscussionPhoto,
-    content: 'Incredible panel on global vaccine distribution. So many innovative ideas shared today!',
+    content: 'Incredible panel on global cookie distribution. So many innovative ideas shared today!',
     author: 'James Chen',
   },
   {
     id: 'example-photo-3',
     type: 'photo' as const,
     image_url: posterSessionPhoto,
-    content: 'Fascinating research on mRNA technology at the poster session. The future of immunization looks bright!',
+    content: 'Fascinating research on flavor technology at the poster session. The future of cookies looks bright!',
     author: 'Prof. Sarah Williams',
   },
 ];
@@ -357,7 +357,7 @@ export default function SocialMedia() {
               </div>
               
               <h1 className="text-4xl md:text-6xl font-bold text-primary mb-6">
-                #VaccinesSummit2026
+                #CookiesSummit2026
               </h1>
               
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
@@ -556,7 +556,7 @@ export default function SocialMedia() {
               </p>
               <div className="inline-block bg-primary/10 rounded-full px-8 py-4">
                 <span className="text-2xl md:text-3xl font-bold text-primary">
-                  #VaccinesSummit2026
+                  #CookiesSummit2026
                 </span>
               </div>
             </motion.div>
