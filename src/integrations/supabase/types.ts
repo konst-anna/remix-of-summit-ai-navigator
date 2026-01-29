@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      summit_prompts: {
+        Row: {
+          author_name: string
+          brand_context: string | null
+          created_at: string
+          day_number: number | null
+          id: string
+          prompt_text: string
+        }
+        Insert: {
+          author_name: string
+          brand_context?: string | null
+          created_at?: string
+          day_number?: number | null
+          id?: string
+          prompt_text: string
+        }
+        Update: {
+          author_name?: string
+          brand_context?: string | null
+          created_at?: string
+          day_number?: number | null
+          id?: string
+          prompt_text?: string
+        }
+        Relationships: []
+      }
       summit_thoughts: {
         Row: {
           author_name: string | null

@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Trophy, Sparkles, Award, Gamepad2, Brain, Target } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import PromptCompetitionModal from './PromptCompetitionModal';
 
 const activities = [
   {
@@ -8,18 +10,21 @@ const activities = [
     title: 'Best Prompt Competition',
     description: 'Showcase your AI skills in our gamified prompt engineering challenge. Compete for the title of Marketing Champion in Prompting!',
     reward: 'On-stage recognition & exclusive pins',
+    clickable: true,
   },
   {
     icon: Trophy,
     title: 'Copilot Challenge',
     description: 'Master the 2026 Cookies Summit Copilot Agent. Complete tasks and earn the "Best User of Copilot" badge.',
     reward: 'Dinner table upgrades & special pins',
+    clickable: false,
   },
   {
     icon: Target,
     title: 'AI Knowledge Quest',
     description: 'Navigate through AI-powered quizzes and interactive learning modules. Collect stamps for your AI Passport!',
     reward: 'Digital badges & AI Passport stamps',
+    clickable: false,
   },
 ];
 
@@ -37,6 +42,14 @@ const item = {
 };
 
 export default function ActivitiesSection() {
+  const [promptModalOpen, setPromptModalOpen] = useState(false);
+
+  const handleActivityClick = (activity: typeof activities[0]) => {
+    if (activity.title === 'Best Prompt Competition') {
+      setPromptModalOpen(true);
+    }
+  };
+
   return (
     <section id="activities" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -70,11 +83,23 @@ export default function ActivitiesSection() {
         >
           {activities.map((activity) => (
             <motion.div key={activity.title} variants={item}>
-              <Card className="h-full p-6 bg-card hover:shadow-xl transition-all duration-300 group border-2 border-transparent hover:border-primary/20">
+              <Card 
+                className={`h-full p-6 bg-card hover:shadow-xl transition-all duration-300 group border-2 border-transparent hover:border-primary/20 ${
+                  activity.clickable ? 'cursor-pointer' : ''
+                }`}
+                onClick={() => handleActivityClick(activity)}
+              >
                 <div className="w-14 h-14 rounded-xl gradient-hero flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
                   <activity.icon className="w-7 h-7 text-primary-foreground" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-3">{activity.title}</h3>
+                <h3 className="text-xl font-bold text-foreground mb-3">
+                  {activity.title}
+                  {activity.clickable && (
+                    <span className="ml-2 text-xs font-normal px-2 py-0.5 bg-primary/10 text-primary rounded-full">
+                      Click to view
+                    </span>
+                  )}
+                </h3>
                 <p className="text-muted-foreground mb-5">{activity.description}</p>
                 <div className="flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-lg">
                   <Award className="w-4 h-4 text-accent" />
@@ -144,6 +169,8 @@ export default function ActivitiesSection() {
           </div>
         </motion.div>
       </div>
+
+      <PromptCompetitionModal open={promptModalOpen} onOpenChange={setPromptModalOpen} />
     </section>
   );
 }
