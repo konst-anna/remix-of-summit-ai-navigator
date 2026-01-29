@@ -20,6 +20,24 @@ interface Prompt {
 
 const brands = ['Oreo', 'Cadbury', 'Ritz', 'Trident', 'BelVita', 'Chips Ahoy!', 'Philadelphia', 'Toblerone'];
 
+const brandColors: Record<string, { bg: string; text: string; border: string }> = {
+  'Oreo': { bg: 'bg-slate-900', text: 'text-white', border: 'border-slate-700' },
+  'Cadbury': { bg: 'bg-purple-600', text: 'text-white', border: 'border-purple-400' },
+  'Ritz': { bg: 'bg-amber-500', text: 'text-amber-950', border: 'border-amber-400' },
+  'Trident': { bg: 'bg-cyan-500', text: 'text-white', border: 'border-cyan-400' },
+  'BelVita': { bg: 'bg-orange-500', text: 'text-white', border: 'border-orange-400' },
+  'Chips Ahoy!': { bg: 'bg-blue-600', text: 'text-white', border: 'border-blue-400' },
+  'Philadelphia': { bg: 'bg-sky-200', text: 'text-sky-900', border: 'border-sky-300' },
+  'Toblerone': { bg: 'bg-yellow-400', text: 'text-yellow-950', border: 'border-yellow-500' },
+};
+
+const getBrandStyle = (brand: string | null) => {
+  if (!brand || !brandColors[brand]) {
+    return { bg: 'bg-muted', text: 'text-muted-foreground', border: 'border-border' };
+  }
+  return brandColors[brand];
+};
+
 const staticPrompts: Prompt[] = [
   { id: 's1', prompt_text: 'Create a viral TikTok campaign for Oreo that leverages AR filters to let users design their dream cookie flavor', author_name: 'Sarah Johnson', brand_context: 'Oreo', created_at: '2026-01-29T10:00:00Z' },
   { id: 's2', prompt_text: 'Design an AI sommelier for Cadbury chocolates that pairs flavors with movies, music, and moods', author_name: 'Marcus Lee', brand_context: 'Cadbury', created_at: '2026-01-29T09:55:00Z' },
@@ -147,7 +165,7 @@ export default function PromptsWall() {
             <Card className="max-w-2xl mx-auto p-6">
               <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-primary" />
-                Submit Your Prompt for Day 2
+                Submit Your Prompt
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -234,7 +252,7 @@ export default function PromptsWall() {
                           <div className="flex items-center gap-2 mb-1 flex-wrap">
                             <span className="font-semibold text-foreground">{prompt.author_name}</span>
                             {prompt.brand_context && (
-                              <span className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-full">
+                              <span className={`text-xs px-2 py-0.5 rounded-full border ${getBrandStyle(prompt.brand_context).bg} ${getBrandStyle(prompt.brand_context).text} ${getBrandStyle(prompt.brand_context).border}`}>
                                 {prompt.brand_context}
                               </span>
                             )}
