@@ -23,7 +23,7 @@ export default function Header() {
               <Syringe className="w-6 h-6 text-primary-foreground" />
             </div>
             <div className="hidden sm:block">
-              <h1 className="font-bold text-lg text-foreground">Vaccines Summit</h1>
+              <h1 className="font-bold text-lg text-foreground">Cookies Summit</h1>
               <p className="text-xs text-muted-foreground">2026 International</p>
             </div>
           </Link>

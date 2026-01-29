@@ -32,14 +32,14 @@ export default function HeroSection() {
             className="inline-flex items-center gap-2 px-4 py-2 bg-primary-foreground/10 backdrop-blur-sm rounded-full border border-primary-foreground/20 mb-8"
           >
             <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-            <span className="text-primary-foreground text-sm font-medium">International Vaccines Summit 2026</span>
+            <span className="text-primary-foreground text-sm font-medium">International Cookies Summit 2026</span>
           </motion.div>
 
           {/* Title */}
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-primary-foreground mb-6 leading-tight">
             Shaping the Future
             <br />
-            <span className="text-accent">of Vaccines</span>
+            <span className="text-accent">of Cookies</span>
           </h1>
 
           {/* Subtitle */}
