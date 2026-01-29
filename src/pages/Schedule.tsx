@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, ChevronRight } from 'lucide-react';
+import { Clock, ChevronRight, ArrowLeft, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { scheduleData, Session, trackLabels, DaySchedule } from '@/data/scheduleData';
-import SessionModal from './SessionModal';
+import SessionModal from '@/components/SessionModal';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
@@ -113,7 +115,7 @@ function DayTab({ day, isActive, onClick }: { day: DaySchedule; isActive: boolea
       <div className="text-sm opacity-80">{day.date}</div>
       {isActive && (
         <motion.div
-          layoutId="activeTab"
+          layoutId="activeTabSchedule"
           className="absolute bottom-0 left-0 right-0 h-1 gradient-hero rounded-t"
         />
       )}
@@ -121,7 +123,7 @@ function DayTab({ day, isActive, onClick }: { day: DaySchedule; isActive: boolea
   );
 }
 
-export default function ScheduleSection() {
+export default function Schedule() {
   const [activeDay, setActiveDay] = useState(0);
   const [selectedSession, setSelectedSession] = useState<Session | null>(null);
 
@@ -137,106 +139,118 @@ export default function ScheduleSection() {
   }, {} as Record<string, Session[]>);
 
   return (
-    <section id="schedule" className="py-20 bg-secondary/30">
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
-            Event Schedule
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Three days of insightful sessions, workshops, and networking opportunities.
-            Click on any session to learn more.
-          </p>
-        </motion.div>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main className="pt-20 lg:pt-24">
+        {/* Hero Section */}
+        <section className="py-12 md:py-16 bg-gradient-to-b from-primary/10 to-background">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center"
+            >
+              <Link to="/">
+                <Button variant="ghost" className="mb-6">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Home
+                </Button>
+              </Link>
+              
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
+                <Calendar className="w-4 h-4" />
+                Full Schedule
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+                Event Schedule
+              </h1>
+              
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+                Three days of insightful sessions, workshops, and networking opportunities.
+                Click on any session to learn more.
+              </p>
+            </motion.div>
+          </div>
+        </section>
 
-        {/* Track Legend */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-3 mb-8"
-        >
-          {Object.entries(trackLabels).map(([key, label]) => (
-            <div key={key} className="flex items-center gap-2">
-              <div className={`w-3 h-3 rounded-full ${trackColorMap[key]}`} />
-              <span className="text-xs text-muted-foreground">{label}</span>
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Day Tabs */}
-        <div className="flex gap-1 mb-0">
-          {scheduleData.map((day, index) => (
-            <DayTab
-              key={day.date}
-              day={day}
-              isActive={activeDay === index}
-              onClick={() => setActiveDay(index)}
-            />
-          ))}
-        </div>
-
-        {/* Schedule Grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeDay}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="bg-card rounded-b-2xl rounded-tr-2xl shadow-lg p-6"
-          >
-            <div className="space-y-6">
-              {Object.entries(timeSlots).map(([time, sessions]) => (
-                <div key={time} className="relative">
-                  {/* Time Marker */}
-                  <div className="flex items-center gap-4 mb-3">
-                    <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full">
-                      <Clock className="w-4 h-4 text-primary" />
-                      <span className="font-semibold text-primary">{time}</span>
-                    </div>
-                    <div className="flex-1 h-px bg-border" />
-                  </div>
-
-                  {/* Sessions Grid */}
-                  <div className={`grid gap-4 ${sessions.length > 1 ? 'md:grid-cols-2 lg:grid-cols-3' : 'max-w-2xl'}`}>
-                    {sessions.map((session) => (
-                      <SessionCard
-                        key={session.id}
-                        session={session}
-                        onClick={() => setSelectedSession(session)}
-                      />
-                    ))}
-                  </div>
+        {/* Schedule Content */}
+        <section className="py-12 bg-secondary/30">
+          <div className="container mx-auto px-4">
+            {/* Track Legend */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="flex flex-wrap justify-center gap-3 mb-8"
+            >
+              {Object.entries(trackLabels).map(([key, label]) => (
+                <div key={key} className="flex items-center gap-2">
+                  <div className={`w-3 h-3 rounded-full ${trackColorMap[key]}`} />
+                  <span className="text-xs text-muted-foreground">{label}</span>
                 </div>
               ))}
-            </div>
-          </motion.div>
-        </AnimatePresence>
+            </motion.div>
 
-        {/* View Full Schedule CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mt-8"
-        >
-          <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
-            <Link to="/schedule">View Full Schedule</Link>
-          </Button>
-        </motion.div>
-      </div>
+            {/* Day Tabs */}
+            <div className="flex gap-1 mb-0">
+              {scheduleData.map((day, index) => (
+                <DayTab
+                  key={day.date}
+                  day={day}
+                  isActive={activeDay === index}
+                  onClick={() => setActiveDay(index)}
+                />
+              ))}
+            </div>
+
+            {/* Schedule Grid */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeDay}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="bg-card rounded-b-2xl rounded-tr-2xl shadow-lg p-6"
+              >
+                <div className="space-y-6">
+                  {Object.entries(timeSlots).map(([time, sessions]) => (
+                    <div key={time} className="relative">
+                      {/* Time Marker */}
+                      <div className="flex items-center gap-4 mb-3">
+                        <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full">
+                          <Clock className="w-4 h-4 text-primary" />
+                          <span className="font-semibold text-primary">{time}</span>
+                        </div>
+                        <div className="flex-1 h-px bg-border" />
+                      </div>
+
+                      {/* Sessions Grid */}
+                      <div className={`grid gap-4 ${sessions.length > 1 ? 'md:grid-cols-2 lg:grid-cols-3' : 'max-w-2xl'}`}>
+                        {sessions.map((session) => (
+                          <SessionCard
+                            key={session.id}
+                            session={session}
+                            onClick={() => setSelectedSession(session)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </section>
+      </main>
+      <Footer />
 
       {/* Session Modal */}
       <SessionModal
         session={selectedSession}
         onClose={() => setSelectedSession(null)}
       />
-    </section>
+    </div>
   );
 }
