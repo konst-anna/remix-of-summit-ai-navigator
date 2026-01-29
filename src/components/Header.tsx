@@ -4,7 +4,7 @@ import { Menu, X, Calendar, MapPin, Syringe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const navItems = [
-  { label: 'Schedule', href: '#schedule' },
+  { label: 'Schedule', href: '/schedule', isRoute: true },
   { label: 'Activities', href: '#activities' },
   { label: 'AI Passport', href: '#passport' },
   { label: 'Social', href: '/social', isRoute: true },

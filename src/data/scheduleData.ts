@@ -13,6 +13,7 @@ export interface Speaker {
   role: string;
   company: string;
   bio: string;
+  photo?: string;
 }
 
 export interface Session {

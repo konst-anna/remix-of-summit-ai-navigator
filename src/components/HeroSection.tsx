@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Users, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import heroImage from '@/assets/barcelona-hero.jpg';
 
 export default function HeroSection() {
@@ -83,9 +84,9 @@ export default function HeroSection() {
             <Button
               size="lg"
               className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8"
-              onClick={() => document.getElementById('schedule')?.scrollIntoView({ behavior: 'smooth' })}
+              asChild
             >
-              View Full Schedule
+              <Link to="/schedule">View Full Schedule</Link>
             </Button>
           </motion.div>
         </motion.div>
