@@ -1,18 +1,34 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Calendar, MapPin, Syringe } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const navItems = [
   { label: 'Schedule', href: '/schedule', isRoute: true },
-  { label: 'Activities', href: '#activities' },
-  { label: 'AI Passport', href: '#passport' },
+  { label: 'Activities', href: '#activities', anchor: 'activities' },
+  { label: 'AI Passport', href: '#passport', anchor: 'passport' },
   { label: 'Prompts Wall', href: '/prompts', isRoute: true },
   { label: 'Social', href: '/social', isRoute: true },
 ];
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === '/';
+
+  const handleAnchorClick = (e: React.MouseEvent, anchor: string) => {
+    e.preventDefault();
+    if (isHomePage) {
+      // Scroll to section on homepage
+      const element = document.getElementById(anchor);
+      element?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // Navigate to homepage with hash
+      navigate(`/#${anchor}`);
+    }
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -44,7 +60,8 @@ export default function Header() {
                 <a
                   key={item.label}
                   href={item.href}
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                  onClick={(e) => item.anchor && handleAnchorClick(e, item.anchor)}
+                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer"
                 >
                   {item.label}
                 </a>
@@ -99,8 +116,8 @@ export default function Header() {
                   <a
                     key={item.label}
                     href={item.href}
-                    className="text-foreground font-medium py-2"
-                    onClick={() => setIsMenuOpen(false)}
+                    className="text-foreground font-medium py-2 cursor-pointer"
+                    onClick={(e) => item.anchor && handleAnchorClick(e, item.anchor)}
                   >
                     {item.label}
                   </a>
