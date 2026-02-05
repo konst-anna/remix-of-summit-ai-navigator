@@ -53,9 +53,12 @@ export default function SessionModal({ session, onClose }: SessionModalProps) {
               <span className="px-3 py-1 bg-primary-foreground/20 rounded-full text-xs font-medium uppercase tracking-wider">
                 {trackLabels[session.track]}
               </span>
-              <span className="px-3 py-1 bg-primary-foreground/20 rounded-full text-xs font-medium capitalize">
-                {session.type}
-              </span>
+              {session.type.toLowerCase() !== session.track.toLowerCase() && 
+               session.type.toLowerCase() !== trackLabels[session.track].toLowerCase() && (
+                <span className="px-3 py-1 bg-primary-foreground/20 rounded-full text-xs font-medium capitalize">
+                  {session.type}
+                </span>
+              )}
             </div>
 
             <h2 className="text-2xl font-bold mb-2">{session.title}</h2>
@@ -119,11 +122,6 @@ export default function SessionModal({ session, onClose }: SessionModalProps) {
               </div>
             )}
 
-            {/* Actions */}
-            <div className="flex gap-3 mt-8 pt-6 border-t border-border">
-              <Button className="flex-1">Add to My Schedule</Button>
-              <Button variant="outline" className="flex-1">Share Session</Button>
-            </div>
           </div>
         </motion.div>
       </motion.div>
