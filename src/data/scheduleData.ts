@@ -6,7 +6,8 @@ export type SessionTrack =
   | 'rsv-maternal' 
   | 'plenary' 
   | 'break' 
-  | 'networking';
+  | 'networking'
+  | 'tick-bourne';
 
 export interface Speaker {
   name: string;
@@ -43,6 +44,7 @@ export const trackLabels: Record<SessionTrack, string> = {
   'plenary': 'Plenary',
   'break': 'Break',
   'networking': 'Networking',
+  'tick-bourne': 'Tick Bourne',
 };
 
 // Speaker photos using randomuser.me portraits for realistic avatars
@@ -685,7 +687,7 @@ export const scheduleData: DaySchedule[] = [
         title: 'Tick Bourne Franchise',
         time: '11:15',
         duration: '45 min',
-        track: 'plenary',
+        track: 'tick-bourne',
         description: 'Overview of the Tick Bourne franchise and strategic opportunities.',
         speakers: [
           withPhoto({ name: 'Dr. Richard Hayes', role: 'Chief Scientific Officer', company: 'R&D', bio: 'Leading global research initiatives.' }),

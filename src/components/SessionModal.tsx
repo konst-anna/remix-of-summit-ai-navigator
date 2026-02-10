@@ -17,6 +17,7 @@ const trackColorMap: Record<string, string> = {
   'plenary': 'bg-track-plenary',
   'break': 'bg-track-break',
   'networking': 'bg-track-networking',
+  'tick-bourne': 'bg-track-tick-bourne',
 };
 
 export default function SessionModal({ session, onClose }: SessionModalProps) {
