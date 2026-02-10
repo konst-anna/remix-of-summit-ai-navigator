@@ -1,4 +1,4 @@
-import { Calendar, MapPin, Mail, Phone } from 'lucide-react';
+import { Calendar, MapPin, ExternalLink } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -47,17 +47,15 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Community */}
           <div>
-            <h4 className="font-semibold mb-4">Contact</h4>
+            <h4 className="font-semibold mb-4">Community</h4>
             <ul className="space-y-3 text-sm opacity-80">
-              <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                <span>summit@vaccines2026.com</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                <span>+1 (555) 123-4567</span>
+              <li>
+                <a href="https://web.yammer.com/vaccines-community" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-100 transition-opacity">
+                  <ExternalLink className="w-4 h-4" />
+                  <span>Viva Engage Vaccines Community</span>
+                </a>
               </li>
             </ul>
           </div>
