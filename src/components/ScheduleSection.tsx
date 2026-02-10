@@ -16,6 +16,7 @@ const trackColorMap: Record<string, string> = {
   'plenary': 'bg-track-plenary',
   'break': 'bg-track-break',
   'networking': 'bg-track-networking',
+  'tick-bourne': 'bg-track-tick-bourne',
 };
 
 const trackBorderMap: Record<string, string> = {
@@ -27,6 +28,7 @@ const trackBorderMap: Record<string, string> = {
   'plenary': 'border-l-track-plenary',
   'break': 'border-l-track-break',
   'networking': 'border-l-track-networking',
+  'tick-bourne': 'border-l-track-tick-bourne',
 };
 
 function getInitials(name: string): string {

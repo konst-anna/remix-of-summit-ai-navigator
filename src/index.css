@@ -43,14 +43,15 @@
     --radius: 0.5rem;
 
     /* Session Track Colors */
-    --track-pcv-paed: 15 90% 55%;
-    --track-pcv-adult: 215 100% 50%;
-    --track-comirnaty: 145 65% 40%;
-    --track-rsv-adult: 330 70% 55%;
-    --track-rsv-maternal: 200 70% 65%;
-    --track-plenary: 45 85% 50%;
-    --track-break: 210 15% 75%;
-    --track-networking: 280 60% 60%;
+    --track-pcv-paed: 130 55% 55%;
+    --track-pcv-adult: 145 60% 32%;
+    --track-comirnaty: 220 10% 58%;
+    --track-rsv-adult: 340 65% 45%;
+    --track-rsv-maternal: 340 60% 72%;
+    --track-plenary: 215 85% 50%;
+    --track-break: 40 15% 75%;
+    --track-networking: 270 55% 55%;
+    --track-tick-bourne: 25 90% 55%;
 
     /* Gradients */
     --gradient-hero: linear-gradient(135deg, hsl(215 100% 37%) 0%, hsl(205 90% 50%) 100%);
@@ -177,7 +178,7 @@
 
   .track-rsv-maternal {
     background-color: hsl(var(--track-rsv-maternal));
-    color: white;
+    color: hsl(215 25% 15%);
   }
 
   .track-plenary {
@@ -192,6 +193,11 @@
 
   .track-networking {
     background-color: hsl(var(--track-networking));
+    color: white;
+  }
+
+  .track-tick-bourne {
+    background-color: hsl(var(--track-tick-bourne));
     color: white;
   }
 

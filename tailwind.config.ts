@@ -66,6 +66,7 @@ export default {
           "plenary": "hsl(var(--track-plenary))",
           "break": "hsl(var(--track-break))",
           "networking": "hsl(var(--track-networking))",
+          "tick-bourne": "hsl(var(--track-tick-bourne))",
         },
       },
       fontFamily: {
