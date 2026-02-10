@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Instagram, MessageCircle, Hash, ArrowRight } from 'lucide-react';
+import { MessageCircle, Hash, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -36,18 +36,6 @@ export default function SocialMediaSection() {
           <div className="bg-card rounded-2xl p-8 md:p-12 shadow-lg border border-border">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-                    <Instagram className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-1">Share on Instagram</h3>
-                    <p className="text-muted-foreground text-sm">
-                      Follow the hashtag and share your pictures from the summit
-                    </p>
-                  </div>
-                </div>
-
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
                     <MessageCircle className="w-6 h-6 text-primary-foreground" />
