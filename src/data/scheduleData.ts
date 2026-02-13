@@ -87,23 +87,6 @@ function withPhoto(speaker: Omit<Speaker, 'photo'>): Speaker {
 
 export const scheduleData: DaySchedule[] = [
   {
-    date: 'March 24, 2026',
-    dayName: 'Tuesday',
-    sessions: [
-      {
-        id: 'tue-1',
-        title: 'Arrive in Barcelona at Leisure',
-        time: '—',
-        duration: 'All day',
-        track: 'networking',
-        description: 'Arrive in Barcelona at your leisure. Settle in and explore the city before the summit begins.',
-        speakers: [],
-        room: '',
-        type: 'networking',
-      },
-    ],
-  },
-  {
     date: 'March 25, 2026',
     dayName: 'Wednesday',
     sessions: [
