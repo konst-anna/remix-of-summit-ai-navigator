@@ -3,7 +3,6 @@ import { Calendar, MapPin, Users, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import heroImage from '@/assets/barcelona-hero.jpg';
-import ensembleLogo from '@/assets/ensemble-logo.png';
 
 export default function HeroSection() {
   return (
@@ -15,60 +14,55 @@ export default function HeroSection() {
           alt="Barcelona skyline"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(200,60%,15%,0.88)] via-[hsl(185,70%,30%,0.75)] to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(200,60%,12%,0.92)] via-[hsl(185,70%,25%,0.82)] to-background" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 pt-24 pb-12">
+      <div className="relative z-10 container mx-auto px-4 pt-28 pb-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto text-center"
+          className="max-w-3xl mx-auto text-center"
         >
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="mb-8"
+          {/* Eyebrow */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="text-accent text-sm font-semibold uppercase tracking-[0.2em] mb-6"
           >
-            <img
-              src={ensembleLogo}
-              alt="The Pfizer Vaccines Ensemble - Synchronised in our growth ambitions"
-              className="w-full max-w-lg mx-auto drop-shadow-2xl"
-            />
-          </motion.div>
+            The Pfizer Vaccines Ensemble
+          </motion.p>
+
+          {/* Title — large, clean, Apple-style */}
+          <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extrabold text-primary-foreground mb-6 leading-[1.05] tracking-tight">
+            Synchronised
+            <br />
+            <span className="text-accent">in Growth</span>
+          </h1>
 
           {/* Subtitle */}
-          <p className="text-lg sm:text-xl text-primary-foreground/80 mb-10 max-w-2xl mx-auto">
-            Join global leaders, innovators, and healthcare professionals for three days of 
-            collaboration, learning, and breakthrough insights in the heart of Barcelona.
+          <p className="text-base sm:text-lg text-primary-foreground/70 mb-12 max-w-xl mx-auto font-light leading-relaxed">
+            Three days of collaboration, learning, and breakthrough insights — Barcelona, March 2026.
           </p>
 
-          {/* Event Details */}
-          <div className="flex flex-wrap justify-center gap-4 mb-10">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-3 px-5 py-3 bg-primary-foreground/10 backdrop-blur-sm rounded-xl border border-primary-foreground/20"
-            >
-              <Calendar className="w-5 h-5 text-accent" />
-              <span className="text-primary-foreground font-medium">March 25-27, 2026</span>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-3 px-5 py-3 bg-primary-foreground/10 backdrop-blur-sm rounded-xl border border-primary-foreground/20"
-            >
-              <MapPin className="w-5 h-5 text-accent" />
-              <span className="text-primary-foreground font-medium">Barcelona, Spain</span>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-3 px-5 py-3 bg-primary-foreground/10 backdrop-blur-sm rounded-xl border border-primary-foreground/20"
-            >
-              <Users className="w-5 h-5 text-accent" />
-              <span className="text-primary-foreground font-medium">250 Attendees</span>
-            </motion.div>
+          {/* Minimal info pills */}
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {[
+              { icon: Calendar, text: 'March 25–27, 2026' },
+              { icon: MapPin, text: 'Barcelona, Spain' },
+              { icon: Users, text: '250 Attendees' },
+            ].map(({ icon: Icon, text }) => (
+              <motion.div
+                key={text}
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center gap-2 px-4 py-2 bg-primary-foreground/5 backdrop-blur-md rounded-full border border-primary-foreground/10 text-sm text-primary-foreground/80"
+              >
+                <Icon className="w-4 h-4 text-accent" />
+                <span>{text}</span>
+              </motion.div>
+            ))}
           </div>
 
           {/* CTA */}
@@ -76,11 +70,10 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Button
               size="lg"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8"
+              className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-10 py-6 text-base rounded-full"
               asChild
             >
               <Link to="/schedule">View Full Schedule</Link>
@@ -96,12 +89,12 @@ export default function HeroSection() {
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <motion.div
-            animate={{ y: [0, 10, 0] }}
+            animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
-            className="flex flex-col items-center gap-2 text-primary-foreground/60"
+            className="flex flex-col items-center gap-2 text-primary-foreground/40"
           >
-            <span className="text-xs uppercase tracking-wider">Scroll to explore</span>
-            <ChevronDown className="w-5 h-5" />
+            <span className="text-[10px] uppercase tracking-[0.2em]">Explore</span>
+            <ChevronDown className="w-4 h-4" />
           </motion.div>
         </motion.div>
       </div>
