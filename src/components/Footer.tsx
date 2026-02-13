@@ -1,4 +1,4 @@
-import { Calendar, MapPin, ExternalLink } from 'lucide-react';
+import { Calendar, MapPin, ExternalLink, Music } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -9,15 +9,15 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-lg bg-primary-foreground/10 flex items-center justify-center">
-                <span className="font-bold text-lg">VS</span>
+                <Music className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-bold">Cookies Summit</h3>
-                <p className="text-xs opacity-70">2026 International</p>
+                <h3 className="font-bold">Vaccines Ensemble</h3>
+                <p className="text-xs opacity-70">Summit 2026</p>
               </div>
             </div>
             <p className="text-sm opacity-80 mb-4">
-              Shaping the future of cookies through innovation, collaboration, and global leadership.
+              Synchronised in our growth ambitions — shaping the future of vaccines through innovation and collaboration.
             </p>
           </div>
 
@@ -64,7 +64,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm opacity-60">
-            © 2026 International Cookies Summit. All rights reserved.
+            © 2026 Pfizer Vaccines Ensemble Summit. All rights reserved.
           </p>
           <p className="text-xs opacity-40">
             Confidential - For Internal Use Only

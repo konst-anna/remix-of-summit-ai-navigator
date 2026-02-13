@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Calendar, MapPin, Syringe } from 'lucide-react';
+import { Menu, X, Calendar, MapPin, Music } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const navItems = [
@@ -20,11 +20,9 @@ export default function Header() {
   const handleAnchorClick = (e: React.MouseEvent, anchor: string) => {
     e.preventDefault();
     if (isHomePage) {
-      // Scroll to section on homepage
       const element = document.getElementById(anchor);
       element?.scrollIntoView({ behavior: 'smooth' });
     } else {
-      // Navigate to homepage with hash
       navigate(`/#${anchor}`);
     }
     setIsMenuOpen(false);
@@ -37,11 +35,11 @@ export default function Header() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
             <div className="w-10 h-10 gradient-hero rounded-lg flex items-center justify-center">
-              <Syringe className="w-6 h-6 text-primary-foreground" />
+              <Music className="w-6 h-6 text-primary-foreground" />
             </div>
             <div className="hidden sm:block">
-              <h1 className="font-bold text-lg text-foreground">Cookies Summit</h1>
-              <p className="text-xs text-muted-foreground">2026 International</p>
+              <h1 className="font-bold text-lg text-foreground">Vaccines Ensemble</h1>
+              <p className="text-xs text-muted-foreground">Summit 2026</p>
             </div>
           </Link>
 
