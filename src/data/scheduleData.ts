@@ -118,7 +118,7 @@ export const scheduleData: DaySchedule[] = [
       },
       {
         id: 'wed-3',
-        title: 'Policy Panel: Current Vaccines Environment',
+        title: 'Policy Panel: Current Cookies Environment',
         time: '09:45',
         duration: '45 min',
         track: 'plenary',
@@ -404,11 +404,11 @@ export const scheduleData: DaySchedule[] = [
       },
       {
         id: 'thu-2',
-        title: 'Vaccines Portfolio Approach',
+        title: 'Cookies Portfolio Approach',
         time: '09:00',
         duration: '45 min',
         track: 'plenary',
-        description: 'Comprehensive overview of the vaccines portfolio and integrated approach.',
+        description: 'Comprehensive overview of the cookies portfolio and integrated approach.',
         speakers: [
           withPhoto({ name: 'Rachel Green', role: 'Portfolio Marketing Director', company: 'Global Marketing', bio: 'Award-winning marketer with 15 years in the industry.' }),
         ],
@@ -697,7 +697,7 @@ export const scheduleData: DaySchedule[] = [
       },
       {
         id: 'fri-6',
-        title: 'Vaccines Pipeline',
+        title: 'Cookies Pipeline',
         time: '12:00',
         duration: '30 min',
         track: 'plenary',
