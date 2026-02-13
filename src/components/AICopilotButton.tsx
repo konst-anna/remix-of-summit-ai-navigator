@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bot, X, Sparkles, ArrowRight, ExternalLink } from 'lucide-react';
+import { Bot, X, Sparkles, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function AICopilotButton() {
@@ -102,10 +102,6 @@ export default function AICopilotButton() {
                   <Button className="w-full gradient-hero text-primary-foreground" size="lg">
                     <Bot className="w-5 h-5 mr-2" />
                     Launch Copilot
-                  </Button>
-                  <Button variant="outline" className="w-full" size="lg">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Add to Your Corporate Environment
                   </Button>
                 </div>
               </div>
