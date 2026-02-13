@@ -3,18 +3,19 @@ import { Calendar, MapPin, Users, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import heroImage from '@/assets/barcelona-hero.jpg';
+import ensembleLogo from '@/assets/ensemble-logo.png';
 
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
+      {/* Background Image with Teal/Cyan Overlay */}
       <div className="absolute inset-0">
         <img
           src={heroImage}
-          alt="Barcelona skyline at sunset"
+          alt="Barcelona skyline"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/60 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(200,60%,15%,0.88)] via-[hsl(185,70%,30%,0.75)] to-background" />
       </div>
 
       {/* Content */}
@@ -25,23 +26,19 @@ export default function HeroSection() {
           transition={{ duration: 0.8 }}
           className="max-w-4xl mx-auto text-center"
         >
-          {/* Badge */}
+          {/* Logo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary-foreground/10 backdrop-blur-sm rounded-full border border-primary-foreground/20 mb-8"
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="mb-8"
           >
-            <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-            <span className="text-primary-foreground text-sm font-medium">International Cookies Summit 2026</span>
+            <img
+              src={ensembleLogo}
+              alt="The Pfizer Vaccines Ensemble - Synchronised in our growth ambitions"
+              className="w-full max-w-lg mx-auto drop-shadow-2xl"
+            />
           </motion.div>
-
-          {/* Title */}
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-primary-foreground mb-6 leading-tight">
-            Shaping the Future
-            <br />
-            <span className="text-accent">of Cookies</span>
-          </h1>
 
           {/* Subtitle */}
           <p className="text-lg sm:text-xl text-primary-foreground/80 mb-10 max-w-2xl mx-auto">
