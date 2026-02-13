@@ -38,7 +38,7 @@ export default function Header() {
               <Music className="w-6 h-6 text-primary-foreground" />
             </div>
             <div className="hidden sm:block">
-              <h1 className="font-bold text-lg text-foreground">Vaccines Ensemble</h1>
+              <h1 className="font-bold text-lg text-foreground">Cookies Ensemble</h1>
               <p className="text-xs text-muted-foreground">Summit 2026</p>
             </div>
           </Link>

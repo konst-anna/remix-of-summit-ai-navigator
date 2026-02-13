@@ -19,7 +19,7 @@ export default function SocialMediaSection() {
             Join the Conversation
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            #VaccinesSummit2026
+#CookiesSummit2026
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Share your experience and connect with fellow attendees on social media
@@ -51,7 +51,7 @@ export default function SocialMediaSection() {
 
               <div className="text-center md:text-right">
                 <p className="text-2xl md:text-3xl font-bold text-primary mb-4">
-                  #VaccinesSummit2026
+                  #CookiesSummit2026
                 </p>
                 <p className="text-muted-foreground mb-6">
                   See what others are sharing and join the conversation

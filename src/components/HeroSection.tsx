@@ -32,7 +32,7 @@ export default function HeroSection() {
             transition={{ delay: 0.2 }}
             className="text-accent text-sm font-semibold uppercase tracking-[0.2em] mb-6"
           >
-            The Pfizer Vaccines Ensemble
+            The Pfizer Cookies Ensemble
           </motion.p>
 
           {/* Title — large, clean, Apple-style */}

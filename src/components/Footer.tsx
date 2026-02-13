@@ -17,7 +17,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm opacity-80 mb-4">
-              Synchronised in our growth ambitions — shaping the future of vaccines through innovation and collaboration.
+              Synchronised in our growth ambitions — shaping the future of cookies through innovation and collaboration.
             </p>
           </div>
 
@@ -52,9 +52,9 @@ export default function Footer() {
             <h4 className="font-semibold mb-4">Community</h4>
             <ul className="space-y-3 text-sm opacity-80">
               <li>
-                <a href="https://web.yammer.com/vaccines-community" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-100 transition-opacity">
+                <a href="https://web.yammer.com/cookies-community" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-100 transition-opacity">
                   <ExternalLink className="w-4 h-4" />
-                  <span>Viva Engage Vaccines Community</span>
+                  <span>Viva Engage Cookies Community</span>
                 </a>
               </li>
             </ul>
@@ -64,7 +64,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm opacity-60">
-            © 2026 Pfizer Vaccines Ensemble Summit. All rights reserved.
+            © 2026 © 2026 Pfizer Cookies Ensemble Summit. All rights reserved.. All rights reserved.
           </p>
           <p className="text-xs opacity-40">
             Confidential - For Internal Use Only
