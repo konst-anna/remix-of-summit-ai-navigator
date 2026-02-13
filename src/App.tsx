@@ -8,6 +8,7 @@ import SocialMedia from "./pages/SocialMedia";
 import Schedule from "./pages/Schedule";
 import PromptsWall from "./pages/PromptsWall";
 import NotFound from "./pages/NotFound";
+import AICopilotButton from "./components/AICopilotButton";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <AICopilotButton />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

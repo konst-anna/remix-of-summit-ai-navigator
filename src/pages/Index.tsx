@@ -6,7 +6,6 @@ import ScheduleSection from '@/components/ScheduleSection';
 import ActivitiesSection from '@/components/ActivitiesSection';
 import AIPassportSection from '@/components/AIPassportSection';
 import SocialMediaSection from '@/components/SocialMediaSection';
-import AICopilotButton from '@/components/AICopilotButton';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -32,7 +31,6 @@ const Index = () => {
         <SocialMediaSection />
       </main>
       <Footer />
-      <AICopilotButton />
     </div>
   );
 };
