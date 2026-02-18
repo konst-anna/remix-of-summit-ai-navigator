@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="py-16" style={{ background: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(170 60% 85%) 40%, hsl(160 50% 65%) 70%, hsl(75 50% 55%) 100%)' }}>
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-10 mb-12">
+        <div className="grid md:grid-cols-3 gap-10 mb-12 md:pl-24 lg:pl-40">
           {/* Event Details */}
           <div>
             <h4 className="font-semibold text-foreground mb-4">Event Details</h4>
