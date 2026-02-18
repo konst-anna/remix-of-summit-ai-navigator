@@ -215,62 +215,55 @@ export default function SocialMedia() {
       <main className="pt-20 lg:pt-24">
         {/* Hero Section – Social gradient */}
         <section
-          className="py-8 md:py-12 relative overflow-hidden"
+          className="relative overflow-hidden min-h-[260px] md:min-h-[320px]"
           style={{ background: social.gradientBg }}
         >
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="flex items-center gap-8">
-              {/* Left – Hero Image */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="hidden md:block w-2/5 flex-shrink-0"
-              >
-                <img
-                  src={socialHeroImg}
-                  alt="Summit musician"
-                  className="w-full h-auto max-h-[280px] object-contain rounded-xl drop-shadow-2xl"
-                />
-              </motion.div>
+          {/* Background hero image – left side, blended */}
+          <div className="absolute inset-0 hidden md:block">
+            <img
+              src={socialHeroImg}
+              alt=""
+              className="absolute left-0 top-0 h-full w-3/5 object-cover object-center"
+              style={{ maskImage: 'linear-gradient(to right, rgba(0,0,0,0.7) 30%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,0.7) 30%, transparent 100%)' }}
+            />
+          </div>
 
-              {/* Right – Text content */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="text-center md:text-left flex-1"
-              >
-                <Link to="/">
-                  <Button variant="ghost" className="mb-4 text-white/80 hover:text-white hover:bg-white/10">
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back to Home
-                  </Button>
-                </Link>
-                
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-4">
-                  <Hash className="w-4 h-4" />
-                  Live Feed
-                </div>
-                
-                <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-                  #CookiesSummit2026
-                </h1>
-                
-                <p className="text-base md:text-lg text-white/80 max-w-xl mb-6">
-                  Share your thoughts and photos from the summit
-                </p>
-
-                <Button 
-                  onClick={() => setShowForm(!showForm)}
-                  className="bg-white hover:bg-white/90 text-[#ef4056] font-bold shadow-lg"
-                  size="lg"
-                >
-                  <Camera className="w-5 h-5 mr-2" />
-                  Share a Moment
+          <div className="container mx-auto px-4 relative z-10 py-10 md:py-14">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="md:ml-auto md:w-1/2 text-center md:text-left"
+            >
+              <Link to="/">
+                <Button variant="ghost" className="mb-4 text-white/80 hover:text-white hover:bg-white/10">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Home
                 </Button>
-              </motion.div>
-            </div>
+              </Link>
+              
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-4">
+                <Hash className="w-4 h-4" />
+                Live Feed
+              </div>
+              
+              <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
+                #CookiesSummit2026
+              </h1>
+              
+              <p className="text-base md:text-lg text-white/80 max-w-xl mb-6">
+                Share your thoughts and photos from the summit
+              </p>
+
+              <Button 
+                onClick={() => setShowForm(!showForm)}
+                className="bg-white hover:bg-white/90 text-[#ef4056] font-bold shadow-lg"
+                size="lg"
+              >
+                <Camera className="w-5 h-5 mr-2" />
+                Share a Moment
+              </Button>
+            </motion.div>
 
             {/* Submission Form */}
             <AnimatePresence>
