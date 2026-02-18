@@ -16,6 +16,15 @@ import coffeeBreakPhoto from '@/assets/summit-coffee-break.jpg';
 import panelDiscussionPhoto from '@/assets/summit-panel-discussion.jpg';
 import posterSessionPhoto from '@/assets/summit-poster-session.jpg';
 
+// --- Social palette (pink → coral → orange → yellow) ---
+const social = {
+  pink: 'hsl(350, 85%, 55%)',
+  coral: 'hsl(10, 90%, 60%)',
+  orange: 'hsl(30, 95%, 55%)',
+  yellow: 'hsl(45, 95%, 55%)',
+  gradientBg: 'linear-gradient(180deg, hsl(350,85%,55%) 0%, hsl(10,90%,60%) 40%, hsl(30,95%,55%) 75%, hsl(45,95%,55%) 100%)',
+};
+
 interface Thought {
   id: string;
   content: string;
@@ -74,8 +83,6 @@ async function resizeImage(file: File): Promise<Blob> {
 
     img.onload = () => {
       let { width, height } = img;
-
-      // Calculate new dimensions while maintaining aspect ratio
       if (width > MAX_IMAGE_DIMENSION || height > MAX_IMAGE_DIMENSION) {
         if (width > height) {
           height = (height / width) * MAX_IMAGE_DIMENSION;
@@ -85,30 +92,16 @@ async function resizeImage(file: File): Promise<Blob> {
           height = MAX_IMAGE_DIMENSION;
         }
       }
-
       canvas.width = width;
       canvas.height = height;
-
-      if (!ctx) {
-        reject(new Error('Could not get canvas context'));
-        return;
-      }
-
+      if (!ctx) { reject(new Error('Could not get canvas context')); return; }
       ctx.drawImage(img, 0, 0, width, height);
-
       canvas.toBlob(
-        (blob) => {
-          if (blob) {
-            resolve(blob);
-          } else {
-            reject(new Error('Could not create blob'));
-          }
-        },
+        (blob) => { blob ? resolve(blob) : reject(new Error('Could not create blob')); },
         'image/jpeg',
         0.85
       );
     };
-
     img.onerror = () => reject(new Error('Could not load image'));
     img.src = URL.createObjectURL(file);
   });
@@ -132,15 +125,9 @@ export default function SocialMedia() {
         .from('summit_thoughts')
         .select('*')
         .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('Error fetching thoughts:', error);
-        return;
-      }
-
+      if (error) { console.error('Error fetching thoughts:', error); return; }
       setThoughts(data || []);
     };
-
     fetchThoughts();
   }, []);
 
@@ -148,184 +135,74 @@ export default function SocialMedia() {
   useEffect(() => {
     const channel = supabase
       .channel('summit_thoughts_realtime')
-      .on(
-        'postgres_changes',
-        {
-          event: 'INSERT',
-          schema: 'public',
-          table: 'summit_thoughts',
-        },
-        (payload) => {
-          const newThought = payload.new as Thought;
-          setThoughts((prev) => [newThought, ...prev]);
-        }
+      .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'summit_thoughts' },
+        (payload) => { setThoughts((prev) => [payload.new as Thought, ...prev]); }
       )
       .subscribe();
-
-    return () => {
-      supabase.removeChannel(channel);
-    };
+    return () => { supabase.removeChannel(channel); };
   }, []);
 
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
     if (!file.type.startsWith('image/')) {
-      toast({
-        title: "Invalid file type",
-        description: "Please select an image file.",
-        variant: "destructive",
-      });
+      toast({ title: "Invalid file type", description: "Please select an image file.", variant: "destructive" });
       return;
     }
-
     if (file.size > MAX_FILE_SIZE) {
-      toast({
-        title: "File too large",
-        description: "Please select an image under 5MB.",
-        variant: "destructive",
-      });
+      toast({ title: "File too large", description: "Please select an image under 5MB.", variant: "destructive" });
       return;
     }
-
     setSelectedImage(file);
     setImagePreview(URL.createObjectURL(file));
   };
 
   const clearImage = () => {
     setSelectedImage(null);
-    if (imagePreview) {
-      URL.revokeObjectURL(imagePreview);
-      setImagePreview(null);
-    }
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
+    if (imagePreview) { URL.revokeObjectURL(imagePreview); setImagePreview(null); }
+    if (fileInputRef.current) { fileInputRef.current.value = ''; }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     const trimmedContent = newThought.trim();
     const trimmedAuthor = authorName.trim();
-
-    // At least content or image is required
     if (!trimmedContent && !selectedImage) {
-      toast({
-        title: "Nothing to share",
-        description: "Please write something or add a photo.",
-        variant: "destructive",
-      });
+      toast({ title: "Nothing to share", description: "Please write something or add a photo.", variant: "destructive" });
       return;
     }
-
     if (trimmedContent.length > 500) {
-      toast({
-        title: "Too long",
-        description: "Please keep your thought under 500 characters.",
-        variant: "destructive",
-      });
+      toast({ title: "Too long", description: "Please keep your thought under 500 characters.", variant: "destructive" });
       return;
     }
-
     setIsSubmitting(true);
-
     try {
       let imageUrl: string | null = null;
-
-      // Upload image if selected
       if (selectedImage) {
         const resizedBlob = await resizeImage(selectedImage);
         const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.jpg`;
-        
-        const { error: uploadError } = await supabase.storage
-          .from('summit-photos')
-          .upload(fileName, resizedBlob, {
-            contentType: 'image/jpeg',
-          });
-
-        if (uploadError) {
-          console.error('Upload error:', uploadError);
-          throw new Error('Failed to upload image');
-        }
-
-        const { data: publicUrlData } = supabase.storage
-          .from('summit-photos')
-          .getPublicUrl(fileName);
-
+        const { error: uploadError } = await supabase.storage.from('summit-photos').upload(fileName, resizedBlob, { contentType: 'image/jpeg' });
+        if (uploadError) { console.error('Upload error:', uploadError); throw new Error('Failed to upload image'); }
+        const { data: publicUrlData } = supabase.storage.from('summit-photos').getPublicUrl(fileName);
         imageUrl = publicUrlData.publicUrl;
       }
-
-      const { error } = await supabase.from('summit_thoughts').insert({
-        content: trimmedContent || null,
-        author_name: trimmedAuthor || null,
-        image_url: imageUrl,
-      });
-
-      if (error) {
-        console.error('Error submitting thought:', error);
-        throw new Error('Failed to submit');
-      }
-
-      toast({
-        title: "Shared!",
-        description: "Your post has been added to the wall.",
-      });
-      setNewThought('');
-      setAuthorName('');
-      clearImage();
-      setShowForm(false);
+      const { error } = await supabase.from('summit_thoughts').insert({ content: trimmedContent || null, author_name: trimmedAuthor || null, image_url: imageUrl });
+      if (error) { console.error('Error submitting thought:', error); throw new Error('Failed to submit'); }
+      toast({ title: "Shared!", description: "Your post has been added to the wall." });
+      setNewThought(''); setAuthorName(''); clearImage(); setShowForm(false);
     } catch (error) {
       console.error('Submission error:', error);
-      toast({
-        title: "Error",
-        description: "Failed to submit your post. Please try again.",
-        variant: "destructive",
-      });
+      toast({ title: "Error", description: "Failed to submit your post. Please try again.", variant: "destructive" });
     }
-
     setIsSubmitting(false);
   };
 
   // Create mixed feed of static quotes, user thoughts, and example photos
   const createMixedFeed = () => {
-    const feed: {
-      type: 'static' | 'user' | 'photo';
-      content: string | null;
-      author?: string | null;
-      id: string;
-      image_url?: string | null;
-    }[] = [];
-    
-    // Add static quotes
-    staticQuotes.forEach((quote, index) => {
-      feed.push({ type: 'static', content: quote, id: `static-${index}` });
-    });
-
-    // Add example photo posts
-    examplePhotoPosts.forEach((post) => {
-      feed.push({
-        type: 'photo',
-        content: post.content,
-        author: post.author,
-        id: post.id,
-        image_url: post.image_url,
-      });
-    });
-
-    // Add user thoughts
-    thoughts.forEach((thought) => {
-      feed.push({
-        type: thought.image_url ? 'photo' : 'user',
-        content: thought.content,
-        author: thought.author_name,
-        id: thought.id,
-        image_url: thought.image_url,
-      });
-    });
-
-    // Shuffle the feed for variety
+    const feed: { type: 'static' | 'user' | 'photo'; content: string | null; author?: string | null; id: string; image_url?: string | null; }[] = [];
+    staticQuotes.forEach((quote, index) => { feed.push({ type: 'static', content: quote, id: `static-${index}` }); });
+    examplePhotoPosts.forEach((post) => { feed.push({ type: 'photo', content: post.content, author: post.author, id: post.id, image_url: post.image_url }); });
+    thoughts.forEach((thought) => { feed.push({ type: thought.image_url ? 'photo' : 'user', content: thought.content, author: thought.author_name, id: thought.id, image_url: thought.image_url }); });
     return feed.sort(() => Math.random() - 0.5);
   };
 
@@ -335,9 +212,12 @@ export default function SocialMedia() {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-20 lg:pt-24">
-        {/* Hero Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-b from-primary/10 to-background">
-          <div className="container mx-auto px-4">
+        {/* Hero Section – Social gradient */}
+        <section
+          className="py-16 md:py-24 relative overflow-hidden"
+          style={{ background: social.gradientBg }}
+        >
+          <div className="container mx-auto px-4 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -345,28 +225,28 @@ export default function SocialMedia() {
               className="text-center"
             >
               <Link to="/">
-                <Button variant="ghost" className="mb-6">
+                <Button variant="ghost" className="mb-6 text-white/80 hover:text-white hover:bg-white/10">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to Home
                 </Button>
               </Link>
               
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-6">
                 <Hash className="w-4 h-4" />
                 Live Feed
               </div>
               
-              <h1 className="text-4xl md:text-6xl font-bold text-primary mb-6">
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
                 #CookiesSummit2026
               </h1>
               
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+              <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-8">
                 Share your thoughts and photos from the summit
               </p>
 
               <Button 
                 onClick={() => setShowForm(!showForm)}
-                className="bg-primary hover:bg-primary/90"
+                className="bg-white hover:bg-white/90 text-[hsl(350,85%,55%)] font-bold shadow-lg"
                 size="lg"
               >
                 <Camera className="w-5 h-5 mr-2" />
@@ -384,35 +264,21 @@ export default function SocialMedia() {
                   transition={{ duration: 0.3 }}
                   className="max-w-lg mx-auto mt-8"
                 >
-                  <form onSubmit={handleSubmit} className="bg-card rounded-xl p-6 shadow-lg border border-border">
+                  <form onSubmit={handleSubmit} className="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg">
                     <div className="space-y-4">
                       {/* Image Upload */}
                       <div>
-                        <label className="block text-sm font-medium text-foreground mb-2">
+                        <label className="block text-sm font-medium text-[hsl(350,85%,40%)] mb-2">
                           Add a Photo (optional)
                         </label>
-                        <input
-                          ref={fileInputRef}
-                          type="file"
-                          accept="image/*"
-                          onChange={handleImageSelect}
-                          className="hidden"
-                        />
+                        <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageSelect} className="hidden" />
                         
                         {imagePreview ? (
-                          <div className="relative rounded-lg overflow-hidden border border-border">
+                          <div className="relative rounded-lg overflow-hidden border border-[hsl(30,95%,55%)]/30">
                             <AspectRatio ratio={4/3}>
-                              <img
-                                src={imagePreview}
-                                alt="Preview"
-                                className="w-full h-full object-cover"
-                              />
+                              <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
                             </AspectRatio>
-                            <button
-                              type="button"
-                              onClick={clearImage}
-                              className="absolute top-2 right-2 bg-background/80 hover:bg-background rounded-full p-1.5 transition-colors"
-                            >
+                            <button type="button" onClick={clearImage} className="absolute top-2 right-2 bg-white/80 hover:bg-white rounded-full p-1.5 transition-colors">
                               <X className="w-4 h-4 text-foreground" />
                             </button>
                           </div>
@@ -420,34 +286,30 @@ export default function SocialMedia() {
                           <button
                             type="button"
                             onClick={() => fileInputRef.current?.click()}
-                            className="w-full border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 hover:bg-primary/5 transition-colors"
+                            className="w-full border-2 border-dashed border-[hsl(30,95%,55%)]/40 rounded-lg p-8 text-center hover:border-[hsl(350,85%,55%)]/60 hover:bg-[hsl(350,85%,55%)]/5 transition-colors"
                           >
-                            <ImageIcon className="w-10 h-10 mx-auto text-muted-foreground mb-2" />
-                            <span className="text-sm text-muted-foreground">
-                              Click to upload a photo
-                            </span>
+                            <ImageIcon className="w-10 h-10 mx-auto text-[hsl(30,95%,55%)] mb-2" />
+                            <span className="text-sm text-[hsl(350,85%,40%)]">Click to upload a photo</span>
                           </button>
                         )}
                       </div>
 
                       <div>
-                        <label htmlFor="thought" className="block text-sm font-medium text-foreground mb-2">
-                          Your Thought {!selectedImage && <span className="text-muted-foreground">(required)</span>}
+                        <label htmlFor="thought" className="block text-sm font-medium text-[hsl(350,85%,40%)] mb-2">
+                          Your Thought {!selectedImage && <span className="text-[hsl(30,95%,55%)]">(required)</span>}
                         </label>
                         <Textarea
                           id="thought"
                           placeholder="Share your thoughts about the summit..."
                           value={newThought}
                           onChange={(e) => setNewThought(e.target.value)}
-                          className="min-h-[100px]"
+                          className="min-h-[100px] border-[hsl(30,95%,55%)]/30 focus-visible:ring-[hsl(350,85%,55%)]"
                           maxLength={500}
                         />
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {newThought.length}/500 characters
-                        </p>
+                        <p className="text-xs text-[hsl(350,85%,40%)] mt-1">{newThought.length}/500 characters</p>
                       </div>
                       <div>
-                        <label htmlFor="author" className="block text-sm font-medium text-foreground mb-2">
+                        <label htmlFor="author" className="block text-sm font-medium text-[hsl(350,85%,40%)] mb-2">
                           Your Name (optional)
                         </label>
                         <Input
@@ -456,11 +318,12 @@ export default function SocialMedia() {
                           value={authorName}
                           onChange={(e) => setAuthorName(e.target.value)}
                           maxLength={100}
+                          className="border-[hsl(30,95%,55%)]/30 focus-visible:ring-[hsl(350,85%,55%)]"
                         />
                       </div>
                       <Button 
                         type="submit" 
-                        className="w-full"
+                        className="w-full bg-gradient-to-r from-[hsl(350,85%,55%)] to-[hsl(30,95%,55%)] hover:opacity-90 text-white font-bold"
                         disabled={isSubmitting || (!newThought.trim() && !selectedImage)}
                       >
                         {isSubmitting ? 'Sharing...' : 'Share'}
@@ -486,21 +349,15 @@ export default function SocialMedia() {
                   className="break-inside-avoid mb-4"
                 >
                   {item.type === 'photo' || item.image_url ? (
-                    // Photo post card
-                    <div className="rounded-xl overflow-hidden shadow-sm border border-border hover:shadow-md transition-shadow bg-card">
+                    <div className="rounded-xl overflow-hidden shadow-sm border border-[hsl(30,95%,55%)]/20 hover:shadow-md hover:shadow-[hsl(350,85%,55%)]/10 transition-shadow bg-card">
                       <div className="relative">
-                        <img
-                          src={item.image_url || ''}
-                          alt="Summit moment"
-                          className="w-full h-auto object-cover"
-                          loading="lazy"
-                        />
+                        <img src={item.image_url || ''} alt="Summit moment" className="w-full h-auto object-cover" loading="lazy" />
                       </div>
                       {item.content && (
                         <div className="p-4">
                           <p className="text-foreground leading-relaxed">{item.content}</p>
                           {item.author && (
-                            <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+                            <div className="mt-3 flex items-center gap-2 text-sm text-[hsl(350,85%,55%)]">
                               <User className="w-4 h-4" />
                               <span>{item.author}</span>
                             </div>
@@ -508,25 +365,24 @@ export default function SocialMedia() {
                         </div>
                       )}
                       {!item.content && item.author && (
-                        <div className="p-4 flex items-center gap-2 text-sm text-muted-foreground">
+                        <div className="p-4 flex items-center gap-2 text-sm text-[hsl(350,85%,55%)]">
                           <User className="w-4 h-4" />
                           <span>{item.author}</span>
                         </div>
                       )}
                     </div>
                   ) : (
-                    // Text-only card (quote or user thought)
-                    <div className={`rounded-xl p-6 shadow-sm border border-border hover:shadow-md transition-shadow ${
+                    <div className={`rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow ${
                       item.type === 'user' 
-                        ? 'bg-primary/5 border-primary/20' 
-                        : 'bg-card'
+                        ? 'bg-gradient-to-br from-[hsl(350,85%,55%)]/5 to-[hsl(30,95%,55%)]/5 border-[hsl(350,85%,55%)]/20' 
+                        : 'bg-card border-[hsl(30,95%,55%)]/15'
                     }`}>
                       <Quote className={`w-8 h-8 mb-3 ${
-                        item.type === 'user' ? 'text-primary/50' : 'text-primary/30'
+                        item.type === 'user' ? 'text-[hsl(350,85%,55%)]/50' : 'text-[hsl(30,95%,55%)]/40'
                       }`} />
                       <p className="text-foreground italic leading-relaxed">"{item.content}"</p>
                       {item.type === 'user' && (
-                        <div className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+                        <div className="mt-4 flex items-center gap-2 text-sm text-[hsl(350,85%,55%)]">
                           <User className="w-4 h-4" />
                           <span>{item.author || 'Anonymous'}</span>
                         </div>
@@ -540,22 +396,25 @@ export default function SocialMedia() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-16">
-          <div className="container mx-auto px-4 text-center">
+        <section
+          className="py-16 relative overflow-hidden"
+          style={{ background: social.gradientBg }}
+        >
+          <div className="container mx-auto px-4 text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="max-w-2xl mx-auto"
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
                 Join the Conversation
               </h2>
-              <p className="text-muted-foreground mb-8">
+              <p className="text-white/80 mb-8">
                 Your voice matters! Share your thoughts and photos from the summit.
               </p>
-              <div className="inline-block bg-primary/10 rounded-full px-8 py-4">
-                <span className="text-2xl md:text-3xl font-bold text-primary">
+              <div className="inline-block bg-white/20 backdrop-blur-sm rounded-full px-8 py-4">
+                <span className="text-2xl md:text-3xl font-bold text-white">
                   #CookiesSummit2026
                 </span>
               </div>
