@@ -139,18 +139,15 @@ export default function ScheduleSection() {
   }, {} as Record<string, Session[]>);
 
   return (
-    <section id="schedule" className="py-20 bg-secondary/30">
+    <section id="schedule" className="pt-6 pb-20 bg-secondary/30">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-14">
+          className="text-center mb-10">
 
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-3">
-            Schedule
-          </h2>
           <p className="text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
             Three days of insightful sessions, workshops, and networking.<br />
             Click on any session to learn more.
