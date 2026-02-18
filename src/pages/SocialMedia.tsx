@@ -394,33 +394,6 @@ export default function SocialMedia() {
             </div>
           </div>
         </section>
-
-        {/* CTA / Bottom Section – warm social gradient */}
-        <section
-          className="py-16 relative overflow-hidden"
-          style={{ background: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, #f7e234 30%, #f9a870 60%, #f0679e 85%, #ef4056 100%)' }}
-        >
-          <div className="container mx-auto px-4 text-center relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="max-w-2xl mx-auto"
-            >
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                Join the Conversation
-              </h2>
-              <p className="text-foreground/70 mb-8">
-                Your voice matters! Share your thoughts and photos from the summit.
-              </p>
-              <div className="inline-block bg-white/30 backdrop-blur-sm rounded-full px-8 py-4">
-                <span className="text-2xl md:text-3xl font-bold text-[#ef4056]">
-                  #CookiesSummit2026
-                </span>
-              </div>
-            </motion.div>
-          </div>
-        </section>
       </main>
       <Footer variant="social" />
     </div>
