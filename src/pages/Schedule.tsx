@@ -8,6 +8,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import heroBg from '@/assets/hero-bg.png';
 
 const trackColorMap: Record<string, string> = {
   'pcv-paed': 'bg-track-pcv-paed',
@@ -144,32 +145,38 @@ export default function Schedule() {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-20 lg:pt-24">
-        {/* Hero Section */}
-        <section className="py-12 md:py-16 bg-gradient-to-b from-primary/10 to-background">
-          <div className="container mx-auto px-4">
+        {/* Hero Section — matching homepage style */}
+        <section className="relative overflow-hidden min-h-[260px] md:min-h-[320px]">
+          {/* Background image with white overlay like homepage */}
+          <div className="absolute inset-0">
+            <img src={heroBg} alt="" className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-white/60" />
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10 py-10 md:py-14">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-center"
+              className="md:ml-auto md:w-1/2 text-center md:text-left"
             >
               <Link to="/">
-                <Button variant="ghost" className="mb-6">
+                <Button variant="ghost" className="mb-4">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to Home
                 </Button>
               </Link>
-              
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
+
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-4">
                 <Calendar className="w-4 h-4" />
                 Full Schedule
               </div>
-              
-              <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+
+              <h1 className="text-3xl lg:text-5xl font-bold text-primary mb-4">
                 Event Schedule
               </h1>
-              
-              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
+
+              <p className="text-base md:text-lg text-muted-foreground max-w-xl">
                 Three days of insightful sessions, workshops, and networking opportunities.
                 Click on any session to learn more.
               </p>
