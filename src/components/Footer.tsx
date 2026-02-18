@@ -1,4 +1,5 @@
-import { Calendar, MapPin, ExternalLink, Music } from 'lucide-react';
+import { Calendar, MapPin, ExternalLink } from 'lucide-react';
+import summitLogo from '@/assets/summit-logo.png';
 
 export default function Footer() {
   return (
@@ -7,17 +8,11 @@ export default function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-primary-foreground/10 flex items-center justify-center">
-                <Music className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 className="font-bold">Vaccines Ensemble</h3>
-                <p className="text-xs opacity-70">Summit 2026</p>
-              </div>
+            <div className="mb-4">
+              <img src={summitLogo} alt="Pfizer Vaccines Ensemble" className="h-12 w-auto brightness-0 invert" />
             </div>
             <p className="text-sm opacity-80 mb-4">
-              Synchronised in our growth ambitions — shaping the future of cookies through innovation and collaboration.
+              Synchronised in our growth ambitions — shaping the future of vaccines through innovation and collaboration.
             </p>
           </div>
 
