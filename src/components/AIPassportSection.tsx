@@ -73,34 +73,14 @@ export default function AIPassportSection() {
             <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 blur-3xl rounded-full" />
             
             {/* Passport Image */}
-            
-
-
-
-
-
-
-
-
-
-
-
-            {/* Floating Stamps */}
-            <motion.div
-              animate={{ y: [-5, 5, -5] }}
-              transition={{ repeat: Infinity, duration: 3 }}
-              className="absolute top-10 right-0 lg:right-10 w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center shadow-lg">
-
-              <Star className="w-8 h-8 text-yellow-100" />
-            </motion.div>
-            
-            <motion.div
-              animate={{ y: [5, -5, 5] }}
-              transition={{ repeat: Infinity, duration: 4 }}
-              className="absolute bottom-20 left-0 lg:left-10 w-14 h-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg">
-
-              <Zap className="w-7 h-7 text-primary-foreground" />
-            </motion.div>
+            <div className="relative z-10 flex items-center justify-center">
+              <motion.img
+                src={passportImage}
+                alt="AI Passport"
+                className="w-64 lg:w-80 rounded-xl shadow-2xl"
+                whileHover={{ scale: 1.05 }}
+              />
+            </div>
           </motion.div>
         </div>
 

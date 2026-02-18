@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Gamepad2, Brain, Target, Award } from 'lucide-react';
-import aiPassportImg from '@/assets/ai-passport.png';
+import { Trophy, Sparkles, Award, Gamepad2, Brain, Target } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import PromptCompetitionModal from './PromptCompetitionModal';
 
@@ -150,16 +149,35 @@ export default function ActivitiesSection() {
                 ))}
               </div>
             </div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="flex-shrink-0"
-            >
-              <img
-                src={aiPassportImg}
-                alt="AI Passport"
-                className="w-48 lg:w-64 rounded-xl shadow-2xl"
-              />
-            </motion.div>
+            <div className="flex gap-4">
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ repeat: Infinity, duration: 3 }}
+                whileHover={{ scale: 1.2, rotate: 10 }}
+                className="w-20 h-20 rounded-full flex items-center justify-center shadow-xl cursor-pointer"
+                style={{ background: 'linear-gradient(135deg, #a2d06d, #88ecd4)' }}
+              >
+                <Trophy className="w-10 h-10 text-white" />
+              </motion.div>
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ repeat: Infinity, duration: 3, delay: 0.5 }}
+                whileHover={{ scale: 1.2, rotate: -10 }}
+                className="w-20 h-20 rounded-full flex items-center justify-center shadow-xl cursor-pointer"
+                style={{ background: 'linear-gradient(135deg, #88ecd4, #59c5c7)' }}
+              >
+                <Award className="w-10 h-10 text-white" />
+              </motion.div>
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ repeat: Infinity, duration: 3, delay: 1 }}
+                whileHover={{ scale: 1.2, rotate: 10 }}
+                className="w-20 h-20 rounded-full flex items-center justify-center shadow-xl cursor-pointer"
+                style={{ background: 'linear-gradient(135deg, #59c5c7, #0095ff)' }}
+              >
+                <Sparkles className="w-10 h-10 text-white" />
+              </motion.div>
+            </div>
           </div>
         </motion.div>
       </div>
