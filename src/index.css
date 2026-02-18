@@ -22,8 +22,32 @@
 
 @font-face {
   font-family: 'FF Din';
-  src: url('/fonts/DINPro-CondMedium.ttf') format('truetype');
+  src: url('/fonts/DINPro.ttf') format('truetype');
   font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FF Din';
+  src: url('/fonts/DINPro.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FF Din';
+  src: url('/fonts/DINPro.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'FF Din';
+  src: url('/fonts/DINPro.ttf') format('truetype');
+  font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
