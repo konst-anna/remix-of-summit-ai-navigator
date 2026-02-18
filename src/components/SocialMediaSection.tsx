@@ -12,8 +12,8 @@ export default function SocialMediaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+          className="text-center mb-12">
+
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
             <Hash className="w-4 h-4" />
             Join the Conversation
@@ -31,42 +31,42 @@ export default function SocialMediaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="bg-card rounded-2xl p-8 md:p-12 shadow-lg border border-border">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                    <MessageCircle className="w-6 h-6 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground mb-1">AI Concierge</h3>
-                    <p className="text-muted-foreground text-sm">
-                      Send your pictures or thoughts directly to our AI Concierge
-                    </p>
-                  </div>
-                </div>
-              </div>
+          className="max-w-4xl mx-auto">
 
-              <div className="text-center md:text-right">
-                <p className="text-2xl md:text-3xl font-bold text-primary mb-4">
-                  #CookiesSummit2026
-                </p>
-                <p className="text-muted-foreground mb-6">
-                  See what others are sharing and join the conversation
-                </p>
-                <Link to="/social">
-                  <Button className="group">
-                    View Social Feed
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </motion.div>
       </div>
-    </section>
-  );
+    </section>);
+
 }
