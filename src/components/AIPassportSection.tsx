@@ -47,9 +47,9 @@ export default function AIPassportSection() {
           {/* Passport Book */}
           <div className="relative z-10 flex flex-col md:flex-row rounded-2xl overflow-hidden shadow-2xl border border-border">
             {/* Left Page - Cover */}
-            <div className="md:w-2/5 bg-gradient-to-br from-[hsl(213,55%,18%)] to-[hsl(213,55%,28%)] p-6 flex flex-col items-center justify-center relative">
+            <div className="md:w-2/5 bg-card p-6 flex flex-col items-center justify-center relative">
               {/* Spine effect */}
-              <div className="hidden md:block absolute right-0 top-0 bottom-0 w-4 bg-gradient-to-r from-[hsl(213,55%,14%)] to-[hsl(213,55%,20%)] shadow-inner" />
+              <div className="hidden md:block absolute right-0 top-0 bottom-0 w-4 bg-gradient-to-r from-border to-transparent" />
               <motion.img
                 src={passportImage}
                 alt="AI Passport"
@@ -62,7 +62,7 @@ export default function AIPassportSection() {
                   'Earn badges & recognition',
                   'Share on social media',
                 ].map((feature, i) => (
-                  <div key={i} className="flex items-center gap-2 text-xs text-white/70">
+                  <div key={i} className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Check className="w-3 h-3 text-accent flex-shrink-0" />
                     <span>{feature}</span>
                   </div>
