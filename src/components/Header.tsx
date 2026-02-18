@@ -36,7 +36,7 @@ export default function Header({ variant = 'default' }: { variant?: 'default' | 
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src={variant === 'social' ? summitLogoRed : summitLogo} alt="Pfizer Vaccines Ensemble" className={variant === 'social' ? "h-20 lg:h-24 w-auto" : "h-12 lg:h-14 w-auto"} />
+            <img src={variant === 'social' ? summitLogoRed : summitLogo} alt="Pfizer Vaccines Ensemble" className={variant === 'social' ? "h-20 lg:h-24 w-auto -ml-4" : "h-12 lg:h-14 w-auto"} />
           </Link>
 
           {/* Desktop Navigation */}
