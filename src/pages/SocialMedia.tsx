@@ -248,7 +248,10 @@ export default function SocialMedia() {
                 Live Feed
               </div>
               
-              <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
+              <h1
+                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-[1.05] tracking-tight"
+                style={{ fontFamily: "'FF Din Cond', 'FF Din', sans-serif" }}
+              >
                 #VaccinesSummit2026
               </h1>
               
