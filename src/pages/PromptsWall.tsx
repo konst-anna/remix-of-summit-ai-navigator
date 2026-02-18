@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Sparkles, Brain, Trophy, User } from 'lucide-react';
+import { Send, Sparkles, Brain, Trophy, User, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import promptsHeroImg from '@/assets/prompts-hero.png';
 
 interface Prompt {
   id: string;
@@ -17,6 +19,14 @@ interface Prompt {
   brand_context: string | null;
   created_at: string;
 }
+
+// Prompts page palette — cyan → purple → magenta
+const prompts = {
+  cyan: '#5ce1e6',
+  purple: '#9b59b6',
+  magenta: '#e91e8c',
+  gradientBg: 'linear-gradient(135deg, #5ce1e6 0%, #9b59b6 50%, #e91e8c 100%)',
+};
 
 const brands = ['Prevnar', 'Comirnaty', 'Abrysvo', 'PCV Paed', 'Tick Bourne'];
 
@@ -59,7 +69,7 @@ const staticPrompts: Prompt[] = [
 ];
 
 export default function PromptsWall() {
-  const [prompts, setPrompts] = useState<Prompt[]>([]);
+  const [promptsList, setPromptsList] = useState<Prompt[]>([]);
   const [authorName, setAuthorName] = useState('');
   const [promptText, setPromptText] = useState('');
   const [brandContext, setBrandContext] = useState('');
@@ -77,7 +87,7 @@ export default function PromptsWall() {
       return;
     }
 
-    setPrompts(data || []);
+    setPromptsList(data || []);
   };
 
   useEffect(() => {
@@ -89,7 +99,7 @@ export default function PromptsWall() {
         'postgres_changes',
         { event: 'INSERT', schema: 'public', table: 'summit_prompts' },
         (payload) => {
-          setPrompts((prev) => [payload.new as Prompt, ...prev]);
+          setPromptsList((prev) => [payload.new as Prompt, ...prev]);
         }
       )
       .subscribe();
@@ -133,26 +143,56 @@ export default function PromptsWall() {
     setIsSubmitting(false);
   };
 
-  const allPrompts = [...prompts, ...staticPrompts];
+  const allPrompts = [...promptsList, ...staticPrompts];
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-20">
-        {/* Hero Section */}
-        <section className="py-12 gradient-hero">
-          <div className="container mx-auto px-4 text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-foreground/10 backdrop-blur-sm rounded-full mb-4">
-              <Brain className="w-4 h-4 text-primary-foreground" />
-              <span className="text-sm font-medium text-primary-foreground">Best Prompt Competition</span>
-            </div>
-            <h1 className="text-3xl lg:text-5xl font-bold text-primary-foreground mb-4">
-              Prompts Wall
-            </h1>
-            <p className="text-lg text-primary-foreground/80 max-w-2xl mx-auto">
-              Showcase your AI creativity! Submit your best prompts and see how other marketers 
-              are leveraging AI for our iconic brands.
-            </p>
+        {/* Hero Section — same layout as Social page */}
+        <section
+          className="relative overflow-hidden min-h-[260px] md:min-h-[320px]"
+          style={{ background: prompts.gradientBg }}
+        >
+          {/* Background hero image – left side, blended */}
+          <div className="absolute inset-0 hidden md:block">
+            <img
+              src={promptsHeroImg}
+              alt=""
+              className="absolute left-0 top-0 h-full w-3/5 object-cover object-center"
+              style={{
+                maskImage: 'linear-gradient(to right, rgba(0,0,0,0.7) 30%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to right, rgba(0,0,0,0.7) 30%, transparent 100%)',
+              }}
+            />
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10 py-10 md:py-14">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="md:ml-auto md:w-1/2 text-center md:text-left"
+            >
+              <Link to="/">
+                <Button variant="ghost" className="mb-4 text-white/80 hover:text-white hover:bg-white/10">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Home
+                </Button>
+              </Link>
+
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-4">
+                <Brain className="w-4 h-4" />
+                Best Prompt Competition
+              </div>
+              <h1 className="text-3xl lg:text-5xl font-bold text-white mb-4">
+                Prompts Wall
+              </h1>
+              <p className="text-base md:text-lg text-white/80 max-w-xl">
+                Showcase your AI creativity! Submit your best prompts and see how other marketers
+                are leveraging AI for our vaccine brands.
+              </p>
+            </motion.div>
           </div>
         </section>
 
@@ -161,7 +201,7 @@ export default function PromptsWall() {
           <div className="container mx-auto px-4">
             <Card className="max-w-2xl mx-auto p-6">
               <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-primary" />
+                <Sparkles className="w-5 h-5" style={{ color: prompts.purple }} />
                 Submit Your Prompt
               </h2>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -175,6 +215,7 @@ export default function PromptsWall() {
                       onChange={(e) => setAuthorName(e.target.value)}
                       placeholder="John Smith"
                       maxLength={50}
+                      className="focus-visible:ring-[#9b59b6]"
                     />
                   </div>
                   <div>
@@ -184,7 +225,7 @@ export default function PromptsWall() {
                     <select
                       value={brandContext}
                       onChange={(e) => setBrandContext(e.target.value)}
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9b59b6] focus-visible:ring-offset-2"
                     >
                       <option value="">Select a brand...</option>
                       {brands.map((brand) => (
@@ -203,12 +244,18 @@ export default function PromptsWall() {
                     placeholder="Create an AI-powered marketing campaign that..."
                     rows={4}
                     maxLength={500}
+                    className="focus-visible:ring-[#9b59b6]"
                   />
                   <p className="text-xs text-muted-foreground mt-1">
                     {promptText.length}/500 characters
                   </p>
                 </div>
-                <Button type="submit" disabled={isSubmitting} className="w-full">
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full text-white"
+                  style={{ background: prompts.gradientBg }}
+                >
                   {isSubmitting ? 'Submitting...' : 'Submit Prompt'}
                   <Send className="w-4 h-4 ml-2" />
                 </Button>
@@ -242,8 +289,11 @@ export default function PromptsWall() {
                   >
                     <Card className="p-4 hover:shadow-lg transition-shadow">
                       <div className="flex items-start gap-3">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0">
-                          <User className="w-5 h-5 text-primary-foreground" />
+                        <div
+                          className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                          style={{ background: prompts.gradientBg }}
+                        >
+                          <User className="w-5 h-5 text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 mb-1 flex-wrap">
@@ -268,13 +318,13 @@ export default function PromptsWall() {
         </section>
 
         {/* Competition Info */}
-        <section className="py-12 gradient-hero">
+        <section className="py-12" style={{ background: prompts.gradientBg }}>
           <div className="container mx-auto px-4 text-center">
-            <Trophy className="w-12 h-12 text-primary-foreground mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-primary-foreground mb-4">
+            <Trophy className="w-12 h-12 text-white mx-auto mb-4" />
+            <h2 className="text-2xl font-bold text-white mb-4">
               Win the "Marketing Champion in Prompting" Title!
             </h2>
-            <p className="text-primary-foreground/80 max-w-2xl mx-auto mb-6">
+            <p className="text-white/80 max-w-2xl mx-auto mb-6">
               The top 3 prompts each day will be recognized on stage. Winners receive 
               exclusive pins, dinner table upgrades, and digital badges for their AI Passport!
             </p>
@@ -282,7 +332,7 @@ export default function PromptsWall() {
               {['On-stage Recognition', 'Exclusive Pins', 'Dinner Upgrades', 'AI Passport Stamps'].map((reward) => (
                 <span
                   key={reward}
-                  className="px-4 py-2 bg-primary-foreground/10 backdrop-blur-sm rounded-full text-sm text-primary-foreground border border-primary-foreground/20"
+                  className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm text-white border border-white/20"
                 >
                   {reward}
                 </span>
