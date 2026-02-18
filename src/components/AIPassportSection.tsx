@@ -13,7 +13,7 @@ const stamps = [
 
 export default function AIPassportSection() {
   return (
-    <section id="passport" className="py-16 bg-gradient-to-b from-secondary/30 to-background overflow-hidden">
+    <section id="passport" className="py-16 overflow-hidden">
       <div className="container mx-auto px-4">
         {/* Header */}
         <motion.div
@@ -72,12 +72,6 @@ export default function AIPassportSection() {
 
             {/* Right Page - Stamps */}
             <div className="md:w-3/5 bg-card p-6 lg:p-8 relative">
-              {/* Page texture lines */}
-              <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-                style={{
-                  backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 31px, hsl(213 55% 24%) 31px, hsl(213 55% 24%) 32px)',
-                }}
-              />
               <h3 className="text-lg font-bold text-foreground mb-5 flex items-center gap-2 relative z-10">
                 <Stamp className="w-5 h-5 text-primary" />
                 Achievement Stamps
