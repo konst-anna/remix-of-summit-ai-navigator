@@ -12,7 +12,7 @@ export default function Footer() {
               <img src={summitLogo} alt="Pfizer Vaccines Ensemble" className="h-12 w-auto" />
             </div>
             <p className="text-sm text-foreground/70 mb-4">
-              Synchronised in our growth ambitions — shaping the future of vaccines through innovation and collaboration.
+
             </p>
           </div>
 
@@ -66,6 +66,6 @@ export default function Footer() {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
+
 }

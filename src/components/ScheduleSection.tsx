@@ -16,7 +16,7 @@ const trackColorMap: Record<string, string> = {
   'plenary': 'bg-track-plenary',
   'break': 'bg-track-break',
   'networking': 'bg-track-networking',
-  'tick-bourne': 'bg-track-tick-bourne',
+  'tick-bourne': 'bg-track-tick-bourne'
 };
 
 const trackBorderMap: Record<string, string> = {
@@ -28,19 +28,19 @@ const trackBorderMap: Record<string, string> = {
   'plenary': 'border-l-track-plenary',
   'break': 'border-l-track-break',
   'networking': 'border-l-track-networking',
-  'tick-bourne': 'border-l-track-tick-bourne',
+  'tick-bourne': 'border-l-track-tick-bourne'
 };
 
 function getInitials(name: string): string {
-  return name
-    .split(' ')
-    .map(part => part[0])
-    .join('')
-    .toUpperCase()
-    .slice(0, 2);
+  return name.
+  split(' ').
+  map((part) => part[0]).
+  join('').
+  toUpperCase().
+  slice(0, 2);
 }
 
-function SessionCard({ session, onClick }: { session: Session; onClick: () => void }) {
+function SessionCard({ session, onClick }: {session: Session;onClick: () => void;}) {
   return (
     <motion.div
       whileHover={{ scale: 1.02, y: -2 }}
@@ -50,8 +50,8 @@ function SessionCard({ session, onClick }: { session: Session; onClick: () => vo
         relative p-4 bg-card rounded-xl border-l-4 shadow-card cursor-pointer
         transition-shadow hover:shadow-card-hover
         ${trackBorderMap[session.track]}
-      `}
-    >
+      `}>
+
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-2">
@@ -66,61 +66,61 @@ function SessionCard({ session, onClick }: { session: Session; onClick: () => vo
             <span className="text-border">•</span>
             <span>{session.duration}</span>
           </div>
-          {session.speakers.length > 0 && (
-            <div className="mt-3 flex items-center gap-2">
+          {session.speakers.length > 0 &&
+          <div className="mt-3 flex items-center gap-2">
               <div className="flex -space-x-2">
-                {session.speakers.slice(0, 3).map((speaker, idx) => (
-                  <Avatar key={idx} className="w-7 h-7 border-2 border-card">
-                    {speaker.photo ? (
-                      <AvatarImage src={speaker.photo} alt={speaker.name} />
-                    ) : null}
+                {session.speakers.slice(0, 3).map((speaker, idx) =>
+              <Avatar key={idx} className="w-7 h-7 border-2 border-card">
+                    {speaker.photo ?
+                <AvatarImage src={speaker.photo} alt={speaker.name} /> :
+                null}
                     <AvatarFallback className="text-[10px] bg-primary/10 text-primary font-medium">
                       {getInitials(speaker.name)}
                     </AvatarFallback>
                   </Avatar>
-                ))}
-                {session.speakers.length > 3 && (
-                  <div className="w-7 h-7 rounded-full bg-muted flex items-center justify-center border-2 border-card">
+              )}
+                {session.speakers.length > 3 &&
+              <div className="w-7 h-7 rounded-full bg-muted flex items-center justify-center border-2 border-card">
                     <span className="text-[10px] text-muted-foreground font-medium">
                       +{session.speakers.length - 3}
                     </span>
                   </div>
-                )}
+              }
               </div>
               <span className="text-xs text-muted-foreground line-clamp-1">
-                {session.speakers.map(s => s.name.split(' ').pop()).join(', ')}
+                {session.speakers.map((s) => s.name.split(' ').pop()).join(', ')}
               </span>
             </div>
-          )}
+          }
         </div>
         <ChevronRight className="w-5 h-5 text-muted-foreground flex-shrink-0" />
       </div>
-    </motion.div>
-  );
+    </motion.div>);
+
 }
 
-function DayTab({ day, isActive, onClick }: { day: DaySchedule; isActive: boolean; onClick: () => void }) {
+function DayTab({ day, isActive, onClick }: {day: DaySchedule;isActive: boolean;onClick: () => void;}) {
   return (
     <button
       onClick={onClick}
       className={`
         relative px-6 py-4 text-left transition-all rounded-t-xl
-        ${isActive 
-          ? 'bg-card text-foreground shadow-lg' 
-          : 'bg-secondary/50 text-muted-foreground hover:bg-secondary'
-        }
-      `}
-    >
+        ${isActive ?
+      'bg-card text-foreground shadow-lg' :
+      'bg-secondary/50 text-muted-foreground hover:bg-secondary'}
+      `
+      }>
+
       <div className="font-bold">{day.dayName}</div>
       <div className="text-sm opacity-80">{day.date}</div>
-      {isActive && (
-        <motion.div
-          layoutId="activeTab"
-          className="absolute bottom-0 left-0 right-0 h-1 gradient-hero rounded-t"
-        />
-      )}
-    </button>
-  );
+      {isActive &&
+      <motion.div
+        layoutId="activeTab"
+        className="absolute bottom-0 left-0 right-0 h-1 gradient-hero rounded-t" />
+
+      }
+    </button>);
+
 }
 
 export default function ScheduleSection() {
@@ -146,14 +146,14 @@ export default function ScheduleSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+          className="text-center mb-12">
+
           <h2 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
             Event Schedule
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Three days of insightful sessions, workshops, and networking opportunities.
-            Click on any session to learn more.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Three days of insightful sessions, workshops, and networking opportunities.
+Click on any session to learn more.
+
           </p>
         </motion.div>
 
@@ -162,26 +162,26 @@ export default function ScheduleSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-3 mb-8"
-        >
-          {Object.entries(trackLabels).map(([key, label]) => (
-            <div key={key} className="flex items-center gap-2">
+          className="flex flex-wrap justify-center gap-3 mb-8">
+
+          {Object.entries(trackLabels).map(([key, label]) =>
+          <div key={key} className="flex items-center gap-2">
               <div className={`w-3 h-3 rounded-full ${trackColorMap[key]}`} />
               <span className="text-xs text-muted-foreground">{label}</span>
             </div>
-          ))}
+          )}
         </motion.div>
 
         {/* Day Tabs */}
         <div className="flex gap-1 mb-0">
-          {scheduleData.map((day, index) => (
-            <DayTab
-              key={day.date}
-              day={day}
-              isActive={activeDay === index}
-              onClick={() => setActiveDay(index)}
-            />
-          ))}
+          {scheduleData.map((day, index) =>
+          <DayTab
+            key={day.date}
+            day={day}
+            isActive={activeDay === index}
+            onClick={() => setActiveDay(index)} />
+
+          )}
         </div>
 
         {/* Schedule Grid */}
@@ -191,11 +191,11 @@ export default function ScheduleSection() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="bg-card rounded-b-2xl rounded-tr-2xl shadow-lg p-6"
-          >
+            className="bg-card rounded-b-2xl rounded-tr-2xl shadow-lg p-6">
+
             <div className="space-y-6">
-              {Object.entries(timeSlots).map(([time, sessions]) => (
-                <div key={time} className="relative">
+              {Object.entries(timeSlots).map(([time, sessions]) =>
+              <div key={time} className="relative">
                   {/* Time Marker */}
                   <div className="flex items-center gap-4 mb-3">
                     <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full">
@@ -207,16 +207,16 @@ export default function ScheduleSection() {
 
                   {/* Sessions Grid */}
                   <div className={`grid gap-4 ${sessions.length > 1 ? 'md:grid-cols-2 lg:grid-cols-3' : 'max-w-2xl'}`}>
-                    {sessions.map((session) => (
-                      <SessionCard
-                        key={session.id}
-                        session={session}
-                        onClick={() => setSelectedSession(session)}
-                      />
-                    ))}
+                    {sessions.map((session) =>
+                  <SessionCard
+                    key={session.id}
+                    session={session}
+                    onClick={() => setSelectedSession(session)} />
+
+                  )}
                   </div>
                 </div>
-              ))}
+              )}
             </div>
           </motion.div>
         </AnimatePresence>
@@ -226,8 +226,8 @@ export default function ScheduleSection() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mt-8"
-        >
+          className="text-center mt-8">
+
           <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
             <Link to="/schedule">View Full Schedule</Link>
           </Button>
@@ -237,8 +237,8 @@ export default function ScheduleSection() {
       {/* Session Modal */}
       <SessionModal
         session={selectedSession}
-        onClose={() => setSelectedSession(null)}
-      />
-    </section>
-  );
+        onClose={() => setSelectedSession(null)} />
+
+    </section>);
+
 }

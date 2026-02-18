@@ -26,25 +26,25 @@ export default function HeroSection() {
           className="max-w-3xl mx-auto text-center">
 
           {/* Eyebrow */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-accent text-sm font-semibold uppercase tracking-[0.2em] mb-6">
+          
 
-            The Pfizer Vaccines Ensemble
-          </motion.p>
+
+
+
+
+
+
 
           {/* Title — large, clean, Apple-style */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary mb-4 leading-[1.05] tracking-tight">
-            Synchronised
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary mb-4 leading-[1.05] tracking-tight">Synchronised in our Growth Ambitions
+
             <br />
-            <span className="text-gradient-hero">in Growth</span>
+            <span className="text-gradient-hero">in our Growth Ambitions</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm sm:text-base text-muted-foreground mb-8 max-w-xl mx-auto font-light leading-relaxed">
-            Three days of collaboration, learning, and breakthrough insights — Barcelona, March 2026.
+          <p className="text-sm sm:text-base text-muted-foreground mb-8 max-w-xl mx-auto font-light leading-relaxed">Three days of collaboration, learning, and breakthrough insights
+
           </p>
 
           {/* Minimal info pills */}
