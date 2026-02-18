@@ -3,12 +3,13 @@ import { Stamp, Star, Zap, Award, Shield, Rocket, Brain, Check } from 'lucide-re
 import passportImage from '@/assets/ai-passport.png';
 
 const stamps = [
-{ icon: Brain, title: 'Marketing Champion', description: 'Master of AI prompts' },
-{ icon: Zap, title: 'Copilot Expert', description: 'Best Copilot user' },
-{ icon: Star, title: 'Innovation Star', description: 'Creative problem solver' },
-{ icon: Shield, title: 'Data Guardian', description: 'Analytics excellence' },
-{ icon: Rocket, title: 'Speed Runner', description: 'Quick learner badge' },
-{ icon: Award, title: 'Summit Leader', description: 'Top contributor' }];
+  { icon: Brain, title: 'Marketing Champion', description: 'Master of AI prompts', gradient: 'from-[hsl(213,55%,24%)] to-[hsl(210,70%,50%)]', iconBg: 'bg-[hsl(213,55%,24%)]/20', hoverBorder: 'hover:border-[hsl(213,55%,24%)]', hoverBg: 'hover:bg-[hsl(213,55%,24%)]/10' },
+  { icon: Zap, title: 'Copilot Expert', description: 'Best Copilot user', gradient: 'from-[hsl(180,50%,55%)] to-[hsl(190,60%,45%)]', iconBg: 'bg-[hsl(180,50%,55%)]/20', hoverBorder: 'hover:border-[hsl(180,50%,55%)]', hoverBg: 'hover:bg-[hsl(180,50%,55%)]/10' },
+  { icon: Star, title: 'Innovation Star', description: 'Creative problem solver', gradient: 'from-[hsl(80,50%,50%)] to-[hsl(130,55%,55%)]', iconBg: 'bg-[hsl(80,50%,50%)]/20', hoverBorder: 'hover:border-[hsl(80,50%,50%)]', hoverBg: 'hover:bg-[hsl(80,50%,50%)]/10' },
+  { icon: Shield, title: 'Data Guardian', description: 'Analytics excellence', gradient: 'from-[hsl(210,70%,50%)] to-[hsl(213,55%,24%)]', iconBg: 'bg-[hsl(210,70%,50%)]/20', hoverBorder: 'hover:border-[hsl(210,70%,50%)]', hoverBg: 'hover:bg-[hsl(210,70%,50%)]/10' },
+  { icon: Rocket, title: 'Speed Runner', description: 'Quick learner badge', gradient: 'from-[hsl(190,60%,45%)] to-[hsl(180,50%,55%)]', iconBg: 'bg-[hsl(190,60%,45%)]/20', hoverBorder: 'hover:border-[hsl(190,60%,45%)]', hoverBg: 'hover:bg-[hsl(190,60%,45%)]/10' },
+  { icon: Award, title: 'Summit Leader', description: 'Top contributor', gradient: 'from-[hsl(65,55%,45%)] to-[hsl(80,50%,50%)]', iconBg: 'bg-[hsl(65,55%,45%)]/20', hoverBorder: 'hover:border-[hsl(65,55%,45%)]', hoverBg: 'hover:bg-[hsl(65,55%,45%)]/10' },
+];
 
 
 export default function AIPassportSection() {
@@ -101,9 +102,9 @@ export default function AIPassportSection() {
               whileHover={{ scale: 1.05, rotate: 3 }}
               className="relative group">
 
-                <div className="aspect-square rounded-2xl bg-card border-2 border-dashed border-primary/30 p-4 flex flex-col items-center justify-center text-center transition-all group-hover:border-primary group-hover:bg-primary/5">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary/20 transition-colors">
-                    <stamp.icon className="w-6 h-6 text-primary" />
+                <div className={`aspect-square rounded-2xl bg-card border-2 border-dashed border-muted-foreground/20 p-4 flex flex-col items-center justify-center text-center transition-all ${stamp.hoverBorder} ${stamp.hoverBg}`}>
+                  <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${stamp.gradient} flex items-center justify-center mb-3 shadow-md`}>
+                    <stamp.icon className="w-6 h-6 text-white" />
                   </div>
                   <h4 className="text-sm font-semibold text-foreground">{stamp.title}</h4>
                   <p className="text-xs text-muted-foreground mt-1">{stamp.description}</p>
