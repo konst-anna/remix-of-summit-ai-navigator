@@ -25,19 +25,12 @@ export default function HeroSection() {
           transition={{ duration: 0.8 }}
           className="max-w-3xl mx-auto text-center">
 
-          {/* Eyebrow */}
-          
-
-
-
-
-
-
-
-
           {/* Title — large, clean, Apple-style */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary mb-4 leading-[1.05] tracking-tight">Synchronised in our Growth Ambitions
-
+          <h1
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary mb-4 leading-[1.05] tracking-tight"
+            style={{ fontFamily: "'FF Din', sans-serif" }}
+          >
+            Synchronised
             <br />
             <span className="text-gradient-hero">in our Growth Ambitions</span>
           </h1>
