@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Hash, ArrowLeft, Quote, Send, User, Camera, X, Image as ImageIcon } from 'lucide-react';
+import socialHeroImg from '@/assets/social-hero-drummer.png';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -218,41 +219,58 @@ export default function SocialMedia() {
           style={{ background: social.gradientBg }}
         >
           <div className="container mx-auto px-4 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-center"
-            >
-              <Link to="/">
-                <Button variant="ghost" className="mb-4 text-white/80 hover:text-white hover:bg-white/10">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Home
-                </Button>
-              </Link>
-              
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-4">
-                <Hash className="w-4 h-4" />
-                Live Feed
-              </div>
-              
-              <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-                #CookiesSummit2026
-              </h1>
-              
-              <p className="text-base md:text-lg text-white/80 max-w-2xl mx-auto mb-6">
-                Share your thoughts and photos from the summit
-              </p>
-
-              <Button 
-                onClick={() => setShowForm(!showForm)}
-                className="bg-white hover:bg-white/90 text-[#ef4056] font-bold shadow-lg"
-                size="lg"
+            <div className="flex items-center gap-8">
+              {/* Left – Hero Image */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="hidden md:block w-2/5 flex-shrink-0"
               >
-                <Camera className="w-5 h-5 mr-2" />
-                Share a Moment
-              </Button>
-            </motion.div>
+                <img
+                  src={socialHeroImg}
+                  alt="Summit musician"
+                  className="w-full h-auto max-h-[280px] object-contain rounded-xl drop-shadow-2xl"
+                />
+              </motion.div>
+
+              {/* Right – Text content */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="text-center md:text-left flex-1"
+              >
+                <Link to="/">
+                  <Button variant="ghost" className="mb-4 text-white/80 hover:text-white hover:bg-white/10">
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Back to Home
+                  </Button>
+                </Link>
+                
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-4">
+                  <Hash className="w-4 h-4" />
+                  Live Feed
+                </div>
+                
+                <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
+                  #CookiesSummit2026
+                </h1>
+                
+                <p className="text-base md:text-lg text-white/80 max-w-xl mb-6">
+                  Share your thoughts and photos from the summit
+                </p>
+
+                <Button 
+                  onClick={() => setShowForm(!showForm)}
+                  className="bg-white hover:bg-white/90 text-[#ef4056] font-bold shadow-lg"
+                  size="lg"
+                >
+                  <Camera className="w-5 h-5 mr-2" />
+                  Share a Moment
+                </Button>
+              </motion.div>
+            </div>
 
             {/* Submission Form */}
             <AnimatePresence>
