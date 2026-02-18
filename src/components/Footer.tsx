@@ -76,9 +76,9 @@ export default function Footer({ variant = 'default' }: { variant?: 'default' | 
             <h4 className="font-semibold text-foreground mb-4">Community</h4>
             <ul className="space-y-3 text-sm text-foreground/70">
               <li>
-                <a href="https://web.yammer.com/cookies-community" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-foreground transition-colors">
+                <a href="https://web.yammer.com/vaccines-community" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-foreground transition-colors">
                   <ExternalLink className="w-4 h-4 text-foreground/80" />
-                  <span>Viva Engage Cookies Community</span>
+                  <span>Viva Engage Vaccines Community</span>
                 </a>
               </li>
             </ul>

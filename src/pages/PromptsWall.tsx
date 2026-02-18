@@ -18,17 +18,14 @@ interface Prompt {
   created_at: string;
 }
 
-const brands = ['Oreo', 'Cadbury', 'Ritz', 'Trident', 'BelVita', 'Chips Ahoy!', 'Philadelphia', 'Toblerone'];
+const brands = ['Prevnar', 'Comirnaty', 'Abrysvo', 'PCV Paed', 'Tick Bourne'];
 
 const brandColors: Record<string, { bg: string; text: string; border: string }> = {
-  'Oreo': { bg: 'bg-slate-900', text: 'text-white', border: 'border-slate-700' },
-  'Cadbury': { bg: 'bg-purple-600', text: 'text-white', border: 'border-purple-400' },
-  'Ritz': { bg: 'bg-amber-500', text: 'text-amber-950', border: 'border-amber-400' },
-  'Trident': { bg: 'bg-cyan-500', text: 'text-white', border: 'border-cyan-400' },
-  'BelVita': { bg: 'bg-orange-500', text: 'text-white', border: 'border-orange-400' },
-  'Chips Ahoy!': { bg: 'bg-blue-600', text: 'text-white', border: 'border-blue-400' },
-  'Philadelphia': { bg: 'bg-sky-200', text: 'text-sky-900', border: 'border-sky-300' },
-  'Toblerone': { bg: 'bg-yellow-400', text: 'text-yellow-950', border: 'border-yellow-500' },
+  'Prevnar': { bg: 'bg-emerald-700', text: 'text-white', border: 'border-emerald-500' },
+  'Comirnaty': { bg: 'bg-slate-500', text: 'text-white', border: 'border-slate-400' },
+  'Abrysvo': { bg: 'bg-pink-600', text: 'text-white', border: 'border-pink-400' },
+  'PCV Paed': { bg: 'bg-green-500', text: 'text-white', border: 'border-green-400' },
+  'Tick Bourne': { bg: 'bg-orange-500', text: 'text-white', border: 'border-orange-400' },
 };
 
 const getBrandStyle = (brand: string | null) => {
@@ -39,26 +36,26 @@ const getBrandStyle = (brand: string | null) => {
 };
 
 const staticPrompts: Prompt[] = [
-  { id: 's1', prompt_text: 'Create a viral TikTok campaign for Oreo that leverages AR filters to let users design their dream cookie flavor', author_name: 'Sarah Johnson', brand_context: 'Oreo', created_at: '2026-01-29T10:00:00Z' },
-  { id: 's2', prompt_text: 'Design an AI sommelier for Cadbury chocolates that pairs flavors with movies, music, and moods', author_name: 'Marcus Lee', brand_context: 'Cadbury', created_at: '2026-01-29T09:55:00Z' },
-  { id: 's3', prompt_text: 'Build a Ritz cracker recipe chatbot that creates gourmet appetizers from 5 ingredients or less', author_name: 'Emma Wilson', brand_context: 'Ritz', created_at: '2026-01-29T09:50:00Z' },
-  { id: 's4', prompt_text: 'Develop a Trident gum freshness tracker that uses AI to remind users of optimal chewing moments throughout their day', author_name: 'David Park', brand_context: 'Trident', created_at: '2026-01-29T09:45:00Z' },
-  { id: 's5', prompt_text: 'Create a BelVita morning routine optimizer that suggests breakfast pairings based on calendar meetings and energy needs', author_name: 'Lisa Chen', brand_context: 'BelVita', created_at: '2026-01-29T09:40:00Z' },
-  { id: 's6', prompt_text: 'Design an Oreo dunking physics simulator that calculates perfect milk-to-cookie ratios for maximum enjoyment', author_name: 'Tom Richards', brand_context: 'Oreo', created_at: '2026-01-29T09:35:00Z' },
-  { id: 's7', prompt_text: 'Build a Cadbury gift recommendation engine that analyzes social media to find the perfect chocolate for any relationship', author_name: 'Anna Martinez', brand_context: 'Cadbury', created_at: '2026-01-29T09:30:00Z' },
-  { id: 's8', prompt_text: 'Create an AI party planner for Chips Ahoy! that designs cookie-themed celebrations based on guest preferences', author_name: 'James Wright', brand_context: 'Chips Ahoy!', created_at: '2026-01-29T09:25:00Z' },
-  { id: 's9', prompt_text: 'Develop a Philadelphia cream cheese recipe transformer that converts any dish into a creamy masterpiece', author_name: 'Sophie Brown', brand_context: 'Philadelphia', created_at: '2026-01-29T09:20:00Z' },
-  { id: 's10', prompt_text: 'Design a Toblerone travel companion app that unlocks exclusive chocolate experiences at airports worldwide', author_name: 'Michael Foster', brand_context: 'Toblerone', created_at: '2026-01-29T09:15:00Z' },
-  { id: 's11', prompt_text: 'Build an Oreo flavor prediction AI that forecasts trending tastes 6 months ahead using social listening', author_name: 'Rachel Kim', brand_context: 'Oreo', created_at: '2026-01-29T09:10:00Z' },
-  { id: 's12', prompt_text: 'Create a Trident fresh breath confidence coach that provides real-time social situation advice', author_name: 'Chris Anderson', brand_context: 'Trident', created_at: '2026-01-29T09:05:00Z' },
-  { id: 's13', prompt_text: 'Design a BelVita productivity tracker that correlates breakfast choices with daily achievement metrics', author_name: 'Nicole Taylor', brand_context: 'BelVita', created_at: '2026-01-29T09:00:00Z' },
-  { id: 's14', prompt_text: 'Build a Ritz entertaining assistant that creates themed party menus and shopping lists from a single prompt', author_name: 'Kevin Zhang', brand_context: 'Ritz', created_at: '2026-01-29T08:55:00Z' },
-  { id: 's15', prompt_text: 'Develop a Cadbury nostalgia engine that recreates childhood chocolate memories through personalized storytelling', author_name: 'Amanda White', brand_context: 'Cadbury', created_at: '2026-01-29T08:50:00Z' },
-  { id: 's16', prompt_text: 'Create an AI cookie artist for Chips Ahoy! that generates custom cookie designs from user sketches', author_name: 'Ryan Murphy', brand_context: 'Chips Ahoy!', created_at: '2026-01-29T08:45:00Z' },
-  { id: 's17', prompt_text: 'Design a Philadelphia brunch optimizer that suggests the perfect cream cheese spread for any bagel combination', author_name: 'Jennifer Lewis', brand_context: 'Philadelphia', created_at: '2026-01-29T08:40:00Z' },
-  { id: 's18', prompt_text: 'Build a Toblerone gifting concierge that schedules surprise chocolate deliveries based on relationship milestones', author_name: 'Daniel Harris', brand_context: 'Toblerone', created_at: '2026-01-29T08:35:00Z' },
-  { id: 's19', prompt_text: 'Create an Oreo cultural fusion lab that invents new flavors by combining global dessert traditions', author_name: 'Michelle Garcia', brand_context: 'Oreo', created_at: '2026-01-29T08:30:00Z' },
-  { id: 's20', prompt_text: 'Develop a Trident focus mode assistant that uses chewing patterns to optimize concentration during work sessions', author_name: 'Steven Clark', brand_context: 'Trident', created_at: '2026-01-29T08:25:00Z' },
+  { id: 's1', prompt_text: 'Create an AI-powered tool that predicts pneumococcal disease outbreaks by region to optimize Prevnar distribution and inventory planning', author_name: 'Sarah Johnson', brand_context: 'Prevnar', created_at: '2026-01-29T10:00:00Z' },
+  { id: 's2', prompt_text: 'Design a patient education chatbot for Comirnaty that explains booster schedules, side effects, and answers FAQs in 20+ languages', author_name: 'Marcus Lee', brand_context: 'Comirnaty', created_at: '2026-01-29T09:55:00Z' },
+  { id: 's3', prompt_text: 'Build an AI dashboard that tracks RSV hospitalization rates and correlates them with Abrysvo vaccination coverage to demonstrate real-world effectiveness', author_name: 'Emma Wilson', brand_context: 'Abrysvo', created_at: '2026-01-29T09:50:00Z' },
+  { id: 's4', prompt_text: 'Develop an AI tool that generates personalized immunization catch-up schedules for pediatric patients based on their vaccination history', author_name: 'David Park', brand_context: 'PCV Paed', created_at: '2026-01-29T09:45:00Z' },
+  { id: 's5', prompt_text: 'Create an AI system that analyzes tick population data and climate patterns to predict Tick Bourne disease risk zones and guide vaccination campaigns', author_name: 'Lisa Chen', brand_context: 'Tick Bourne', created_at: '2026-01-29T09:40:00Z' },
+  { id: 's6', prompt_text: 'Design an AI-powered HCP engagement tool for Prevnar that tailors scientific messaging based on physician specialty and patient demographics', author_name: 'Tom Richards', brand_context: 'Prevnar', created_at: '2026-01-29T09:35:00Z' },
+  { id: 's7', prompt_text: 'Build an AI sentiment analyzer that monitors social media conversations about COVID vaccines to help shape Comirnaty communication strategies', author_name: 'Anna Martinez', brand_context: 'Comirnaty', created_at: '2026-01-29T09:30:00Z' },
+  { id: 's8', prompt_text: 'Create an AI model that identifies high-risk pregnant women for RSV maternal vaccination and generates personalized outreach for Abrysvo', author_name: 'James Wright', brand_context: 'Abrysvo', created_at: '2026-01-29T09:25:00Z' },
+  { id: 's9', prompt_text: 'Develop an interactive AI simulation for healthcare providers showing PCV serotype coverage differences to support formulary discussions', author_name: 'Sophie Brown', brand_context: 'PCV Paed', created_at: '2026-01-29T09:20:00Z' },
+  { id: 's10', prompt_text: 'Design an AI-driven market access tool for Tick Bourne vaccines that generates payer value dossiers customized by country and healthcare system', author_name: 'Michael Foster', brand_context: 'Tick Bourne', created_at: '2026-01-29T09:15:00Z' },
+  { id: 's11', prompt_text: 'Build an AI copilot that helps field teams prepare for HCP meetings with real-time Prevnar clinical data summaries and objection handling', author_name: 'Rachel Kim', brand_context: 'Prevnar', created_at: '2026-01-29T09:10:00Z' },
+  { id: 's12', prompt_text: 'Create an AI platform that analyzes electronic health records to identify adults eligible for Comirnaty boosters and automates reminder outreach', author_name: 'Chris Anderson', brand_context: 'Comirnaty', created_at: '2026-01-29T09:05:00Z' },
+  { id: 's13', prompt_text: 'Develop an AI tool that maps RSV seasonality patterns globally to optimize Abrysvo launch timing in new markets', author_name: 'Nicole Taylor', brand_context: 'Abrysvo', created_at: '2026-01-29T09:00:00Z' },
+  { id: 's14', prompt_text: 'Build an AI-powered training simulator for pediatricians that role-plays vaccine-hesitant parent conversations about PCV vaccination', author_name: 'Kevin Zhang', brand_context: 'PCV Paed', created_at: '2026-01-29T08:55:00Z' },
+  { id: 's15', prompt_text: 'Design an AI system that generates real-time competitive intelligence reports for the pneumococcal vaccine landscape', author_name: 'Amanda White', brand_context: 'Prevnar', created_at: '2026-01-29T08:50:00Z' },
+  { id: 's16', prompt_text: 'Create an AI model that predicts Tick Bourne disease endemic expansion due to climate change to support long-term franchise strategy', author_name: 'Ryan Murphy', brand_context: 'Tick Bourne', created_at: '2026-01-29T08:45:00Z' },
+  { id: 's17', prompt_text: 'Build an AI-driven supply chain optimizer for Abrysvo that balances cold-chain logistics with demand forecasting across 50+ markets', author_name: 'Jennifer Lewis', brand_context: 'Abrysvo', created_at: '2026-01-29T08:40:00Z' },
+  { id: 's18', prompt_text: 'Design an AI presentation generator that creates custom Comirnaty data slides for different stakeholder audiences (payers, HCPs, policy makers)', author_name: 'Daniel Harris', brand_context: 'Comirnaty', created_at: '2026-01-29T08:35:00Z' },
+  { id: 's19', prompt_text: 'Create an AI analytics tool that measures the impact of vaccination programs on reducing antibiotic resistance linked to pneumococcal infections', author_name: 'Michelle Garcia', brand_context: 'Prevnar', created_at: '2026-01-29T08:30:00Z' },
+  { id: 's20', prompt_text: 'Develop an AI-powered digital twin of national immunization programs to simulate the impact of adding PCV to childhood schedules', author_name: 'Steven Clark', brand_context: 'PCV Paed', created_at: '2026-01-29T08:25:00Z' },
 ];
 
 export default function PromptsWall() {

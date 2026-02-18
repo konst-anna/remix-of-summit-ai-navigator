@@ -12,8 +12,8 @@ const topPrompts = [
   {
     rank: 1,
     author: 'John Smith',
-    prompt: 'Create a personalized Oreo flavor recommendation engine that analyzes customer purchase history and social media sentiment to suggest limited-edition flavors for regional markets.',
-    brand: 'Oreo',
+    prompt: 'Create an AI-powered tool that predicts pneumococcal disease outbreaks by region to optimize Prevnar distribution and guide proactive vaccination campaigns.',
+    brand: 'Prevnar',
     icon: Trophy,
     color: 'from-yellow-400 to-yellow-600',
     textColor: 'text-yellow-900',
@@ -21,8 +21,8 @@ const topPrompts = [
   {
     rank: 2,
     author: 'Jane Great',
-    prompt: 'Design an AI-powered Cadbury gift selector that uses emotional analysis of recipient relationships to recommend the perfect chocolate assortment for any occasion.',
-    brand: 'Cadbury',
+    prompt: 'Design an AI patient education platform for Comirnaty that personalizes booster recommendations based on individual risk factors and local epidemiology data.',
+    brand: 'Comirnaty',
     icon: Medal,
     color: 'from-gray-300 to-gray-500',
     textColor: 'text-gray-800',
@@ -30,8 +30,8 @@ const topPrompts = [
   {
     rank: 3,
     author: 'Michael Chen',
-    prompt: 'Build a Ritz cracker recipe generator that creates fusion appetizer ideas based on trending global cuisines and available pantry ingredients.',
-    brand: 'Ritz',
+    prompt: 'Build an AI dashboard that correlates RSV hospitalization rates with Abrysvo vaccination coverage to demonstrate real-world effectiveness to payers.',
+    brand: 'Abrysvo',
     icon: Award,
     color: 'from-amber-500 to-amber-700',
     textColor: 'text-amber-900',
@@ -86,7 +86,7 @@ export default function PromptCompetitionModal({ open, onOpenChange }: PromptCom
           </h4>
           <p className="text-sm text-muted-foreground mb-4">
             Submit your best AI prompt for Day 2 and compete for the title of "Marketing Champion in Prompting"!
-            Use any of our featured brands: Oreo, Cadbury, Ritz, Trident, or BelVita.
+            Use any of our vaccine brands: Prevnar, Comirnaty, Abrysvo, PCV Paed, or Tick Bourne.
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
             <Button asChild className="flex-1">
