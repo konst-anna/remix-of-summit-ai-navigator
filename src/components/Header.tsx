@@ -13,6 +13,8 @@ const navItems = [
   { label: 'Social', href: '/social', isRoute: true },
 ];
 
+const isSocialVariant = (v: string) => v === 'social';
+
 export default function Header({ variant = 'default' }: { variant?: 'default' | 'social' }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -70,14 +72,20 @@ export default function Header({ variant = 'default' }: { variant?: 'default' | 
 
           {/* Event Info Pills */}
           <div className="hidden md:flex items-center gap-3">
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full text-xs">
-              <MapPin className="w-3 h-3 text-primary" />
-              <span className="text-secondary-foreground">Barcelona</span>
+            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs ${isSocialVariant(variant) ? '' : 'bg-secondary'}`}
+              style={isSocialVariant(variant) ? { background: 'linear-gradient(135deg, #f7e234, #f9a870, #f0679e, #ef4056)' } : undefined}
+            >
+              <MapPin className={`w-3 h-3 ${isSocialVariant(variant) ? 'text-white' : 'text-primary'}`} />
+              <span className={isSocialVariant(variant) ? 'text-white font-medium' : 'text-secondary-foreground'}>Barcelona</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full text-xs">
-              <Calendar className="w-3 h-3 text-primary" />
-              <span className="text-secondary-foreground">Mar 25-27, 2026</span>
-            </div>
+            <Link
+              to="/schedule"
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs cursor-pointer hover:opacity-80 transition-opacity ${isSocialVariant(variant) ? '' : 'bg-secondary'}`}
+              style={isSocialVariant(variant) ? { background: 'linear-gradient(135deg, #f7e234, #f9a870, #f0679e, #ef4056)' } : undefined}
+            >
+              <Calendar className={`w-3 h-3 ${isSocialVariant(variant) ? 'text-white' : 'text-primary'}`} />
+              <span className={isSocialVariant(variant) ? 'text-white font-medium' : 'text-secondary-foreground'}>Mar 25-27, 2026</span>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -123,14 +131,21 @@ export default function Header({ variant = 'default' }: { variant?: 'default' | 
                 )
               ))}
               <div className="flex gap-2 pt-2">
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full text-xs">
-                  <MapPin className="w-3 h-3 text-primary" />
-                  <span className="text-secondary-foreground">Barcelona</span>
+                <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs ${isSocialVariant(variant) ? '' : 'bg-secondary'}`}
+                  style={isSocialVariant(variant) ? { background: 'linear-gradient(135deg, #f7e234, #f9a870, #f0679e, #ef4056)' } : undefined}
+                >
+                  <MapPin className={`w-3 h-3 ${isSocialVariant(variant) ? 'text-white' : 'text-primary'}`} />
+                  <span className={isSocialVariant(variant) ? 'text-white font-medium' : 'text-secondary-foreground'}>Barcelona</span>
                 </div>
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full text-xs">
-                  <Calendar className="w-3 h-3 text-primary" />
-                  <span className="text-secondary-foreground">Mar 25-27</span>
-                </div>
+                <Link
+                  to="/schedule"
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs ${isSocialVariant(variant) ? '' : 'bg-secondary'}`}
+                  style={isSocialVariant(variant) ? { background: 'linear-gradient(135deg, #f7e234, #f9a870, #f0679e, #ef4056)' } : undefined}
+                >
+                  <Calendar className={`w-3 h-3 ${isSocialVariant(variant) ? 'text-white' : 'text-primary'}`} />
+                  <span className={isSocialVariant(variant) ? 'text-white font-medium' : 'text-secondary-foreground'}>Mar 25-27</span>
+                </Link>
               </div>
             </nav>
           </motion.div>
