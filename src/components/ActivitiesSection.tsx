@@ -60,9 +60,9 @@ export default function ActivitiesSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-4">
-            <Gamepad2 className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">Gamified Learning</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4" style={{ background: 'linear-gradient(135deg, #88ecd4, #59c5c7)' }}>
+            <Gamepad2 className="w-4 h-4 text-white" />
+            <span className="text-sm font-medium text-white">Gamified Learning</span>
           </div>
           <h2 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
             Fun Activities & Competitions
@@ -89,21 +89,21 @@ export default function ActivitiesSection() {
                 }`}
                 onClick={() => handleActivityClick(activity)}
               >
-                <div className="w-14 h-14 rounded-xl gradient-hero flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                  <activity.icon className="w-7 h-7 text-primary-foreground" />
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform" style={{ background: 'linear-gradient(135deg, #a2d06d, #59c5c7)' }}>
+                  <activity.icon className="w-7 h-7 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-3">
                   {activity.title}
                   {activity.clickable && (
-                    <span className="ml-2 text-xs font-normal px-2 py-0.5 bg-primary/10 text-primary rounded-full">
+                    <span className="ml-2 text-xs font-normal px-2 py-0.5 rounded-full text-white" style={{ backgroundColor: '#59c5c7' }}>
                       Click to view
                     </span>
                   )}
                 </h3>
                 <p className="text-muted-foreground mb-5">{activity.description}</p>
-                <div className="flex items-center gap-2 px-4 py-2 bg-accent/10 rounded-lg">
-                  <Award className="w-4 h-4 text-accent" />
-                  <span className="text-sm font-medium text-accent">{activity.reward}</span>
+                <div className="flex items-center gap-2 px-4 py-2 rounded-lg" style={{ backgroundColor: 'rgba(136, 236, 212, 0.15)' }}>
+                  <Award className="w-4 h-4" style={{ color: '#59c5c7' }} />
+                  <span className="text-sm font-medium" style={{ color: '#59c5c7' }}>{activity.reward}</span>
                 </div>
               </Card>
             </motion.div>
@@ -115,8 +115,7 @@ export default function ActivitiesSection() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="relative overflow-hidden rounded-2xl gradient-hero p-8 lg:p-12"
-        >
+          className="relative overflow-hidden rounded-2xl p-8 lg:p-12" style={{ background: 'linear-gradient(135deg, #a2d06d 0%, #59c5c7 50%, #0095ff 100%)' }}>
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 left-0 w-64 h-64 rounded-full bg-primary-foreground blur-3xl" />
