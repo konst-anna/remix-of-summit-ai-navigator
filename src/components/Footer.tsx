@@ -90,7 +90,7 @@ export default function Footer({ variant = 'default' }: { variant?: 'default' | 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-foreground/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-foreground/50">
-            © 2026 Pfizer Vaccines Ensemble Summit. All rights reserved.
+            © 2026 Pfizer Vaccines Summit. All rights reserved.
           </p>
           <p className="text-xs text-foreground/40">
             Confidential - For Internal Use Only
