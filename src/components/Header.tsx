@@ -13,9 +13,12 @@ const navItems = [
   { label: 'Social', href: '/social', isRoute: true },
 ];
 
-const isSocialVariant = (v: string) => v === 'social';
+const variantGradient: Record<string, string> = {
+  social: 'linear-gradient(135deg, #f7e234, #f9a870, #f0679e, #ef4056)',
+  prompts: 'linear-gradient(135deg, #5ce1e6, #9b59b6, #e91e8c)',
+};
 
-export default function Header({ variant = 'default' }: { variant?: 'default' | 'social' }) {
+export default function Header({ variant = 'default' }: { variant?: 'default' | 'social' | 'prompts' }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -74,11 +77,11 @@ export default function Header({ variant = 'default' }: { variant?: 'default' | 
           <div className="hidden md:flex items-center gap-3">
             <Link
               to="/schedule"
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs cursor-pointer hover:opacity-80 transition-opacity ${isSocialVariant(variant) ? '' : 'bg-secondary'}`}
-              style={isSocialVariant(variant) ? { background: 'linear-gradient(135deg, #f7e234, #f9a870, #f0679e, #ef4056)' } : undefined}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs cursor-pointer hover:opacity-80 transition-opacity ${variantGradient[variant] ? '' : 'bg-secondary'}`}
+              style={variantGradient[variant] ? { background: variantGradient[variant] } : undefined}
             >
-              <Calendar className={`w-3 h-3 ${isSocialVariant(variant) ? 'text-white' : 'text-primary'}`} />
-              <span className={isSocialVariant(variant) ? 'text-white font-medium' : 'text-secondary-foreground'}>Mar 25-27, 2026</span>
+              <Calendar className={`w-3 h-3 ${variantGradient[variant] ? 'text-white' : 'text-primary'}`} />
+              <span className={variantGradient[variant] ? 'text-white font-medium' : 'text-secondary-foreground'}>Mar 25-27, 2026</span>
             </Link>
           </div>
 
@@ -128,11 +131,11 @@ export default function Header({ variant = 'default' }: { variant?: 'default' | 
                 <Link
                   to="/schedule"
                   onClick={() => setIsMenuOpen(false)}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs ${isSocialVariant(variant) ? '' : 'bg-secondary'}`}
-                  style={isSocialVariant(variant) ? { background: 'linear-gradient(135deg, #f7e234, #f9a870, #f0679e, #ef4056)' } : undefined}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs ${variantGradient[variant] ? '' : 'bg-secondary'}`}
+                  style={variantGradient[variant] ? { background: variantGradient[variant] } : undefined}
                 >
-                  <Calendar className={`w-3 h-3 ${isSocialVariant(variant) ? 'text-white' : 'text-primary'}`} />
-                  <span className={isSocialVariant(variant) ? 'text-white font-medium' : 'text-secondary-foreground'}>Mar 25-27</span>
+                  <Calendar className={`w-3 h-3 ${variantGradient[variant] ? 'text-white' : 'text-primary'}`} />
+                  <span className={variantGradient[variant] ? 'text-white font-medium' : 'text-secondary-foreground'}>Mar 25-27</span>
                 </Link>
               </div>
             </nav>
