@@ -1,8 +1,43 @@
 import { Calendar, MapPin, ExternalLink } from 'lucide-react';
 
+const EqualizerBar = ({ height, delay }: { height: number; delay: number }) => (
+  <div
+    className="rounded-sm"
+    style={{
+      width: '8px',
+      height: `${height}px`,
+      backgroundColor: 'hsl(75 50% 50% / 0.5)',
+      marginRight: '3px',
+      display: 'inline-block',
+    }}
+  />
+);
+
+const EqualizerRow = () => {
+  // Generate a repeating pattern of equalizer bars with varying heights
+  const barPattern = [
+    12, 20, 8, 28, 16, 24, 10, 32, 14, 22, 18, 26, 8, 30, 12, 20,
+    16, 28, 10, 24, 14, 32, 18, 22, 8, 26, 12, 30, 20, 16, 24, 10,
+    28, 14, 22, 18, 32, 8, 26, 12, 20, 30, 16, 24, 10, 28, 14, 22,
+    18, 32, 8, 26, 12, 30, 20, 16, 24, 10, 28, 14, 22, 18, 32, 26,
+    12, 20, 8, 28, 16, 24, 10, 32, 14, 22, 18, 26, 8, 30, 12, 20,
+    16, 28, 10, 24, 14, 32, 18, 22, 8, 26, 12, 30, 20, 16, 24, 10,
+    28, 14, 22, 18, 32, 8, 26, 12, 20, 30, 16, 24, 10, 28, 14, 22,
+    18, 32, 8, 26, 12, 30, 20, 16, 24, 10, 28, 14, 22, 18, 32, 26,
+  ];
+
+  return (
+    <div className="flex items-end justify-center overflow-hidden w-full">
+      {barPattern.map((h, i) => (
+        <EqualizerBar key={i} height={h} delay={i * 0.05} />
+      ))}
+    </div>
+  );
+};
+
 export default function Footer() {
   return (
-    <footer className="py-16" style={{ background: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(170 60% 85%) 40%, hsl(160 50% 65%) 70%, hsl(75 50% 55%) 100%)' }}>
+    <footer className="relative py-16 overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(170 60% 85%) 40%, hsl(160 50% 65%) 70%, hsl(75 50% 55%) 100%)' }}>
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-10 mb-12 md:pl-24 lg:pl-40">
           {/* Event Details */}
@@ -54,6 +89,11 @@ export default function Footer() {
             Confidential - For Internal Use Only
           </p>
         </div>
+      </div>
+
+      {/* Equalizer bars at the bottom */}
+      <div className="absolute bottom-0 left-0 right-0">
+        <EqualizerRow />
       </div>
     </footer>
   );
