@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Calendar, MapPin } from 'lucide-react';
+import { Menu, X, Calendar } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import summitLogo from '@/assets/summit-logo.png';
 import summitLogoRed from '@/assets/summit-logo-red.png';
@@ -70,14 +70,8 @@ export default function Header({ variant = 'default' }: { variant?: 'default' | 
             })}
           </nav>
 
-          {/* Event Info Pills */}
+          {/* Event Info Pill */}
           <div className="hidden md:flex items-center gap-3">
-            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs ${isSocialVariant(variant) ? '' : 'bg-secondary'}`}
-              style={isSocialVariant(variant) ? { background: 'linear-gradient(135deg, #f7e234, #f9a870, #f0679e, #ef4056)' } : undefined}
-            >
-              <MapPin className={`w-3 h-3 ${isSocialVariant(variant) ? 'text-white' : 'text-primary'}`} />
-              <span className={isSocialVariant(variant) ? 'text-white font-medium' : 'text-secondary-foreground'}>Barcelona</span>
-            </div>
             <Link
               to="/schedule"
               className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs cursor-pointer hover:opacity-80 transition-opacity ${isSocialVariant(variant) ? '' : 'bg-secondary'}`}
@@ -131,12 +125,6 @@ export default function Header({ variant = 'default' }: { variant?: 'default' | 
                 )
               ))}
               <div className="flex gap-2 pt-2">
-                <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs ${isSocialVariant(variant) ? '' : 'bg-secondary'}`}
-                  style={isSocialVariant(variant) ? { background: 'linear-gradient(135deg, #f7e234, #f9a870, #f0679e, #ef4056)' } : undefined}
-                >
-                  <MapPin className={`w-3 h-3 ${isSocialVariant(variant) ? 'text-white' : 'text-primary'}`} />
-                  <span className={isSocialVariant(variant) ? 'text-white font-medium' : 'text-secondary-foreground'}>Barcelona</span>
-                </div>
                 <Link
                   to="/schedule"
                   onClick={() => setIsMenuOpen(false)}
