@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,12 +13,21 @@ import AICopilotButton from "./components/AICopilotButton";
 
 const queryClient = new QueryClient();
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 function AppContent() {
   const location = useLocation();
   const isSocial = location.pathname === '/social';
 
   return (
     <>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/social" element={<SocialMedia />} />
