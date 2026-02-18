@@ -422,7 +422,7 @@ export default function SocialMedia() {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer variant="social" />
     </div>
   );
 }

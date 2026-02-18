@@ -1,19 +1,19 @@
 import { Calendar, MapPin, ExternalLink } from 'lucide-react';
 
-const EqualizerBar = ({ height, delay }: { height: number; delay: number }) => (
+const EqualizerBar = ({ height, color }: { height: number; color: string }) => (
   <div
     className="rounded-sm"
     style={{
       width: '8px',
       height: `${height}px`,
-      backgroundColor: 'hsl(75 50% 50% / 0.5)',
+      backgroundColor: color,
       marginRight: '3px',
       display: 'inline-block',
     }}
   />
 );
 
-const EqualizerRow = () => {
+const EqualizerRow = ({ color = 'hsl(75 50% 50% / 0.5)' }: { color?: string }) => {
   // Generate a repeating pattern of equalizer bars with varying heights
   const barPattern = [
     12, 20, 8, 28, 16, 24, 10, 32, 14, 22, 18, 26, 8, 30, 12, 20,
@@ -29,15 +29,21 @@ const EqualizerRow = () => {
   return (
     <div className="flex items-end justify-center overflow-hidden w-full">
       {barPattern.map((h, i) => (
-        <EqualizerBar key={i} height={h} delay={i * 0.05} />
+        <EqualizerBar key={i} height={h} color={color} />
       ))}
     </div>
   );
 };
 
-export default function Footer() {
+export default function Footer({ variant = 'default' }: { variant?: 'default' | 'social' }) {
+  const isSocial = variant === 'social';
+  const bgStyle = isSocial
+    ? { background: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, #f7e234 40%, #f9a870 70%, #ef4056 100%)' }
+    : { background: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(170 60% 85%) 40%, hsl(160 50% 65%) 70%, hsl(75 50% 55%) 100%)' };
+  const barColor = isSocial ? '#ef4056' : 'hsl(75 50% 50% / 0.5)';
+
   return (
-    <footer className="relative py-16 overflow-hidden" style={{ background: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(170 60% 85%) 40%, hsl(160 50% 65%) 70%, hsl(75 50% 55%) 100%)' }}>
+    <footer className="relative py-16 overflow-hidden" style={bgStyle}>
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-10 mb-12 md:pl-24 lg:pl-40">
           {/* Event Details */}
@@ -93,7 +99,7 @@ export default function Footer() {
 
       {/* Equalizer bars at the bottom */}
       <div className="absolute bottom-0 left-0 right-0">
-        <EqualizerRow />
+        <EqualizerRow color={barColor} />
       </div>
     </footer>
   );
