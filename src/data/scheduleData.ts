@@ -98,7 +98,7 @@ export const scheduleData: DaySchedule[] = [
         track: 'plenary',
         description: 'Welcome address and strategic overview from leadership team. Setting the stage for an impactful summit.',
         speakers: [
-          withPhoto({ name: 'Dr. Sarah Mitchell', role: 'VP, Cookies Division', company: 'Global Operations', bio: 'Leading cookies strategy for 15+ years with expertise in global market access.' }),
+          withPhoto({ name: 'Dr. Sarah Mitchell', role: 'VP, Vaccines Division', company: 'Global Operations', bio: 'Leading vaccines strategy for 15+ years with expertise in global market access.' }),
         ],
         room: 'Grand Ballroom',
         type: 'plenary',
@@ -118,7 +118,7 @@ export const scheduleData: DaySchedule[] = [
       },
       {
         id: 'wed-3',
-        title: 'Policy Panel: Current Cookies Environment',
+        title: 'Policy Panel: Current Vaccines Environment',
         time: '09:45',
         duration: '45 min',
         track: 'plenary',
@@ -150,7 +150,7 @@ export const scheduleData: DaySchedule[] = [
         track: 'pcv-paed',
         description: 'Pediatric strategies and latest outcomes data.',
         speakers: [
-          withPhoto({ name: 'Dr. Amanda Foster', role: 'Culinary Director', company: 'Pediatric Cookies', bio: 'Specialist in kid-friendly cookie programs.' }),
+          withPhoto({ name: 'Dr. Amanda Foster', role: 'Medical Director', company: 'Pediatric Vaccines', bio: 'Specialist in pediatric vaccination programs.' }),
         ],
         room: 'Room A',
         type: 'session',
@@ -163,7 +163,7 @@ export const scheduleData: DaySchedule[] = [
         track: 'pcv-adult',
         description: 'Adult trends and real-world effectiveness data.',
         speakers: [
-          withPhoto({ name: 'Dr. Robert Kim', role: 'Senior Culinary Advisor', company: 'Adult Cookies', bio: 'Leading researcher in adult cookie preferences.' }),
+          withPhoto({ name: 'Dr. Robert Kim', role: 'Senior Medical Advisor', company: 'Adult Vaccines', bio: 'Leading researcher in adult vaccination strategies.' }),
         ],
         room: 'Room B',
         type: 'session',
@@ -202,7 +202,7 @@ export const scheduleData: DaySchedule[] = [
         track: 'comirnaty',
         description: 'Comirnaty strategy and next-generation coverage.',
         speakers: [
-          withPhoto({ name: 'Dr. Sophie Laurent', role: 'Scientific Director', company: 'Artisan Cookies', bio: 'Pioneer in cookie recipe development.' }),
+          withPhoto({ name: 'Dr. Sophie Laurent', role: 'Scientific Director', company: 'mRNA Vaccines', bio: 'Pioneer in mRNA vaccine development.' }),
         ],
         room: 'Room E',
         type: 'session',
@@ -279,7 +279,7 @@ export const scheduleData: DaySchedule[] = [
         track: 'comirnaty',
         description: 'Seasonal strategy and integration.',
         speakers: [
-          withPhoto({ name: 'Dr. Emily Watson', role: 'Culinary Development Lead', company: 'Artisan Cookies', bio: 'Trials expert with focus on seasonal approaches.' }),
+          withPhoto({ name: 'Dr. Emily Watson', role: 'Clinical Development Lead', company: 'mRNA Vaccines', bio: 'Trials expert with focus on seasonal approaches.' }),
         ],
         room: 'Room E',
         type: 'session',
@@ -356,7 +356,7 @@ export const scheduleData: DaySchedule[] = [
         track: 'comirnaty',
         description: 'Combination approaches and portfolio integration.',
         speakers: [
-          withPhoto({ name: 'Dr. Sophie Laurent', role: 'Scientific Director', company: 'Artisan Cookies', bio: 'Pioneer in recipe development.' }),
+          withPhoto({ name: 'Dr. Sophie Laurent', role: 'Scientific Director', company: 'mRNA Vaccines', bio: 'Pioneer in vaccine development.' }),
         ],
         room: 'Room E',
         type: 'session',
@@ -397,18 +397,18 @@ export const scheduleData: DaySchedule[] = [
         track: 'plenary',
         description: 'Day 2 kickoff with leadership insights and agenda overview.',
         speakers: [
-          withPhoto({ name: 'Dr. Sarah Mitchell', role: 'VP, Cookies Division', company: 'Global Operations', bio: 'Leading cookies strategy for 15+ years.' }),
+          withPhoto({ name: 'Dr. Sarah Mitchell', role: 'VP, Vaccines Division', company: 'Global Operations', bio: 'Leading vaccines strategy for 15+ years.' }),
         ],
         room: 'Grand Ballroom',
         type: 'plenary',
       },
       {
         id: 'thu-2',
-        title: 'Cookies Portfolio Approach',
+        title: 'Vaccines Portfolio Approach',
         time: '09:00',
         duration: '45 min',
         track: 'plenary',
-        description: 'Comprehensive overview of the cookies portfolio and integrated approach.',
+        description: 'Comprehensive overview of the vaccines portfolio and integrated approach.',
         speakers: [
           withPhoto({ name: 'Rachel Green', role: 'Portfolio Marketing Director', company: 'Global Marketing', bio: 'Award-winning marketer with 15 years in the industry.' }),
         ],
@@ -448,7 +448,7 @@ export const scheduleData: DaySchedule[] = [
         track: 'pcv-paed',
         description: 'Pediatric vaccination coverage optimization and immunization program success.',
         speakers: [
-          withPhoto({ name: 'Dr. Amanda Foster', role: 'Culinary Director', company: 'Pediatric Cookies', bio: 'Specialist in kid-friendly cookie programs.' }),
+          withPhoto({ name: 'Dr. Amanda Foster', role: 'Medical Director', company: 'Pediatric Vaccines', bio: 'Specialist in pediatric vaccination programs.' }),
         ],
         room: 'Room A',
         type: 'session',
@@ -485,9 +485,9 @@ export const scheduleData: DaySchedule[] = [
         time: '11:30',
         duration: '1.5 hr',
         track: 'comirnaty',
-        description: 'Cookie recipe evolution and next-generation flavor coverage.',
+        description: 'Vaccine development evolution and next-generation coverage.',
         speakers: [
-          withPhoto({ name: 'Dr. Emily Watson', role: 'Culinary Development Lead', company: 'Artisan Cookies', bio: 'Trials expert with focus on seasonal approaches.' }),
+          withPhoto({ name: 'Dr. Emily Watson', role: 'Clinical Development Lead', company: 'mRNA Vaccines', bio: 'Trials expert with focus on seasonal approaches.' }),
         ],
         room: 'Room D',
         type: 'session',
@@ -541,7 +541,7 @@ export const scheduleData: DaySchedule[] = [
         track: 'comirnaty',
         description: 'Comirnaty in the endemic phase - long-term strategy.',
         speakers: [
-          withPhoto({ name: 'Dr. Sophie Laurent', role: 'Scientific Director', company: 'Artisan Cookies', bio: 'Pioneer in recipe development.' }),
+          withPhoto({ name: 'Dr. Sophie Laurent', role: 'Scientific Director', company: 'mRNA Vaccines', bio: 'Pioneer in vaccine development.' }),
         ],
         room: 'Room D',
         type: 'session',
@@ -581,7 +581,7 @@ export const scheduleData: DaySchedule[] = [
         track: 'rsv-adult',
         description: 'RSV adult vaccination strategy and market outlook.',
         speakers: [
-          withPhoto({ name: 'Dr. Robert Kim', role: 'Senior Culinary Advisor', company: 'Adult Cookies', bio: 'Leading researcher in adult preferences.' }),
+          withPhoto({ name: 'Dr. Robert Kim', role: 'Senior Medical Advisor', company: 'Adult Vaccines', bio: 'Leading researcher in adult vaccination strategies.' }),
         ],
         room: 'Room C',
         type: 'session',
@@ -607,7 +607,7 @@ export const scheduleData: DaySchedule[] = [
         track: 'comirnaty',
         description: 'Combination approaches and portfolio integration.',
         speakers: [
-          withPhoto({ name: 'Dr. Emily Watson', role: 'Culinary Development Lead', company: 'Artisan Cookies', bio: 'Trials expert with focus on seasonal approaches.' }),
+          withPhoto({ name: 'Dr. Emily Watson', role: 'Clinical Development Lead', company: 'mRNA Vaccines', bio: 'Trials expert with focus on seasonal approaches.' }),
         ],
         room: 'Room E',
         type: 'session',
@@ -626,7 +626,7 @@ export const scheduleData: DaySchedule[] = [
         track: 'plenary',
         description: 'Final day kickoff and agenda overview.',
         speakers: [
-          withPhoto({ name: 'Dr. Sarah Mitchell', role: 'VP, Cookies Division', company: 'Global Operations', bio: 'Leading cookies strategy for 15+ years.' }),
+          withPhoto({ name: 'Dr. Sarah Mitchell', role: 'VP, Vaccines Division', company: 'Global Operations', bio: 'Leading vaccines strategy for 15+ years.' }),
         ],
         room: 'Grand Ballroom',
         type: 'plenary',
@@ -639,7 +639,7 @@ export const scheduleData: DaySchedule[] = [
         track: 'plenary',
         description: 'How AI and digital tools are transforming development, distribution, and customer engagement.',
         speakers: [
-          withPhoto({ name: 'Dr. Alex Rivera', role: 'Digital Innovation Lead', company: 'Digital Bakery', bio: 'AI/ML expert applying technology to innovation.' }),
+          withPhoto({ name: 'Dr. Alex Rivera', role: 'Digital Innovation Lead', company: 'Digital Health', bio: 'AI/ML expert applying technology to vaccine innovation.' }),
           withPhoto({ name: 'Maya Patel', role: 'Data Science Director', company: 'Analytics', bio: 'Leading predictive analytics for demand forecasting.' }),
         ],
         room: 'Grand Ballroom',
@@ -697,7 +697,7 @@ export const scheduleData: DaySchedule[] = [
       },
       {
         id: 'fri-6',
-        title: 'Cookies Pipeline',
+        title: 'Vaccines Pipeline',
         time: '12:00',
         duration: '30 min',
         track: 'plenary',
@@ -716,7 +716,7 @@ export const scheduleData: DaySchedule[] = [
         track: 'plenary',
         description: 'Summit closing remarks, awards, and recognition of outstanding contributions.',
         speakers: [
-          withPhoto({ name: 'Dr. Sarah Mitchell', role: 'VP, Cookies Division', company: 'Global Operations', bio: 'Leading cookies strategy for 15+ years.' }),
+          withPhoto({ name: 'Dr. Sarah Mitchell', role: 'VP, Vaccines Division', company: 'Global Operations', bio: 'Leading vaccines strategy for 15+ years.' }),
         ],
         room: 'Grand Ballroom',
         type: 'plenary',

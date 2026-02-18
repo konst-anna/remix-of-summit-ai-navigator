@@ -74,7 +74,7 @@ export default function AICopilotButton({ variant = 'default' }: AICopilotButton
                   </div>
                   <div>
                     <h3 className="text-xl font-bold">Summit AI Agent</h3>
-                    <p className="text-sm opacity-80">2026 Cookies Summit Copilot</p>
+                    <p className="text-sm opacity-80">2026 Vaccines Summit Copilot</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-sm opacity-90">

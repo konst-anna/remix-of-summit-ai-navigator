@@ -15,7 +15,7 @@ const activities = [
   {
     icon: Trophy,
     title: 'Copilot Challenge',
-    description: 'Master the 2026 Cookies Summit Copilot Agent. Complete tasks and earn the "Best User of Copilot" badge.',
+    description: 'Master the 2026 Vaccines Summit Copilot Agent. Complete tasks and earn the "Best User of Copilot" badge.',
     reward: 'Dinner table upgrades & special pins',
     clickable: false,
   },

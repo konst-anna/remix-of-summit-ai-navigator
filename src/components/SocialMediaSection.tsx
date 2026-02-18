@@ -19,7 +19,7 @@ export default function SocialMediaSection() {
             Join the Conversation
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-#CookiesSummit2026
+#VaccinesSummit2026
           </h2>
           <p className="text-lg text-white/80 max-w-2xl mx-auto">
             Share your experience and connect with fellow attendees on social media
