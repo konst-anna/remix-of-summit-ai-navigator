@@ -1,21 +1,10 @@
 import { Calendar, MapPin, ExternalLink } from 'lucide-react';
-import summitLogo from '@/assets/summit-logo.png';
 
 export default function Footer() {
   return (
     <footer className="py-16" style={{ background: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(170 60% 85%) 40%, hsl(160 50% 65%) 70%, hsl(75 50% 55%) 100%)' }}>
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
-          <div>
-            <div className="mb-4">
-              <img src={summitLogo} alt="Pfizer Vaccines Ensemble" className="h-12 w-auto" />
-            </div>
-            <p className="text-sm text-foreground/70 mb-4">
-
-            </p>
-          </div>
-
+        <div className="grid md:grid-cols-3 gap-10 mb-12">
           {/* Event Details */}
           <div>
             <h4 className="font-semibold text-foreground mb-4">Event Details</h4>
@@ -66,6 +55,6 @@ export default function Footer() {
           </p>
         </div>
       </div>
-    </footer>);
-
+    </footer>
+  );
 }
