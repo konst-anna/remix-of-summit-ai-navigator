@@ -49,8 +49,8 @@ export default function Header({ variant = 'default' }: { variant?: 'default' | 
             {navItems.map((item) => {
               const isSocial = item.label === 'Social';
               const linkClass = isSocial
-                ? "text-sm font-bold bg-gradient-to-r from-[#f7e234] via-[#f0679e] to-[#ef4056] bg-clip-text text-transparent hover:opacity-80 transition-opacity"
-                : "text-sm font-bold text-muted-foreground hover:text-primary transition-colors";
+                ? "text-sm font-extrabold bg-gradient-to-r from-[#f7e234] via-[#f0679e] to-[#ef4056] bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+                : "text-sm font-extrabold text-muted-foreground hover:text-primary transition-colors";
               
               return item.isRoute ? (
                 <Link
