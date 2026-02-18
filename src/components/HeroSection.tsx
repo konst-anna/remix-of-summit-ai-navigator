@@ -30,9 +30,9 @@ export default function HeroSection() {
             className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary mb-4 leading-[1.05] tracking-tight"
             style={{ fontFamily: "'FF Din Cond', 'FF Din', sans-serif" }}
           >
-            Synchronised
+            Synchronised in our
             <br />
-            <span className="text-gradient-hero">in our Growth Ambitions</span>
+            <span className="text-gradient-hero">Growth Ambitions</span>
           </h1>
 
           {/* Subtitle */}
