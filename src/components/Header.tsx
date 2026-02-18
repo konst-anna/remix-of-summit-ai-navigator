@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Calendar, MapPin, Music } from 'lucide-react';
+import { Menu, X, Calendar, MapPin } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import summitLogo from '@/assets/summit-logo.png';
 
 const navItems = [
   { label: 'Schedule', href: '/schedule', isRoute: true },
@@ -33,14 +34,8 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 gradient-hero rounded-lg flex items-center justify-center">
-              <Music className="w-6 h-6 text-primary-foreground" />
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="font-bold text-lg text-foreground">Cookies Ensemble</h1>
-              <p className="text-xs text-muted-foreground">Summit 2026</p>
-            </div>
+          <Link to="/" className="flex items-center">
+            <img src={summitLogo} alt="Pfizer Vaccines Ensemble" className="h-12 lg:h-14 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}

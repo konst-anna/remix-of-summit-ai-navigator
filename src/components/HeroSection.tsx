@@ -7,14 +7,14 @@ import heroImage from '@/assets/barcelona-hero.jpg';
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Teal/Cyan Overlay */}
+      {/* Background Image with White/Light Overlay */}
       <div className="absolute inset-0">
         <img
           src={heroImage}
           alt="Barcelona skyline"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(200,60%,12%,0.92)] via-[hsl(185,70%,25%,0.82)] to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,100%,0.88)] via-[hsl(210,30%,97%,0.85)] to-background" />
       </div>
 
       {/* Content */}
@@ -32,18 +32,18 @@ export default function HeroSection() {
             transition={{ delay: 0.2 }}
             className="text-accent text-sm font-semibold uppercase tracking-[0.2em] mb-6"
           >
-            The Pfizer Cookies Ensemble
+            The Pfizer Vaccines Ensemble
           </motion.p>
 
           {/* Title — large, clean, Apple-style */}
-          <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extrabold text-primary-foreground mb-6 leading-[1.05] tracking-tight">
+          <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extrabold text-primary mb-6 leading-[1.05] tracking-tight">
             Synchronised
             <br />
-            <span className="text-accent">in Growth</span>
+            <span className="text-gradient-hero">in Growth</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg text-primary-foreground/70 mb-12 max-w-xl mx-auto font-light leading-relaxed">
+          <p className="text-base sm:text-lg text-muted-foreground mb-12 max-w-xl mx-auto font-light leading-relaxed">
             Three days of collaboration, learning, and breakthrough insights — Barcelona, March 2026.
           </p>
 
@@ -57,7 +57,7 @@ export default function HeroSection() {
               <motion.div
                 key={text}
                 whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-2 px-4 py-2 bg-primary-foreground/5 backdrop-blur-md rounded-full border border-primary-foreground/10 text-sm text-primary-foreground/80"
+                className="flex items-center gap-2 px-4 py-2 bg-primary/5 backdrop-blur-md rounded-full border border-primary/10 text-sm text-foreground/80"
               >
                 <Icon className="w-4 h-4 text-accent" />
                 <span>{text}</span>
@@ -91,7 +91,7 @@ export default function HeroSection() {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
-            className="flex flex-col items-center gap-2 text-primary-foreground/40"
+            className="flex flex-col items-center gap-2 text-muted-foreground"
           >
             <span className="text-[10px] uppercase tracking-[0.2em]">Explore</span>
             <ChevronDown className="w-4 h-4" />
