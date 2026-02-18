@@ -143,7 +143,7 @@ export default function Schedule() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header variant="schedule" />
       <main className="pt-20 lg:pt-24">
         {/* Hero Section — matching homepage style */}
         <section className="relative overflow-hidden min-h-[260px] md:min-h-[320px]">

@@ -18,7 +18,7 @@ const variantGradient: Record<string, string> = {
   prompts: 'linear-gradient(135deg, #5ce1e6, #9b59b6, #e91e8c)',
 };
 
-export default function Header({ variant = 'default' }: { variant?: 'default' | 'social' | 'prompts' }) {
+export default function Header({ variant = 'default' }: { variant?: 'default' | 'social' | 'prompts' | 'schedule' }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -74,6 +74,7 @@ export default function Header({ variant = 'default' }: { variant?: 'default' | 
           </nav>
 
           {/* Event Info Pill */}
+          {variant !== 'schedule' && (
           <div className="hidden md:flex items-center gap-3">
             <Link
               to="/schedule"
@@ -84,6 +85,7 @@ export default function Header({ variant = 'default' }: { variant?: 'default' | 
               <span className={variantGradient[variant] ? 'text-white font-medium' : 'text-secondary-foreground'}>Mar 25-27, 2026</span>
             </Link>
           </div>
+          )}
 
           {/* Mobile Menu Button */}
           <button
@@ -127,6 +129,7 @@ export default function Header({ variant = 'default' }: { variant?: 'default' | 
                   </a>
                 )
               ))}
+              {variant !== 'schedule' && (
               <div className="flex gap-2 pt-2">
                 <Link
                   to="/schedule"
@@ -138,6 +141,7 @@ export default function Header({ variant = 'default' }: { variant?: 'default' | 
                   <span className={variantGradient[variant] ? 'text-white font-medium' : 'text-secondary-foreground'}>Mar 25-27</span>
                 </Link>
               </div>
+              )}
             </nav>
           </motion.div>
         )}
