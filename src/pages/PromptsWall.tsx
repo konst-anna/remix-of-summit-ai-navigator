@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Sparkles, Brain, Trophy, User, ArrowLeft } from 'lucide-react';
+import { Send, Sparkles, Brain, Trophy, User, ArrowLeft, Pencil } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { Link } from 'react-router-dom';
@@ -74,6 +75,7 @@ export default function PromptsWall() {
   const [promptText, setPromptText] = useState('');
   const [brandContext, setBrandContext] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const { toast } = useToast();
 
   const fetchPrompts = async () => {
@@ -138,6 +140,7 @@ export default function PromptsWall() {
       toast({ title: 'Prompt submitted successfully! 🎉' });
       setPromptText('');
       setBrandContext('');
+      setShowForm(false);
     }
 
     setIsSubmitting(false);
@@ -188,81 +191,82 @@ export default function PromptsWall() {
               <h1 className="text-3xl lg:text-5xl font-bold text-white mb-4">
                 Prompts Wall
               </h1>
-              <p className="text-base md:text-lg text-white/80 max-w-xl">
+              <p className="text-base md:text-lg text-white/80 max-w-xl mb-6">
                 Showcase your AI creativity! Submit your best prompts and see how other marketers
                 are leveraging AI for our vaccine brands.
               </p>
+              <Button
+                onClick={() => setShowForm(true)}
+                className="bg-white hover:bg-white/90 font-bold shadow-lg"
+                style={{ color: prompts.purple }}
+                size="lg"
+              >
+                <Pencil className="w-5 h-5 mr-2" />
+                Share a Prompt
+              </Button>
             </motion.div>
           </div>
         </section>
 
-        {/* Submit Form */}
-        <section className="py-12 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <Card className="max-w-2xl mx-auto p-6">
-              <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+        {/* Submit Prompt Modal */}
+        <Dialog open={showForm} onOpenChange={setShowForm}>
+          <DialogContent className="max-w-lg">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2 text-xl">
                 <Sparkles className="w-5 h-5" style={{ color: prompts.purple }} />
                 Submit Your Prompt
-              </h2>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-1">
-                      Your Name *
-                    </label>
-                    <Input
-                      value={authorName}
-                      onChange={(e) => setAuthorName(e.target.value)}
-                      placeholder="John Smith"
-                      maxLength={50}
-                      className="focus-visible:ring-[#9b59b6]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-foreground mb-1">
-                      Brand (optional)
-                    </label>
-                    <select
-                      value={brandContext}
-                      onChange={(e) => setBrandContext(e.target.value)}
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9b59b6] focus-visible:ring-offset-2"
-                    >
-                      <option value="">Select a brand...</option>
-                      {brands.map((brand) => (
-                        <option key={brand} value={brand}>{brand}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
+              </DialogTitle>
+            </DialogHeader>
+            <form onSubmit={handleSubmit} className="space-y-4 mt-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-foreground mb-1">
-                    Your Prompt *
-                  </label>
-                  <Textarea
-                    value={promptText}
-                    onChange={(e) => setPromptText(e.target.value)}
-                    placeholder="Create an AI-powered marketing campaign that..."
-                    rows={4}
-                    maxLength={500}
+                  <label className="block text-sm font-medium text-foreground mb-1">Your Name *</label>
+                  <Input
+                    value={authorName}
+                    onChange={(e) => setAuthorName(e.target.value)}
+                    placeholder="John Smith"
+                    maxLength={50}
                     className="focus-visible:ring-[#9b59b6]"
                   />
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {promptText.length}/500 characters
-                  </p>
                 </div>
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full text-white"
-                  style={{ background: prompts.gradientBg }}
-                >
-                  {isSubmitting ? 'Submitting...' : 'Submit Prompt'}
-                  <Send className="w-4 h-4 ml-2" />
-                </Button>
-              </form>
-            </Card>
-          </div>
-        </section>
+                <div>
+                  <label className="block text-sm font-medium text-foreground mb-1">Brand (optional)</label>
+                  <select
+                    value={brandContext}
+                    onChange={(e) => setBrandContext(e.target.value)}
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9b59b6] focus-visible:ring-offset-2"
+                  >
+                    <option value="">Select a brand...</option>
+                    {brands.map((brand) => (
+                      <option key={brand} value={brand}>{brand}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1">Your Prompt *</label>
+                <Textarea
+                  value={promptText}
+                  onChange={(e) => setPromptText(e.target.value)}
+                  placeholder="Create an AI-powered marketing campaign that..."
+                  rows={4}
+                  maxLength={500}
+                  className="focus-visible:ring-[#9b59b6]"
+                />
+                <p className="text-xs text-muted-foreground mt-1">{promptText.length}/500 characters</p>
+              </div>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full text-white"
+                style={{ background: prompts.gradientBg }}
+              >
+                {isSubmitting ? 'Submitting...' : 'Submit Prompt'}
+                <Send className="w-4 h-4 ml-2" />
+              </Button>
+            </form>
+          </DialogContent>
+        </Dialog>
 
         {/* Prompts Wall */}
         <section className="py-12">
