@@ -271,15 +271,6 @@ export default function PromptsWall() {
         {/* Prompts Wall */}
         <section className="py-12">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">
-                Community Prompts
-              </h2>
-              <p className="text-muted-foreground">
-                {allPrompts.length} prompts submitted • Compete for "Marketing Champion in Prompting"!
-              </p>
-            </div>
-
             <div className="columns-1 md:columns-2 lg:columns-3 gap-4 space-y-4">
               <AnimatePresence mode="popLayout">
                 {allPrompts.map((prompt, index) => (
