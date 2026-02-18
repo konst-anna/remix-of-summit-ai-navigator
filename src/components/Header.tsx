@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Calendar, MapPin } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import summitLogo from '@/assets/summit-logo.png';
+import summitLogoRed from '@/assets/summit-logo-red.png';
 
 const navItems = [
   { label: 'Schedule', href: '/schedule', isRoute: true },
@@ -12,7 +13,7 @@ const navItems = [
   { label: 'Social', href: '/social', isRoute: true },
 ];
 
-export default function Header() {
+export default function Header({ variant = 'default' }: { variant?: 'default' | 'social' }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src={summitLogo} alt="Pfizer Vaccines Ensemble" className="h-12 lg:h-14 w-auto" />
+            <img src={variant === 'social' ? summitLogoRed : summitLogo} alt="Pfizer Vaccines Ensemble" className="h-12 lg:h-14 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}

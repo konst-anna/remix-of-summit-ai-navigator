@@ -211,7 +211,7 @@ export default function SocialMedia() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header variant="social" />
       <main className="pt-20 lg:pt-24">
         {/* Hero Section – Social gradient */}
         <section
