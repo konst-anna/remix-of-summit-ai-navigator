@@ -132,13 +132,20 @@ export default function ActivitiesSection() {
                 dinner table upgrades, and digital achievements for their AI Passport.
               </p>
               <div className="flex flex-wrap justify-center lg:justify-start gap-3">
-                {['On-stage Badges', 'Collectible Pins', 'Dinner Upgrades', 'Digital Stamps'].map((reward) => (
-                  <span
-                    key={reward}
-                    className="px-4 py-2 bg-primary-foreground/10 backdrop-blur-sm rounded-full text-sm text-primary-foreground border border-primary-foreground/20"
+                {[
+                  { label: 'On-stage Badges', bg: '#a2d06d', hoverBg: '#8bc34a' },
+                  { label: 'Collectible Pins', bg: '#88ecd4', hoverBg: '#59c5c7' },
+                  { label: 'Dinner Upgrades', bg: '#59c5c7', hoverBg: '#0095ff' },
+                  { label: 'Digital Stamps', bg: '#0095ff', hoverBg: '#006fd6' },
+                ].map((reward) => (
+                  <motion.span
+                    key={reward.label}
+                    whileHover={{ scale: 1.1, backgroundColor: reward.hoverBg }}
+                    className="px-4 py-2 rounded-full text-sm font-semibold text-white cursor-pointer shadow-lg transition-shadow hover:shadow-xl"
+                    style={{ backgroundColor: reward.bg }}
                   >
-                    {reward}
-                  </span>
+                    {reward.label}
+                  </motion.span>
                 ))}
               </div>
             </div>
@@ -146,23 +153,29 @@ export default function ActivitiesSection() {
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ repeat: Infinity, duration: 3 }}
-                className="w-20 h-20 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-xl"
+                whileHover={{ scale: 1.2, rotate: 10 }}
+                className="w-20 h-20 rounded-full flex items-center justify-center shadow-xl cursor-pointer"
+                style={{ background: 'linear-gradient(135deg, #a2d06d, #88ecd4)' }}
               >
-                <Trophy className="w-10 h-10 text-yellow-900" />
+                <Trophy className="w-10 h-10 text-white" />
               </motion.div>
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ repeat: Infinity, duration: 3, delay: 0.5 }}
-                className="w-20 h-20 rounded-full bg-gradient-to-br from-gray-200 to-gray-400 flex items-center justify-center shadow-xl"
+                whileHover={{ scale: 1.2, rotate: -10 }}
+                className="w-20 h-20 rounded-full flex items-center justify-center shadow-xl cursor-pointer"
+                style={{ background: 'linear-gradient(135deg, #88ecd4, #59c5c7)' }}
               >
-                <Award className="w-10 h-10 text-gray-700" />
+                <Award className="w-10 h-10 text-white" />
               </motion.div>
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ repeat: Infinity, duration: 3, delay: 1 }}
-                className="w-20 h-20 rounded-full bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center shadow-xl"
+                whileHover={{ scale: 1.2, rotate: 10 }}
+                className="w-20 h-20 rounded-full flex items-center justify-center shadow-xl cursor-pointer"
+                style={{ background: 'linear-gradient(135deg, #59c5c7, #0095ff)' }}
               >
-                <Sparkles className="w-10 h-10 text-amber-100" />
+                <Sparkles className="w-10 h-10 text-white" />
               </motion.div>
             </div>
           </div>
