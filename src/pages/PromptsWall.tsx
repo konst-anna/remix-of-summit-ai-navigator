@@ -150,7 +150,7 @@ export default function PromptsWall() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header variant="prompts" />
       <main className="pt-20">
         {/* Hero Section — same layout as Social page */}
         <section
