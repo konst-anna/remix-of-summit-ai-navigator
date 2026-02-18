@@ -28,6 +28,7 @@ export default function HeroSection() {
           {/* Title — large, clean, Apple-style */}
           <h1
             className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary mb-4 leading-[1.05] tracking-tight"
+            style={{ fontFamily: "'FF Din Cond', 'FF Din', sans-serif" }}
           >
             Synchronised
             <br />
