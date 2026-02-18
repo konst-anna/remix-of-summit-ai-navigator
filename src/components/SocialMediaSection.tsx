@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { Hash } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function SocialMediaSection() {
@@ -15,10 +14,9 @@ export default function SocialMediaSection() {
         >
           <Link
             to="/social"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-bold text-lg shadow-lg hover:scale-105 hover:shadow-xl transition-all"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full text-white font-bold text-lg shadow-lg hover:scale-105 hover:shadow-xl transition-all"
             style={{ background: 'linear-gradient(135deg, #f7e234 0%, #f9a870 35%, #f0679e 70%, #ef4056 100%)' }}
           >
-            <Hash className="w-5 h-5" />
             #VaccinesSummit2026
           </Link>
           <p className="text-sm text-muted-foreground max-w-md">
