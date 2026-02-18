@@ -148,12 +148,8 @@ export default function ScheduleSection() {
           viewport={{ once: true }}
           className="text-center mb-12">
 
-          <h2 className="text-3xl lg:text-5xl font-bold text-foreground mb-4">
-            Event Schedule
-          </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Three days of insightful sessions, workshops, and networking opportunities.
 Click on any session to learn more.
-
           </p>
         </motion.div>
 
