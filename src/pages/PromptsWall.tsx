@@ -339,7 +339,7 @@ export default function PromptsWall() {
           </div>
         </section>
       </main>
-      <Footer />
+      <Footer variant="prompts" />
     </div>
   );
 }
