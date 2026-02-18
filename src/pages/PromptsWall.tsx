@@ -188,7 +188,10 @@ export default function PromptsWall() {
                 <Brain className="w-4 h-4" />
                 Best Prompt Competition
               </div>
-              <h1 className="text-3xl lg:text-5xl font-bold text-white mb-4">
+              <h1
+                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-[1.05] tracking-tight"
+                style={{ fontFamily: "'FF Din Cond', 'FF Din', sans-serif" }}
+              >
                 Prompts Wall
               </h1>
               <p className="text-base md:text-lg text-white/80 max-w-xl mb-6">
