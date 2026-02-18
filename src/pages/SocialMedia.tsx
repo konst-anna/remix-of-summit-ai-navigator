@@ -11,6 +11,7 @@ import Footer from '@/components/Footer';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 // Import example photos
 import coffeeBreakPhoto from '@/assets/summit-coffee-break.jpg';
@@ -256,7 +257,7 @@ export default function SocialMedia() {
               </p>
 
               <Button 
-                onClick={() => setShowForm(!showForm)}
+                onClick={() => setShowForm(true)}
                 className="bg-white hover:bg-white/90 text-[#ef4056] font-bold shadow-lg"
                 size="lg"
               >
@@ -264,88 +265,82 @@ export default function SocialMedia() {
                 Share a Moment
               </Button>
             </motion.div>
-
-            {/* Submission Form */}
-            <AnimatePresence>
-              {showForm && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="max-w-lg mx-auto mt-8"
-                >
-                  <form onSubmit={handleSubmit} className="bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg">
-                    <div className="space-y-4">
-                      {/* Image Upload */}
-                      <div>
-                        <label className="block text-sm font-medium text-[#ef4056] mb-2">
-                          Add a Photo (optional)
-                        </label>
-                        <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageSelect} className="hidden" />
-                        
-                        {imagePreview ? (
-                          <div className="relative rounded-lg overflow-hidden border border-[#f9a870]/30">
-                            <AspectRatio ratio={4/3}>
-                              <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
-                            </AspectRatio>
-                            <button type="button" onClick={clearImage} className="absolute top-2 right-2 bg-white/80 hover:bg-white rounded-full p-1.5 transition-colors">
-                              <X className="w-4 h-4 text-foreground" />
-                            </button>
-                          </div>
-                        ) : (
-                          <button
-                            type="button"
-                            onClick={() => fileInputRef.current?.click()}
-                            className="w-full border-2 border-dashed border-[#f9a870]/40 rounded-lg p-8 text-center hover:border-[#ef4056]/60 hover:bg-[#ef4056]/5 transition-colors"
-                          >
-                            <ImageIcon className="w-10 h-10 mx-auto text-[#f9a870] mb-2" />
-                            <span className="text-sm text-[#ef4056]">Click to upload a photo</span>
-                          </button>
-                        )}
-                      </div>
-
-                      <div>
-                        <label htmlFor="thought" className="block text-sm font-medium text-[#ef4056] mb-2">
-                          Your Thought {!selectedImage && <span className="text-[#f9a870]">(required)</span>}
-                        </label>
-                        <Textarea
-                          id="thought"
-                          placeholder="Share your thoughts about the summit..."
-                          value={newThought}
-                          onChange={(e) => setNewThought(e.target.value)}
-                          className="min-h-[100px] border-[#f9a870]/30 focus-visible:ring-[#ef4056]"
-                          maxLength={500}
-                        />
-                        <p className="text-xs text-[#ef4056] mt-1">{newThought.length}/500 characters</p>
-                      </div>
-                      <div>
-                        <label htmlFor="author" className="block text-sm font-medium text-[#ef4056] mb-2">
-                          Your Name (optional)
-                        </label>
-                        <Input
-                          id="author"
-                          placeholder="Anonymous"
-                          value={authorName}
-                          onChange={(e) => setAuthorName(e.target.value)}
-                          maxLength={100}
-                          className="border-[#f9a870]/30 focus-visible:ring-[#ef4056]"
-                        />
-                      </div>
-                      <Button 
-                        type="submit" 
-                        className="w-full bg-gradient-to-r from-[#ef4056] to-[#f9a870] hover:opacity-90 text-white font-bold"
-                        disabled={isSubmitting || (!newThought.trim() && !selectedImage)}
-                      >
-                        {isSubmitting ? 'Sharing...' : 'Share'}
-                      </Button>
-                    </div>
-                  </form>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
         </section>
+
+        {/* Share a Moment Modal */}
+        <Dialog open={showForm} onOpenChange={setShowForm}>
+          <DialogContent className="max-w-lg">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2 text-xl">
+                <Camera className="w-5 h-5 text-[#ef4056]" />
+                Share a Moment
+              </DialogTitle>
+            </DialogHeader>
+            <form onSubmit={handleSubmit} className="space-y-4 mt-2">
+              {/* Image Upload */}
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-2">
+                  Add a Photo (optional)
+                </label>
+                <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageSelect} className="hidden" />
+                
+                {imagePreview ? (
+                  <div className="relative rounded-lg overflow-hidden border border-[#f9a870]/30">
+                    <AspectRatio ratio={4/3}>
+                      <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+                    </AspectRatio>
+                    <button type="button" onClick={clearImage} className="absolute top-2 right-2 bg-white/80 hover:bg-white rounded-full p-1.5 transition-colors">
+                      <X className="w-4 h-4 text-foreground" />
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    className="w-full border-2 border-dashed border-[#f9a870]/40 rounded-lg p-8 text-center hover:border-[#ef4056]/60 hover:bg-[#ef4056]/5 transition-colors"
+                  >
+                    <ImageIcon className="w-10 h-10 mx-auto text-[#f9a870] mb-2" />
+                    <span className="text-sm text-muted-foreground">Click to upload a photo</span>
+                  </button>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1">
+                  Your Thought {!selectedImage && <span className="text-muted-foreground">(required)</span>}
+                </label>
+                <Textarea
+                  placeholder="Share your thoughts about the summit..."
+                  value={newThought}
+                  onChange={(e) => setNewThought(e.target.value)}
+                  className="min-h-[100px] focus-visible:ring-[#ef4056]"
+                  maxLength={500}
+                />
+                <p className="text-xs text-muted-foreground mt-1">{newThought.length}/500 characters</p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-foreground mb-1">
+                  Your Name (optional)
+                </label>
+                <Input
+                  placeholder="Anonymous"
+                  value={authorName}
+                  onChange={(e) => setAuthorName(e.target.value)}
+                  maxLength={100}
+                  className="focus-visible:ring-[#ef4056]"
+                />
+              </div>
+              <Button 
+                type="submit" 
+                className="w-full bg-gradient-to-r from-[#ef4056] to-[#f9a870] hover:opacity-90 text-white font-bold"
+                disabled={isSubmitting || (!newThought.trim() && !selectedImage)}
+              >
+                {isSubmitting ? 'Sharing...' : 'Share'}
+              </Button>
+            </form>
+          </DialogContent>
+        </Dialog>
 
         {/* Mixed Feed Wall */}
         <section className="py-16">
