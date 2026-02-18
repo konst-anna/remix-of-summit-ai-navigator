@@ -6,7 +6,7 @@ import heroImage from '@/assets/barcelona-hero.jpg';
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with White/Light Overlay */}
       <div className="absolute inset-0">
         <img
@@ -18,7 +18,7 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 pt-28 pb-16">
+      <div className="relative z-10 container mx-auto px-4 pt-24 pb-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -36,19 +36,19 @@ export default function HeroSection() {
           </motion.p>
 
           {/* Title — large, clean, Apple-style */}
-          <h1 className="text-5xl sm:text-6xl lg:text-8xl font-extrabold text-primary mb-6 leading-[1.05] tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary mb-4 leading-[1.05] tracking-tight">
             Synchronised
             <br />
             <span className="text-gradient-hero">in Growth</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg text-muted-foreground mb-12 max-w-xl mx-auto font-light leading-relaxed">
+          <p className="text-sm sm:text-base text-muted-foreground mb-8 max-w-xl mx-auto font-light leading-relaxed">
             Three days of collaboration, learning, and breakthrough insights — Barcelona, March 2026.
           </p>
 
           {/* Minimal info pills */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
             {[
               { icon: Calendar, text: 'March 25–27, 2026' },
               { icon: MapPin, text: 'Barcelona, Spain' },
