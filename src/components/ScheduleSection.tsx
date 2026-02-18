@@ -218,17 +218,6 @@ export default function ScheduleSection() {
           </motion.div>
         </AnimatePresence>
 
-        {/* View Full Schedule CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mt-8">
-
-          <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
-            <Link to="/schedule">View Full Schedule</Link>
-          </Button>
-        </motion.div>
       </div>
 
       {/* Session Modal */}
