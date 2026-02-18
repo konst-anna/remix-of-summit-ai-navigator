@@ -38,9 +38,9 @@ const EqualizerRow = ({ color = 'hsl(75 50% 50% / 0.5)' }: { color?: string }) =
 export default function Footer({ variant = 'default' }: { variant?: 'default' | 'social' }) {
   const isSocial = variant === 'social';
   const bgStyle = isSocial
-    ? { background: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, #f7e234 40%, #f9a870 70%, #ef4056 100%)' }
+    ? { background: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(0 0% 100%) 30%, #f9a87040 60%, #f067 80%, #ef405630 100%)' }
     : { background: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(170 60% 85%) 40%, hsl(160 50% 65%) 70%, hsl(75 50% 55%) 100%)' };
-  const barColor = isSocial ? '#ef4056' : 'hsl(75 50% 50% / 0.5)';
+  const barColor = isSocial ? '#ef405680' : 'hsl(75 50% 50% / 0.5)';
 
   return (
     <footer className="relative py-16 overflow-hidden" style={bgStyle}>
