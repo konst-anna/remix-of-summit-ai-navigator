@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Users, ChevronDown } from 'lucide-react';
+import { Calendar, MapPin, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import heroBg from '@/assets/hero-bg.png';
@@ -43,7 +43,7 @@ export default function HeroSection() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm sm:text-base text-muted-foreground mb-8 max-w-xl mx-auto font-light leading-relaxed">Three days of collaboration, learning, and breakthrough insights
+          <p className="text-sm sm:text-base text-muted-foreground mb-8 max-w-xl mx-auto font-light leading-relaxed">
 
           </p>
 
@@ -94,7 +94,7 @@ export default function HeroSection() {
             className="flex flex-col items-center gap-2 text-muted-foreground">
 
             
-            <ChevronDown className="w-4 h-4" />
+            
           </motion.div>
         </motion.div>
       </div>
