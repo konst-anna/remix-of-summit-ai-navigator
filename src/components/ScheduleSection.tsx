@@ -146,10 +146,14 @@ export default function ScheduleSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12">
+          className="text-center mb-14">
 
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">Three days of insightful sessions, workshops, and networking opportunities.
-Click on any session to learn more.
+          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-3">
+            Schedule
+          </h2>
+          <p className="text-base text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            Three days of insightful sessions, workshops, and networking.<br />
+            Click on any session to learn more.
           </p>
         </motion.div>
 
