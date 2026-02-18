@@ -68,7 +68,7 @@ export default function Footer({ variant = 'default' }: { variant?: 'default' | 
               <li><a href="#schedule" className="hover:text-foreground transition-colors">Schedule</a></li>
               <li><a href="#activities" className="hover:text-foreground transition-colors">Activities</a></li>
               <li><a href="#passport" className="hover:text-foreground transition-colors">AI Passport</a></li>
-              <li><a href="#vr" className="hover:text-foreground transition-colors">VR Experience</a></li>
+              
             </ul>
           </div>
 
