@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Calendar, MapPin, Users, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import heroImage from '@/assets/barcelona-hero.jpg';
+import heroBg from '@/assets/hero-bg.png';
 
 export default function HeroSection() {
   return (
@@ -10,11 +10,11 @@ export default function HeroSection() {
       {/* Background Image with White/Light Overlay */}
       <div className="absolute inset-0">
         <img
-          src={heroImage}
-          alt="Barcelona skyline"
+          src={heroBg}
+          alt=""
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,100%,0.88)] via-[hsl(210,30%,97%,0.85)] to-background" />
+        <div className="absolute inset-0 bg-white/60" />
       </div>
 
       {/* Content */}
