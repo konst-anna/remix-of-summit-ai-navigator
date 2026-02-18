@@ -3,8 +3,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Bot, X, Sparkles, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-export default function AICopilotButton() {
+interface AICopilotButtonProps {
+  variant?: 'default' | 'social';
+}
+
+export default function AICopilotButton({ variant = 'default' }: AICopilotButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const isSocial = variant === 'social';
+  const gradientClass = isSocial ? '' : 'gradient-hero';
+  const gradientStyle = isSocial
+    ? { background: 'linear-gradient(135deg, #f7e234 0%, #f9a870 35%, #f0679e 70%, #ef4056 100%)' }
+    : undefined;
 
   return (
     <>
@@ -14,7 +24,8 @@ export default function AICopilotButton() {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1, type: 'spring', stiffness: 200 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="ai-copilot-button group"
+        className={`ai-copilot-button group ${isSocial ? '' : ''}`}
+        style={gradientStyle}
         aria-label="Open AI Copilot"
       >
         <motion.div
@@ -32,7 +43,8 @@ export default function AICopilotButton() {
         <motion.div
           animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute inset-0 rounded-full gradient-hero"
+          className={`absolute inset-0 rounded-full ${gradientClass}`}
+          style={gradientStyle}
         />
       </motion.button>
 
@@ -55,7 +67,7 @@ export default function AICopilotButton() {
               className="w-full max-w-sm bg-card rounded-2xl shadow-2xl overflow-hidden border border-border"
             >
               {/* Header */}
-              <div className="gradient-hero p-6 text-primary-foreground">
+              <div className={`${gradientClass} p-6 text-primary-foreground`} style={gradientStyle}>
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-14 h-14 rounded-xl bg-primary-foreground/20 flex items-center justify-center">
                     <Bot className="w-8 h-8" />
@@ -92,14 +104,18 @@ export default function AICopilotButton() {
                       transition={{ delay: index * 0.1 }}
                       className="flex items-center gap-3 text-sm text-foreground"
                     >
-                      <ArrowRight className="w-4 h-4 text-primary flex-shrink-0" />
+                      <ArrowRight className={`w-4 h-4 flex-shrink-0 ${isSocial ? 'text-[#ef4056]' : 'text-primary'}`} />
                       <span>{item}</span>
                     </motion.li>
                   ))}
                 </ul>
 
                 <div className="space-y-3">
-                  <Button className="w-full gradient-hero text-primary-foreground" size="lg">
+                  <Button
+                    className={`w-full text-primary-foreground ${gradientClass}`}
+                    style={gradientStyle}
+                    size="lg"
+                  >
                     <Bot className="w-5 h-5 mr-2" />
                     Launch Copilot
                   </Button>
