@@ -44,8 +44,8 @@ export default function Header({ variant = 'default' }: { variant?: 'default' | 
             <img src={variant === 'social' ? summitLogoRed : summitLogo} alt="Pfizer Vaccines Ensemble" className="h-12 lg:h-14 w-auto" />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          {/* Desktop Navigation — always centered */}
+          <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
             {navItems.map((item) => {
               const isSocial = item.label === 'Social';
               const linkClass = isSocial
