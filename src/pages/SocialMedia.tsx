@@ -16,13 +16,13 @@ import coffeeBreakPhoto from '@/assets/summit-coffee-break.jpg';
 import panelDiscussionPhoto from '@/assets/summit-panel-discussion.jpg';
 import posterSessionPhoto from '@/assets/summit-poster-session.jpg';
 
-// --- Social palette (pink → coral → orange → yellow) ---
+// --- Social palette (first row: yellow → peach → pink → crimson) ---
 const social = {
-  pink: 'hsl(350, 85%, 55%)',
-  coral: 'hsl(10, 90%, 60%)',
-  orange: 'hsl(30, 95%, 55%)',
-  yellow: 'hsl(45, 95%, 55%)',
-  gradientBg: 'linear-gradient(180deg, hsl(350,85%,55%) 0%, hsl(10,90%,60%) 40%, hsl(30,95%,55%) 75%, hsl(45,95%,55%) 100%)',
+  yellow: '#f7e234',
+  peach: '#f9a870',
+  pink: '#f0679e',
+  crimson: '#ef4056',
+  gradientBg: 'linear-gradient(135deg, #f7e234 0%, #f9a870 35%, #f0679e 70%, #ef4056 100%)',
 };
 
 interface Thought {
@@ -214,7 +214,7 @@ export default function SocialMedia() {
       <main className="pt-20 lg:pt-24">
         {/* Hero Section – Social gradient */}
         <section
-          className="py-16 md:py-24 relative overflow-hidden"
+          className="py-8 md:py-12 relative overflow-hidden"
           style={{ background: social.gradientBg }}
         >
           <div className="container mx-auto px-4 relative z-10">
@@ -225,28 +225,28 @@ export default function SocialMedia() {
               className="text-center"
             >
               <Link to="/">
-                <Button variant="ghost" className="mb-6 text-white/80 hover:text-white hover:bg-white/10">
+                <Button variant="ghost" className="mb-4 text-white/80 hover:text-white hover:bg-white/10">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to Home
                 </Button>
               </Link>
               
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-4">
                 <Hash className="w-4 h-4" />
                 Live Feed
               </div>
               
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
                 #CookiesSummit2026
               </h1>
               
-              <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-8">
+              <p className="text-base md:text-lg text-white/80 max-w-2xl mx-auto mb-6">
                 Share your thoughts and photos from the summit
               </p>
 
               <Button 
                 onClick={() => setShowForm(!showForm)}
-                className="bg-white hover:bg-white/90 text-[hsl(350,85%,55%)] font-bold shadow-lg"
+                className="bg-white hover:bg-white/90 text-[#ef4056] font-bold shadow-lg"
                 size="lg"
               >
                 <Camera className="w-5 h-5 mr-2" />
@@ -268,13 +268,13 @@ export default function SocialMedia() {
                     <div className="space-y-4">
                       {/* Image Upload */}
                       <div>
-                        <label className="block text-sm font-medium text-[hsl(350,85%,40%)] mb-2">
+                        <label className="block text-sm font-medium text-[#ef4056] mb-2">
                           Add a Photo (optional)
                         </label>
                         <input ref={fileInputRef} type="file" accept="image/*" onChange={handleImageSelect} className="hidden" />
                         
                         {imagePreview ? (
-                          <div className="relative rounded-lg overflow-hidden border border-[hsl(30,95%,55%)]/30">
+                          <div className="relative rounded-lg overflow-hidden border border-[#f9a870]/30">
                             <AspectRatio ratio={4/3}>
                               <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
                             </AspectRatio>
@@ -286,30 +286,30 @@ export default function SocialMedia() {
                           <button
                             type="button"
                             onClick={() => fileInputRef.current?.click()}
-                            className="w-full border-2 border-dashed border-[hsl(30,95%,55%)]/40 rounded-lg p-8 text-center hover:border-[hsl(350,85%,55%)]/60 hover:bg-[hsl(350,85%,55%)]/5 transition-colors"
+                            className="w-full border-2 border-dashed border-[#f9a870]/40 rounded-lg p-8 text-center hover:border-[#ef4056]/60 hover:bg-[#ef4056]/5 transition-colors"
                           >
-                            <ImageIcon className="w-10 h-10 mx-auto text-[hsl(30,95%,55%)] mb-2" />
-                            <span className="text-sm text-[hsl(350,85%,40%)]">Click to upload a photo</span>
+                            <ImageIcon className="w-10 h-10 mx-auto text-[#f9a870] mb-2" />
+                            <span className="text-sm text-[#ef4056]">Click to upload a photo</span>
                           </button>
                         )}
                       </div>
 
                       <div>
-                        <label htmlFor="thought" className="block text-sm font-medium text-[hsl(350,85%,40%)] mb-2">
-                          Your Thought {!selectedImage && <span className="text-[hsl(30,95%,55%)]">(required)</span>}
+                        <label htmlFor="thought" className="block text-sm font-medium text-[#ef4056] mb-2">
+                          Your Thought {!selectedImage && <span className="text-[#f9a870]">(required)</span>}
                         </label>
                         <Textarea
                           id="thought"
                           placeholder="Share your thoughts about the summit..."
                           value={newThought}
                           onChange={(e) => setNewThought(e.target.value)}
-                          className="min-h-[100px] border-[hsl(30,95%,55%)]/30 focus-visible:ring-[hsl(350,85%,55%)]"
+                          className="min-h-[100px] border-[#f9a870]/30 focus-visible:ring-[#ef4056]"
                           maxLength={500}
                         />
-                        <p className="text-xs text-[hsl(350,85%,40%)] mt-1">{newThought.length}/500 characters</p>
+                        <p className="text-xs text-[#ef4056] mt-1">{newThought.length}/500 characters</p>
                       </div>
                       <div>
-                        <label htmlFor="author" className="block text-sm font-medium text-[hsl(350,85%,40%)] mb-2">
+                        <label htmlFor="author" className="block text-sm font-medium text-[#ef4056] mb-2">
                           Your Name (optional)
                         </label>
                         <Input
@@ -318,12 +318,12 @@ export default function SocialMedia() {
                           value={authorName}
                           onChange={(e) => setAuthorName(e.target.value)}
                           maxLength={100}
-                          className="border-[hsl(30,95%,55%)]/30 focus-visible:ring-[hsl(350,85%,55%)]"
+                          className="border-[#f9a870]/30 focus-visible:ring-[#ef4056]"
                         />
                       </div>
                       <Button 
                         type="submit" 
-                        className="w-full bg-gradient-to-r from-[hsl(350,85%,55%)] to-[hsl(30,95%,55%)] hover:opacity-90 text-white font-bold"
+                        className="w-full bg-gradient-to-r from-[#ef4056] to-[#f9a870] hover:opacity-90 text-white font-bold"
                         disabled={isSubmitting || (!newThought.trim() && !selectedImage)}
                       >
                         {isSubmitting ? 'Sharing...' : 'Share'}
@@ -349,7 +349,7 @@ export default function SocialMedia() {
                   className="break-inside-avoid mb-4"
                 >
                   {item.type === 'photo' || item.image_url ? (
-                    <div className="rounded-xl overflow-hidden shadow-sm border border-[hsl(30,95%,55%)]/20 hover:shadow-md hover:shadow-[hsl(350,85%,55%)]/10 transition-shadow bg-card">
+                    <div className="rounded-xl overflow-hidden shadow-sm border border-[#f9a870]/20 hover:shadow-md hover:shadow-[#ef4056]/10 transition-shadow bg-card">
                       <div className="relative">
                         <img src={item.image_url || ''} alt="Summit moment" className="w-full h-auto object-cover" loading="lazy" />
                       </div>
@@ -357,7 +357,7 @@ export default function SocialMedia() {
                         <div className="p-4">
                           <p className="text-foreground leading-relaxed">{item.content}</p>
                           {item.author && (
-                            <div className="mt-3 flex items-center gap-2 text-sm text-[hsl(350,85%,55%)]">
+                            <div className="mt-3 flex items-center gap-2 text-sm text-[#ef4056]">
                               <User className="w-4 h-4" />
                               <span>{item.author}</span>
                             </div>
@@ -365,7 +365,7 @@ export default function SocialMedia() {
                         </div>
                       )}
                       {!item.content && item.author && (
-                        <div className="p-4 flex items-center gap-2 text-sm text-[hsl(350,85%,55%)]">
+                        <div className="p-4 flex items-center gap-2 text-sm text-[#ef4056]">
                           <User className="w-4 h-4" />
                           <span>{item.author}</span>
                         </div>
@@ -374,15 +374,15 @@ export default function SocialMedia() {
                   ) : (
                     <div className={`rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow ${
                       item.type === 'user' 
-                        ? 'bg-gradient-to-br from-[hsl(350,85%,55%)]/5 to-[hsl(30,95%,55%)]/5 border-[hsl(350,85%,55%)]/20' 
-                        : 'bg-card border-[hsl(30,95%,55%)]/15'
+                        ? 'bg-gradient-to-br from-[#ef4056]/5 to-[#f9a870]/5 border-[#ef4056]/20' 
+                        : 'bg-card border-[#f9a870]/15'
                     }`}>
                       <Quote className={`w-8 h-8 mb-3 ${
-                        item.type === 'user' ? 'text-[hsl(350,85%,55%)]/50' : 'text-[hsl(30,95%,55%)]/40'
+                        item.type === 'user' ? 'text-[#ef4056]/50' : 'text-[#f9a870]/40'
                       }`} />
                       <p className="text-foreground italic leading-relaxed">"{item.content}"</p>
                       {item.type === 'user' && (
-                        <div className="mt-4 flex items-center gap-2 text-sm text-[hsl(350,85%,55%)]">
+                        <div className="mt-4 flex items-center gap-2 text-sm text-[#ef4056]">
                           <User className="w-4 h-4" />
                           <span>{item.author || 'Anonymous'}</span>
                         </div>
@@ -395,10 +395,10 @@ export default function SocialMedia() {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* CTA / Bottom Section – warm social gradient */}
         <section
           className="py-16 relative overflow-hidden"
-          style={{ background: social.gradientBg }}
+          style={{ background: 'linear-gradient(180deg, hsl(0 0% 100%) 0%, #f7e234 30%, #f9a870 60%, #f0679e 85%, #ef4056 100%)' }}
         >
           <div className="container mx-auto px-4 text-center relative z-10">
             <motion.div
@@ -407,14 +407,14 @@ export default function SocialMedia() {
               viewport={{ once: true }}
               className="max-w-2xl mx-auto"
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                 Join the Conversation
               </h2>
-              <p className="text-white/80 mb-8">
+              <p className="text-foreground/70 mb-8">
                 Your voice matters! Share your thoughts and photos from the summit.
               </p>
-              <div className="inline-block bg-white/20 backdrop-blur-sm rounded-full px-8 py-4">
-                <span className="text-2xl md:text-3xl font-bold text-white">
+              <div className="inline-block bg-white/30 backdrop-blur-sm rounded-full px-8 py-4">
+                <span className="text-2xl md:text-3xl font-bold text-[#ef4056]">
                   #CookiesSummit2026
                 </span>
               </div>

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export default function SocialMediaSection() {
   return (
-    <section id="social" className="py-20" style={{ background: 'linear-gradient(180deg, hsl(350,85%,55%) 0%, hsl(10,90%,60%) 40%, hsl(30,95%,55%) 75%, hsl(45,95%,55%) 100%)' }}>
+    <section id="social" className="py-20" style={{ background: 'linear-gradient(135deg, #f7e234 0%, #f9a870 35%, #f0679e 70%, #ef4056 100%)' }}>
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
