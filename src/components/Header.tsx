@@ -9,9 +9,9 @@ const navItems = [
   { label: 'Schedule', href: '/schedule', isRoute: true },
   { label: 'Activities', href: '#activities', anchor: 'activities' },
   { label: 'AI Passport', href: '#passport', anchor: 'passport' },
-  { label: 'Useful Links', href: '#useful-links', anchor: 'useful-links' },
   { label: 'Prompts Wall', href: '/prompts', isRoute: true },
   { label: 'Social', href: '/social', isRoute: true },
+  { label: 'Useful Links', href: '#useful-links', anchor: 'useful-links' },
 ];
 
 const variantGradient: Record<string, string> = {
