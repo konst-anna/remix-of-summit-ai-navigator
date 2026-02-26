@@ -37,7 +37,7 @@ export default function HeroSection() {
 
           {/* Subtitle */}
           <p className="text-sm sm:text-base text-muted-foreground mb-8 max-w-xl mx-auto font-light leading-relaxed">
-
+            Join global leaders for three days of collaboration, learning, and breakthrough insights.
           </p>
 
           {/* Minimal info pills */}
