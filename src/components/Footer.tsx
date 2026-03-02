@@ -68,7 +68,7 @@ export default function Footer({ variant = 'default' }: { variant?: 'default' | 
             <ul className="space-y-2 text-sm text-foreground/70">
               <li><a href="#schedule" className="hover:text-foreground transition-colors">Schedule</a></li>
               
-              <li><a href="#passport" className="hover:text-foreground transition-colors">AI Passport</a></li>
+              <li><a href="/passport" className="hover:text-foreground transition-colors">AI Passport</a></li>
               
             </ul>
           </div>
