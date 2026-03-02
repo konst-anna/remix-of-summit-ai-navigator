@@ -150,7 +150,7 @@ export default function Schedule() {
           {/* Background image with white overlay like homepage */}
           <div className="absolute inset-0">
             <img src={heroBg} alt="" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-white/60" />
+            <div className="absolute inset-0 bg-white/5" />
           </div>
 
           <div className="container mx-auto px-4 relative z-10 py-10 md:py-14">
