@@ -27,11 +27,11 @@ export default function HeroSection() {
 
           {/* Title — large, clean, Apple-style */}
           <h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-[1.05] tracking-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-[1.1] tracking-normal"
           >
             Synchronised in our
             <br />
-            <span className="text-gradient-hero">Growth Ambitions</span>
+            Growth Ambitions
           </h1>
 
           {/* Subtitle */}
