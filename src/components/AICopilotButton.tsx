@@ -94,8 +94,8 @@ export default function AICopilotButton({ variant = 'default' }: AICopilotButton
                   {['Find sessions based on your interests',
                 'Get speaker information',
                 'Navigate the venue',
-                'Connect with other attendees',
-                'Track your AI Passport progress'].
+                'Summarize the meeting minutes from the brand sessions',
+                'Provide brand specific information'].
                 map((item, index) =>
                 <motion.li
                   key={index}
