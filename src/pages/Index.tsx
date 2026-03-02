@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import ScheduleSection from '@/components/ScheduleSection';
-import ActivitiesSection from '@/components/ActivitiesSection';
+
 import AIPassportSection from '@/components/AIPassportSection';
 import SocialMediaSection from '@/components/SocialMediaSection';
 import UsefulLinksSection from '@/components/UsefulLinksSection';
@@ -27,7 +27,7 @@ const Index = () => {
       <main>
         <HeroSection />
         <ScheduleSection />
-        <ActivitiesSection />
+        
         <AIPassportSection />
         <UsefulLinksSection />
         <SocialMediaSection />
