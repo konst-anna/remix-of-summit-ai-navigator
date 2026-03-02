@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import socialHeroImg from '@/assets/social-hero-drummer.png';
-import passportImage from '@/assets/ai-passport.png';
 
 // Reuse Social palette
 const palette = {
@@ -86,6 +85,7 @@ export default function AIPassport() {
             {/* Two Passport Designs */}
             <div className="grid md:grid-cols-2 gap-8 mb-16">
               {/* Brand Sessions Passport */}
+              {/* Brand Sessions */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -93,31 +93,21 @@ export default function AIPassport() {
                 className="relative rounded-2xl overflow-hidden border border-border shadow-xl bg-card"
               >
                 <div className="p-1.5" style={{ background: 'linear-gradient(135deg, #a2d06d 0%, #59c5c7 100%)' }}>
-                  <div className="bg-card rounded-xl p-6 lg:p-8">
-                    <div className="flex items-center gap-3 mb-5">
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-md" style={{ background: 'linear-gradient(135deg, #a2d06d, #59c5c7)' }}>
-                        <Award className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-foreground">Brand Sessions</h3>
-                        <p className="text-sm text-muted-foreground">Earn stamps by participating</p>
-                      </div>
-                    </div>
+                  <div className="bg-card rounded-xl p-6 lg:p-8 flex flex-col items-center text-center">
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      className="w-28 h-28 rounded-full flex items-center justify-center shadow-xl mb-6"
+                      style={{ background: 'linear-gradient(135deg, #a2d06d, #59c5c7)' }}
+                    >
+                      <Award className="w-14 h-14 text-white" />
+                    </motion.div>
 
-                    <div className="flex justify-center mb-6">
-                      <motion.img
-                        src={passportImage}
-                        alt="Brand Sessions Passport"
-                        className="w-32 lg:w-40 rounded-lg shadow-lg"
-                        whileHover={{ scale: 1.05 }}
-                      />
-                    </div>
-
+                    <h3 className="text-xl font-bold text-foreground mb-2">Brand Sessions</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-5">
                       Dive into the brand sessions and put AI to work. Each session is an opportunity to earn a stamp — engage with the content, complete the activities, and watch your passport fill up.
                     </p>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2 text-left w-full">
                       {[
                         'Attend and participate in brand sessions',
                         'Complete hands-on AI activities',
@@ -133,7 +123,7 @@ export default function AIPassport() {
                 </div>
               </motion.div>
 
-              {/* Secret Missions Passport */}
+              {/* Secret Missions */}
               <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -141,32 +131,21 @@ export default function AIPassport() {
                 className="relative rounded-2xl overflow-hidden border border-border shadow-xl bg-card"
               >
                 <div className="p-1.5" style={{ background: palette.gradientBg }}>
-                  <div className="bg-card rounded-xl p-6 lg:p-8">
-                    <div className="flex items-center gap-3 mb-5">
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center shadow-md" style={{ background: palette.gradientBg }}>
-                        <Eye className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-foreground">Secret Missions</h3>
-                        <p className="text-sm text-muted-foreground">Discover hidden challenges</p>
-                      </div>
-                    </div>
+                  <div className="bg-card rounded-xl p-6 lg:p-8 flex flex-col items-center text-center">
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: -5 }}
+                      className="w-28 h-28 rounded-full flex items-center justify-center shadow-xl mb-6"
+                      style={{ background: palette.gradientBg }}
+                    >
+                      <Eye className="w-14 h-14 text-white" />
+                    </motion.div>
 
-                    <div className="flex justify-center mb-6">
-                      <motion.img
-                        src={passportImage}
-                        alt="Secret Missions Passport"
-                        className="w-32 lg:w-40 rounded-lg shadow-lg"
-                        style={{ filter: 'hue-rotate(280deg)' }}
-                        whileHover={{ scale: 1.05 }}
-                      />
-                    </div>
-
+                    <h3 className="text-xl font-bold text-foreground mb-2">Secret Missions</h3>
                     <p className="text-sm text-muted-foreground leading-relaxed mb-5">
                       Keep your eyes open for hidden challenges scattered throughout the summit. Crack the codes, complete surprise tasks, and unlock exclusive stamps that only the most curious attendees will find.
                     </p>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2 text-left w-full">
                       {[
                         'Find and complete hidden challenges',
                         'Solve AI puzzles across the venue',
