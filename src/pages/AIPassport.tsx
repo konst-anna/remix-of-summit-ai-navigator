@@ -90,10 +90,10 @@ export default function AIPassport() {
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="relative rounded-2xl overflow-hidden border border-border shadow-xl bg-card"
+                className="relative rounded-2xl overflow-hidden border border-border shadow-xl bg-card h-full"
               >
-                <div className="p-1.5" style={{ background: 'linear-gradient(135deg, #a2d06d 0%, #59c5c7 100%)' }}>
-                  <div className="bg-card rounded-xl p-6 lg:p-8 flex flex-col items-center text-center">
+                <div className="p-1.5 h-full rounded-2xl" style={{ background: 'linear-gradient(135deg, #a2d06d 0%, #59c5c7 100%)' }}>
+                  <div className="bg-card rounded-[14px] p-6 lg:p-8 flex flex-col items-center text-center h-full">
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       className="w-28 h-28 rounded-full flex items-center justify-center shadow-xl mb-6"
@@ -128,10 +128,10 @@ export default function AIPassport() {
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="relative rounded-2xl overflow-hidden border border-border shadow-xl bg-card"
+                className="relative rounded-2xl overflow-hidden border border-border shadow-xl bg-card h-full"
               >
-                <div className="p-1.5" style={{ background: palette.gradientBg }}>
-                  <div className="bg-card rounded-xl p-6 lg:p-8 flex flex-col items-center text-center">
+                <div className="p-1.5 h-full rounded-2xl" style={{ background: palette.gradientBg }}>
+                  <div className="bg-card rounded-[14px] p-6 lg:p-8 flex flex-col items-center text-center h-full">
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: -5 }}
                       className="w-28 h-28 rounded-full flex items-center justify-center shadow-xl mb-6"
