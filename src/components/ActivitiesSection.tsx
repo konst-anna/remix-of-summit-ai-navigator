@@ -9,7 +9,7 @@ const activities = [
     icon: Brain,
     title: 'Best Prompt Competition',
     description: 'Showcase your AI skills in our gamified prompt engineering challenge. Compete for the title of Marketing Champion in Prompting!',
-    reward: 'On-stage recognition',
+    reward: 'On-stage recognition & AI Passport stamps',
     clickable: true,
   },
   {
