@@ -74,7 +74,8 @@ export default function AICopilotButton({ variant = 'default' }: AICopilotButton
                   </div>
                   <div>
                     <h3 className="text-xl font-bold">Summit AI Concierge</h3>
-                    <p className="text-sm opacity-80">2026 Vaccines Summit Copilot</p>
+                    <p className="text-sm opacity-80">
+                  </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-sm opacity-90">
@@ -90,8 +91,7 @@ export default function AICopilotButton({ variant = 'default' }: AICopilotButton
               </p>
 
                 <ul className="space-y-3 mb-6">
-                  {[
-                'Find sessions based on your interests',
+                  {['Find sessions based on your interests',
                 'Get speaker information',
                 'Navigate the venue',
                 'Connect with other attendees',
