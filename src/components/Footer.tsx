@@ -67,7 +67,7 @@ export default function Footer({ variant = 'default' }: { variant?: 'default' | 
             <h4 className="font-semibold text-foreground mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm text-foreground/70">
               <li><a href="#schedule" className="hover:text-foreground transition-colors">Schedule</a></li>
-              <li><a href="#activities" className="hover:text-foreground transition-colors">Activities</a></li>
+              
               <li><a href="#passport" className="hover:text-foreground transition-colors">AI Passport</a></li>
               
             </ul>
