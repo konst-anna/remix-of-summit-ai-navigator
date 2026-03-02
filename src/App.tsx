@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import SocialMedia from "./pages/SocialMedia";
 import Schedule from "./pages/Schedule";
 import PromptsWall from "./pages/PromptsWall";
+import AIPassport from "./pages/AIPassport";
 import NotFound from "./pages/NotFound";
 import AICopilotButton from "./components/AICopilotButton";
 
@@ -33,6 +34,7 @@ function AppContent() {
         <Route path="/social" element={<SocialMedia />} />
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/prompts" element={<PromptsWall />} />
+        <Route path="/passport" element={<AIPassport />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

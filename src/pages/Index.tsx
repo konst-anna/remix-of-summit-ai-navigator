@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import ScheduleSection from '@/components/ScheduleSection';
 
-import AIPassportSection from '@/components/AIPassportSection';
+
 import SocialMediaSection from '@/components/SocialMediaSection';
 import UsefulLinksSection from '@/components/UsefulLinksSection';
 import Footer from '@/components/Footer';
@@ -28,7 +28,7 @@ const Index = () => {
         <HeroSection />
         <ScheduleSection />
         
-        <AIPassportSection />
+        
         <UsefulLinksSection />
         <SocialMediaSection />
       </main>
