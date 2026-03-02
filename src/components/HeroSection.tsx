@@ -14,7 +14,7 @@ export default function HeroSection() {
           alt=""
           className="w-full h-full object-cover" />
 
-        <div className="absolute inset-0 bg-white/60" />
+        <div className="absolute inset-0 bg-white/5" />
       </div>
 
       {/* Content */}
