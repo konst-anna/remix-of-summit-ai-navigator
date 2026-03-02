@@ -27,17 +27,17 @@ export default function HeroSection() {
 
           {/* Title — large, clean, Apple-style */}
           <h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-[1.1] tracking-normal"
-          >
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-[1.1] tracking-normal">
+
             Synchronised in our
             <br />
             Growth Ambitions
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm sm:text-base text-white/80 mb-8 max-w-xl mx-auto font-light leading-relaxed">
-            Join global leaders for three days of collaboration, learning, and breakthrough insights.
-          </p>
+          
+
+
 
           {/* Minimal info pills */}
           <div className="flex flex-wrap justify-center gap-3 mb-8">
