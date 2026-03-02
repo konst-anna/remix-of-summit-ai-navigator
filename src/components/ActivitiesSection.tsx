@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Sparkles, Award, Gamepad2, Brain, Target } from 'lucide-react';
+import { Trophy, Sparkles, Award, Gamepad2, Brain, Lightbulb } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import PromptCompetitionModal from './PromptCompetitionModal';
 
@@ -13,7 +13,7 @@ const activities = [
     clickable: true,
   },
   {
-    icon: Target,
+    icon: Lightbulb,
     title: 'AI Knowledge Quest',
     description: 'Navigate through AI-powered quizzes and interactive learning modules. Collect stamps for your AI Passport!',
     reward: 'Digital badges & AI Passport stamps',
