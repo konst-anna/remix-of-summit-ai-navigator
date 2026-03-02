@@ -117,7 +117,7 @@ export default function AICopilotButton({ variant = 'default' }: AICopilotButton
                   size="lg">
 
                     <Bot className="w-5 h-5 mr-2" />
-                    Launch Copilot
+                    Start chatting
                   </Button>
                 </div>
               </div>
