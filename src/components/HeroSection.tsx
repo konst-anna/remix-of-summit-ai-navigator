@@ -27,8 +27,7 @@ export default function HeroSection() {
 
           {/* Title — large, clean, Apple-style */}
           <h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary mb-4 leading-[1.05] tracking-tight"
-            style={{ fontFamily: "'FF Din Cond', 'FF Din', sans-serif" }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-[1.05] tracking-tight"
           >
             Synchronised in our
             <br />
@@ -36,7 +35,7 @@ export default function HeroSection() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm sm:text-base text-muted-foreground mb-8 max-w-xl mx-auto font-light leading-relaxed">
+          <p className="text-sm sm:text-base text-white/80 mb-8 max-w-xl mx-auto font-light leading-relaxed">
             Join global leaders for three days of collaboration, learning, and breakthrough insights.
           </p>
 
@@ -50,7 +49,7 @@ export default function HeroSection() {
             <motion.div
               key={text}
               whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-2 px-4 py-2 bg-primary/5 backdrop-blur-md rounded-full border border-primary/10 text-sm text-foreground/80">
+              className="flex items-center gap-2 px-4 py-2 bg-white/15 backdrop-blur-md rounded-full border border-white/20 text-sm text-white/90">
 
                 <Icon className="w-4 h-4 text-accent" />
                 <span>{text}</span>

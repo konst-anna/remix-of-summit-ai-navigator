@@ -167,19 +167,19 @@ export default function Schedule() {
                 </Button>
               </Link>
 
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-4">
                 <Calendar className="w-4 h-4" />
                 Full Schedule
               </div>
 
               <h1
-                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary mb-4 leading-[1.05] tracking-tight"
+                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-[1.05] tracking-tight"
                 style={{ fontFamily: "'FF Din Cond', 'FF Din', sans-serif" }}
               >
                 Event Schedule
               </h1>
 
-              <p className="text-base md:text-lg text-muted-foreground max-w-xl">
+              <p className="text-base md:text-lg text-white/80 max-w-xl">
                 Three days of insightful sessions, workshops, and networking opportunities.
                 Click on any session to learn more.
               </p>
