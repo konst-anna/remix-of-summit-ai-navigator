@@ -47,10 +47,7 @@ export default function Header({ variant = 'default' }: { variant?: 'default' | 
           {/* Desktop Navigation — always centered */}
           <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
             {navItems.map((item) => {
-              const isSocial = item.label === 'Social';
-              const linkClass = isSocial
-                ? "text-sm font-extrabold bg-gradient-to-r from-[#f7e234] via-[#f0679e] to-[#ef4056] bg-clip-text text-transparent hover:opacity-80 transition-opacity"
-                : "text-sm font-extrabold text-muted-foreground hover:text-primary transition-colors";
+              const linkClass = "text-sm font-extrabold text-muted-foreground hover:text-primary transition-colors";
               
               return item.isRoute ? (
                 <Link
