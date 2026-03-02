@@ -73,7 +73,7 @@ export default function AICopilotButton({ variant = 'default' }: AICopilotButton
                     <Bot className="w-8 h-8" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold">Summit AI Agent</h3>
+                    <h3 className="text-xl font-bold">Summit AI Concierge</h3>
                     <p className="text-sm opacity-80">2026 Vaccines Summit Copilot</p>
                   </div>
                 </div>
@@ -94,7 +94,7 @@ export default function AICopilotButton({ variant = 'default' }: AICopilotButton
                 'Find sessions based on your interests',
                 'Get speaker information',
                 'Navigate the venue',
-                'Summarize the sessions minutes',
+                'Connect with other attendees',
                 'Track your AI Passport progress'].
                 map((item, index) =>
                 <motion.li
