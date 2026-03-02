@@ -24,7 +24,13 @@ function ScrollToTop() {
 
 function AppContent() {
   const location = useLocation();
-  const isSocial = location.pathname === '/social';
+  const variantMap: Record<string, 'default' | 'social' | 'prompts' | 'schedule' | 'passport'> = {
+    '/social': 'social',
+    '/prompts': 'prompts',
+    '/schedule': 'schedule',
+    '/passport': 'passport',
+  };
+  const copilotVariant = variantMap[location.pathname] || 'default';
 
   return (
     <>
@@ -38,7 +44,7 @@ function AppContent() {
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <AICopilotButton variant={isSocial ? 'social' : 'default'} />
+      <AICopilotButton variant={copilotVariant} />
     </>
   );
 }

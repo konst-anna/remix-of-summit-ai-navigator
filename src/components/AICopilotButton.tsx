@@ -4,17 +4,30 @@ import { Bot, X, Sparkles, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface AICopilotButtonProps {
-  variant?: 'default' | 'social';
+  variant?: 'default' | 'social' | 'prompts' | 'schedule' | 'passport';
 }
+
+const variantGradients: Record<string, string> = {
+  social: 'linear-gradient(135deg, #f7e234 0%, #f9a870 35%, #f0679e 70%, #ef4056 100%)',
+  prompts: 'linear-gradient(135deg, #5ce1e6 0%, #9b59b6 50%, #e91e8c 100%)',
+  passport: 'linear-gradient(135deg, #f7e234 0%, #f9a870 35%, #f0679e 70%, #ef4056 100%)',
+};
+
+const variantAccentColor: Record<string, string> = {
+  default: 'text-primary',
+  schedule: 'text-primary',
+  social: 'text-[#ef4056]',
+  prompts: 'text-[#9b59b6]',
+  passport: 'text-[#ef4056]',
+};
 
 export default function AICopilotButton({ variant = 'default' }: AICopilotButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const isSocial = variant === 'social';
-  const gradientClass = isSocial ? '' : 'gradient-hero';
-  const gradientStyle = isSocial ?
-  { background: 'linear-gradient(135deg, #f7e234 0%, #f9a870 35%, #f0679e 70%, #ef4056 100%)' } :
-  undefined;
+  const isDefault = variant === 'default' || variant === 'schedule';
+  const gradientClass = isDefault ? 'gradient-hero' : '';
+  const gradientStyle = !isDefault ? { background: variantGradients[variant] } : undefined;
+  const accentColor = variantAccentColor[variant] || 'text-primary';
 
   return (
     <>
@@ -24,7 +37,7 @@ export default function AICopilotButton({ variant = 'default' }: AICopilotButton
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1, type: 'spring', stiffness: 200 }}
         onClick={() => setIsOpen(!isOpen)}
-        className={`ai-copilot-button group ${isSocial ? '' : ''}`}
+        className="ai-copilot-button group"
         style={gradientStyle}
         aria-label="Open AI Copilot">
 
@@ -104,7 +117,7 @@ export default function AICopilotButton({ variant = 'default' }: AICopilotButton
                   transition={{ delay: index * 0.1 }}
                   className="flex items-center gap-3 text-sm text-foreground">
 
-                      <ArrowRight className={`w-4 h-4 flex-shrink-0 ${isSocial ? 'text-[#ef4056]' : 'text-primary'}`} />
+                      <ArrowRight className={`w-4 h-4 flex-shrink-0 ${accentColor}`} />
                       <span>{item}</span>
                     </motion.li>
                 )}
