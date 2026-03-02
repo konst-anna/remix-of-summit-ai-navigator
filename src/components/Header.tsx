@@ -7,7 +7,6 @@ import summitLogoRed from '@/assets/summit-logo-red.png';
 
 const navItems = [
   { label: 'Schedule', href: '/schedule', isRoute: true },
-  { label: 'Activities', href: '#activities', anchor: 'activities' },
   { label: 'AI Passport', href: '#passport', anchor: 'passport' },
   { label: 'Prompts Wall', href: '/prompts', isRoute: true },
   { label: 'Social', href: '/social', isRoute: true },
