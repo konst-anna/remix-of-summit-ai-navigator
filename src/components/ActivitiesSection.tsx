@@ -13,13 +13,6 @@ const activities = [
     clickable: true,
   },
   {
-    icon: Trophy,
-    title: 'Copilot Challenge',
-    description: 'Master the 2026 Vaccines Summit Copilot Agent. Complete tasks and earn the "Best User of Copilot" badge.',
-    reward: 'Dinner table upgrades & special pins',
-    clickable: false,
-  },
-  {
     icon: Target,
     title: 'AI Knowledge Quest',
     description: 'Navigate through AI-powered quizzes and interactive learning modules. Collect stamps for your AI Passport!',
@@ -79,7 +72,7 @@ export default function ActivitiesSection() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid md:grid-cols-3 gap-6 mb-12"
+          className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12"
         >
           {activities.map((activity) => (
             <motion.div key={activity.title} variants={item}>
