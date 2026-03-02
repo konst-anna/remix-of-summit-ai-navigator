@@ -249,7 +249,7 @@ export default function SocialMedia() {
               </div>
               
               <h1
-                className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-[1.05] tracking-tight"
+                className="text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-4 leading-[1.1] tracking-tighter"
                 style={{ fontFamily: "'FF Din Cond', 'FF Din', sans-serif" }}
               >
                 #VaccinesSummit2026
