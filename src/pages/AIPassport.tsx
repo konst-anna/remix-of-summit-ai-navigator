@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
-import { Stamp, Check, Sparkles, ArrowLeft, Award, Eye } from 'lucide-react';
+import { Stamp, Check, Sparkles, ArrowLeft } from 'lucide-react';
+import brandMissionStamp from '@/assets/brand-mission-stamp.png';
+import secretMissionStamp from '@/assets/secret-mission-stamp.png';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
@@ -96,10 +98,9 @@ export default function AIPassport() {
                   <div className="bg-card rounded-[14px] p-6 lg:p-8 flex flex-col items-center text-center h-full">
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
-                      className="w-28 h-28 rounded-full flex items-center justify-center shadow-xl mb-6"
-                      style={{ background: 'linear-gradient(135deg, #a2d06d, #59c5c7)' }}
+                      className="w-40 h-40 mb-6"
                     >
-                      <Award className="w-14 h-14 text-white" />
+                      <img src={brandMissionStamp} alt="Brand Mission Challenge stamp" className="w-full h-full object-contain" />
                     </motion.div>
 
                     <h3 className="text-xl font-bold text-foreground mb-2">Brand Sessions</h3>
@@ -134,10 +135,9 @@ export default function AIPassport() {
                   <div className="bg-card rounded-[14px] p-6 lg:p-8 flex flex-col items-center text-center h-full">
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: -5 }}
-                      className="w-28 h-28 rounded-full flex items-center justify-center shadow-xl mb-6"
-                      style={{ background: palette.gradientBg }}
+                      className="w-40 h-40 mb-6"
                     >
-                      <Eye className="w-14 h-14 text-white" />
+                      <img src={secretMissionStamp} alt="Secret Mission stamp" className="w-full h-full object-contain" />
                     </motion.div>
 
                     <h3 className="text-xl font-bold text-foreground mb-2">Secret Missions</h3>
