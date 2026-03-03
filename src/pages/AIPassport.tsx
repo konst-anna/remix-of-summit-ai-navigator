@@ -98,7 +98,7 @@ export default function AIPassport() {
                   <div className="bg-card rounded-[14px] p-6 lg:p-8 flex flex-col items-center text-center h-full">
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
-                      className="w-40 h-40 mb-6"
+                      className="w-56 h-56 mb-6"
                     >
                       <img src={brandMissionStamp} alt="Brand Mission Challenge stamp" className="w-full h-full object-contain" />
                     </motion.div>
@@ -135,7 +135,7 @@ export default function AIPassport() {
                   <div className="bg-card rounded-[14px] p-6 lg:p-8 flex flex-col items-center text-center h-full">
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: -5 }}
-                      className="w-40 h-40 mb-6"
+                      className="w-56 h-56 mb-6"
                     >
                       <img src={secretMissionStamp} alt="Secret Mission stamp" className="w-full h-full object-contain" />
                     </motion.div>
