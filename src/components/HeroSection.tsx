@@ -44,7 +44,7 @@ export default function HeroSection() {
             {[
             { icon: Calendar, text: 'March 25–27, 2026' },
             { icon: MapPin, text: 'Barcelona, Spain' },
-            { icon: Users, text: '250 Attendees' }].
+            { icon: Users, text: '250+ Strong 💪' }].
             map(({ icon: Icon, text }) =>
             <motion.div
               key={text}
