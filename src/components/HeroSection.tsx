@@ -49,7 +49,7 @@ export default function HeroSection() {
             <motion.div
               key={text}
               whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-2 px-4 py-2 bg-white/15 backdrop-blur-md rounded-full border border-white/20 text-sm text-white/90">
+              className="flex items-center gap-2 px-4 py-2 bg-white/15 backdrop-blur-md rounded-full border border-white/20 text-sm text-white/90 select-none">
 
                 <Icon className="w-4 h-4 text-white" />
                 <span>{text}</span>
